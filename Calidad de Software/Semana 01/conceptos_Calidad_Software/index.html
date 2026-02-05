@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 1: Calidad de Software | Ingeniería de Sistemas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container brand-container">
+                <span class="brand-name">CURSO DE CALIDAD DE SOFTWARE</span><br>
+                <span class="brand-name">Unidad 1: Introducción a estándares de calidad de software</span>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="#introduccion" class="active">Inicio</a></li>
+                    <li><a href="#conceptos">Conceptos Básicos</a></li>
+                    <li><a href="#iso25010">Modelo ISO/IEC 25010</a></li>
+                    <li><a href="#qa-qc">QA vs QC</a></li>
+                    <li><a href="#caso-estudio">Caso Práctico: FoodFast</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container main-content">
+
+        <section id="introduccion" class="hero-section">
+            <h1>Unidad 1: Introducción a estándares de calidad de software</h1>
+            <p class="lead">Bienvenido. En esta unidad dejaremos de ver la "calidad" como un concepto subjetivo y empezaremos a medirla con rigor de ingeniería. Estos son los cimientos para construir software de nivel profesional.</p>
+        </section>
+
+        <hr class="divider">
+
+        <section id="conceptos">
+            <h2>1. Conceptos Fundamentales de Calidad</h2>
+            <p>En ingeniería de sistemas, la calidad no significa "que el software sea perfecto", sino que <strong>cumpla con los requisitos especificados y las expectativas del cliente</strong>.</p>
+            <blockquote class="definition-box">
+                <strong>Definición Pro (IEEE 610):</strong> La calidad de software es el grado en que un sistema, componente o proceso cumple con los requerimientos especificados y las necesidades/expectativas del cliente o usuario final.
+            </blockquote>
+        </section>
+
+        <section id="iso25010">
+            <h2>2. El Modelo ISO/IEC 25010</h2>
+            <p>El estándar <strong>ISO/IEC 25010</strong> es parte de la familia SQuaRE. Es el mapa que nos dice qué debemos evaluar en un producto de software. Se divide en <strong>8 características principales</strong>:</p>
+
+            <div class="table-responsive">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Descripción Breve</th>
+                            <th>¿Qué evalúa?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Adecuación Funcional</strong></td>
+                            <td>Qué tan bien cumple el software sus tareas.</td>
+                            <td>Completitud, corrección y pertinencia.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eficiencia de Desempeño</strong></td>
+                            <td>Relación entre el rendimiento y los recursos usados.</td>
+                            <td>Tiempos de respuesta, uso de CPU/RAM.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compatibilidad</strong></td>
+                            <td>Capacidad de intercambiar info con otros sistemas.</td>
+                            <td>Coexistencia e interoperabilidad.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Usabilidad</strong></td>
+                            <td>Facilidad de aprendizaje y uso para el usuario.</td>
+                            <td>Estética, protección ante errores, accesibilidad.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fiabilidad</strong></td>
+                            <td>Capacidad de mantener su nivel de rendimiento bajo condiciones.</td>
+                            <td>Madurez, disponibilidad, tolerancia a fallos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seguridad</strong></td>
+                            <td>Protección de información y datos.</td>
+                            <td>Confidencialidad, integridad, no repudio.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mantenibilidad</strong></td>
+                            <td>Facilidad para ser modificado o corregido.</td>
+                            <td>Modularidad, reusabilidad, analizabilidad.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Portabilidad</strong></td>
+                            <td>Facilidad para trasladarse de un entorno a otro.</td>
+                            <td>Adaptabilidad, facilidad de instalación.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="qa-qc">
+            <h2>3. QA vs. QC: ¿Cuál es la diferencia?</h2>
+            <p>Es común confundir estos términos, pero en el ciclo de vida del desarrollo (SDLC) tienen roles distintos.</p>
+            
+            <div class="comparison-cards">
+                <div class="card qa-card">
+                    <h3>QA (Quality Assurance)</h3>
+                    <ul>
+                        <li><strong>Enfoque:</strong> Orientado al <span>PROCESO</span>.</li>
+                        <li><strong>Objetivo:</strong> Prevenir defectos asegurando que los procesos sean adecuados.</li>
+                        <li><strong>Actividad:</strong> Proactiva (Auditorías, metodologías).</li>
+                        <li><strong>Ejemplo:</strong> Implementar política de *Code Review* obligatoria.</li>
+                    </ul>
+                </div>
+                <div class="card qc-card">
+                    <h3>QC (Quality Control)</h3>
+                    <ul>
+                        <li><strong>Enfoque:</strong> Orientado al <span>PRODUCTO</span>.</li>
+                        <li><strong>Objetivo:</strong> Identificar y corregir defectos en el software construido.</li>
+                        <li><strong>Actividad:</strong> Reactiva (Testing, pruebas unitarias).</li>
+                        <li><strong>Ejemplo:</strong> Ejecutar un set de pruebas automatizadas en el botón de "Pago".</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Comparativa Rápida</h3>
+            <div class="table-responsive">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Quality Assurance (QA)</th>
+                            <th>Quality Control (QC)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Meta</strong></td>
+                            <td>Prevención de defectos.</td>
+                            <td>Detección de defectos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cuándo</strong></td>
+                            <td>Durante todo el proceso.</td>
+                            <td>Al final o durante hitos específicos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Responsabilidad</strong></td>
+                            <td>Todo el equipo (líderes/arquitectos).</td>
+                            <td>Equipo de Testing / Desarrolladores.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <div class="reflection-box">
+                <h4>Reflexión para Estudiantes</h4>
+                <p>Un ingeniero de sistemas no solo "testea" (QC), sino que diseña sistemas que sean fáciles de testear y mantener (QA). Aplicar la norma ISO/IEC 25010 desde el diseño reduce costos drásticamente.</p>
+                <p><strong>Regla de oro:</strong> No se puede controlar lo que no se puede medir.</p>
+            </div>
+        </section>
+
+        <hr class="divider-thick">
+
+        <section id="caso-estudio" class="case-study-section">
+            <div class="case-header">
+                <h2>Caso de Estudio Práctico</h2>
+                <h3>El Despegue de "FoodFast"</h3>
+            </div>
+
+            <div class="scenario-box">
+                <h4>1. El Escenario</h4>
+                <p>La Startup <strong>FoodFast</strong> lanzó su app de delivery. Fue un éxito inicial, pero en la "Semana de Ofertas" el sistema colapsó con 4 síntomas principales:</p>
+                <ol>
+                    <li><strong>Lentitud extrema:</strong> 15 segundos de carga con >5,000 usuarios.</li>
+                    <li><strong>Fuga de datos:</strong> Usuarios viendo direcciones de otros.</li>
+                    <li><strong>Errores no detectados:</strong> Un parche rompió el botón de "Pagar".</li>
+                    <li><strong>Incompatibilidad:</strong> La app se cierra en Android antiguo.</li>
+                </ol>
+            </div>
+
+            <h3>2. Desafío para el Estudiante (Solución Sugerida)</h3>
+
+            <h4>Tarea A: Mapeo ISO/IEC 25010</h4>
+            <p>Análisis de características vulneradas según los síntomas reportados.</p>
+            <div class="table-responsive">
+                <table class="styled-table case-table">
+                    <thead>
+                        <tr>
+                            <th>Síntoma</th>
+                            <th>Característica ISO 25010 Afectada</th>
+                            <th>Justificación Técnica</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lentitud extrema (15s)</td>
+                            <td><span class="tag tag-performance">Eficiencia de Desempeño</span></td>
+                            <td>El sistema no escala bajo carga (Time behavior).</td>
+                        </tr>
+                        <tr>
+                            <td>Visualización de datos ajenos</td>
+                            <td><span class="tag tag-security">Seguridad</span></td>
+                            <td>Se viola la confidencialidad de los datos del usuario.</td>
+                        </tr>
+                        <tr>
+                            <td>Fallo en el botón de pago</td>
+                            <td><span class="tag tag-functional">Adecuación Funcional / Fiabilidad</span></td>
+                            <td>El software no es maduro y falló una función crítica.</td>
+                        </tr>
+                        <tr>
+                            <td>App cierra en Android viejo</td>
+                            <td><span class="tag tag-compatibility">Compatibilidad / Portabilidad</span></td>
+                            <td>Falta de adaptabilidad a diferentes entornos de ejecución.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Tarea B: Estrategia QA vs QC</h4>
+            <p>Propuesta de acciones preventivas y reactivas para evitar futuros colapsos.</p>
+            
+            <div class="strategy-grid">
+                <div class="strategy-box qa-box">
+                    <h5>Acciones de QA (Prevención / Proceso)</h5>
+                    <ul>
+                        <li>✅ Implementar pipeline de <strong>Integración Continua (CI)</strong> con pruebas automáticas antes del despliegue.</li>
+                        <li>✅ Establecer protocolo de <strong>Code Review</strong> centrado en seguridad para evitar fugas de datos.</li>
+                    </ul>
+                </div>
+                <div class="strategy-box qc-box">
+                    <h5>Acciones de QC (Detección / Producto)</h5>
+                    <ul>
+                        <li>🎯 Realizar <strong>Pruebas de Estrés</strong> simulando 10,000 usuarios para medir tiempos.</li>
+                        <li>🎯 Ejecutar una <strong>Suite de Pruebas de Regresión</strong> cada vez que se toque el código crítico.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>Material docente creado por: José Llanos & Luis Vargas</p>
+            <p>Ingeniería de Sistemas - Curso de Calidad de Software</p>
+            <p>© 2025 CORHUILA</p>
+            
+        </div>
+    </footer>
+
+    <button id="scrollTopBtn" title="Volver arriba">↑</button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

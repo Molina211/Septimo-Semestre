@@ -1,0 +1,356 @@
+/* --- Variables de Color extraídas de la imagen --- */
+:root {
+    --primary-teal: #008083;   /* Color principal de la barra de navegación inferior */
+    --primary-dark: #005f60;   /* Versión más oscura para hovers */
+    --secondary-blue: #2c3e50; /* Barra superior oscura y textos secundarios */
+    --accent-lime: #c0e218;    /* Botones de acción (Inscríbete, etc.) */
+    --accent-lime-dark: #aabf10;
+    --text-dark: #333333;      /* Texto principal */
+    --text-light: #ffffff;     /* Texto sobre fondos oscuros */
+    --bg-light: #f4f7f6;       /* Fondo general suave */
+    --bg-white: #ffffff;
+    --border-color: #e0e0e0;
+}
+
+/* --- Reset y Estilos Globales --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--secondary-blue);
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { 
+    font-size: 2rem; 
+    color: var(--primary-teal);
+    border-bottom: 2px solid var(--accent-lime);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+a { text-decoration: none; color: inherit; }
+
+/* --- Header y Navegación (Estilo basado en imagen) --- */
+.main-header {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Barra superior oscura */
+.top-bar {
+    background-color: var(--secondary-blue);
+    color: var(--text-light);
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+}
+
+.brand-name {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.search-container {
+    display: flex;
+}
+
+.search-container input {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.search-container button {
+    background-color: var(--bg-light);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+/* Barra de navegación principal (Teal) */
+.main-nav {
+    background-color: var(--primary-teal);
+    color: var(--text-light);
+}
+
+.main-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.main-nav ul li a:hover, .main-nav ul li a.active {
+    background-color: var(--primary-dark);
+}
+
+/* Botón de acento (Lima) */
+.btn-accent {
+    background-color: var(--accent-lime);
+    color: var(--secondary-blue);
+    padding: 10px 25px;
+    border-radius: 25px; /* Bordes redondeados como en la imagen */
+    font-weight: 700;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-lime-dark);
+    transform: translateY(-2px);
+}
+
+/* --- Contenido Principal --- */
+.main-content {
+    background-color: var(--bg-white);
+    padding: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+section {
+    margin-bottom: 60px;
+    padding-top: 20px; /* Para compensar el fixed header al hacer scroll */
+}
+
+.hero-section p.lead {
+    font-size: 1.2rem;
+    color: var(--secondary-blue);
+    max-width: 800px;
+}
+
+.divider, .divider-thick {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 40px 0;
+}
+
+.divider-thick {
+    border-top: 4px solid var(--primary-teal);
+}
+
+/* Cajas de definición */
+.definition-box {
+    background-color: #eaf7f7;
+    border-left: 5px solid var(--primary-teal);
+    padding: 20px;
+    margin: 20px 0;
+    font-style: italic;
+}
+
+/* --- Tablas Estilizadas (ISO y QA/QC) --- */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.styled-table, .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.95rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.styled-table thead tr, .comparison-table thead tr {
+    background-color: var(--primary-teal);
+    color: var(--text-light);
+    text-align: left;
+}
+
+.styled-table th, .styled-table td,
+.comparison-table th, .comparison-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #eaf7f7; /* Efecto hover dinámico */
+    transition: background-color 0.2s;
+}
+
+/* Estilos específicos para tabla comparativa */
+.comparison-table th { text-align: center; }
+.comparison-table td:not(:first-child) { text-align: center; }
+.comparison-table td:first-child { font-weight: bold; color: var(--primary-teal); }
+
+/* --- Tarjetas de QA vs QC --- */
+.comparison-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    flex: 1;
+    background: var(--bg-white);
+    padding: 25px;
+    border-radius: 8px;
+    border-top: 5px solid;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.card h3 { margin-top: 0; }
+.card ul { padding-left: 20px; }
+.card li { margin-bottom: 10px; }
+
+.qa-card { border-color: var(--secondary-blue); }
+.qa-card span { color: var(--secondary-blue); font-weight: bold; }
+
+.qc-card { border-color: var(--accent-lime-dark); }
+.qc-card span { color: var(--accent-lime-dark); font-weight: bold; }
+
+.reflection-box {
+    background-color: var(--secondary-blue);
+    color: var(--text-light);
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+.reflection-box h4 { color: var(--accent-lime); }
+
+/* --- Estilos del Caso de Estudio --- */
+.case-study-section {
+    background-color: #fdfdfd;
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.case-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.case-header h2 { border: none; }
+.case-header h3 { color: var(--secondary-blue); }
+
+.scenario-box {
+    background-color: #fff3cd; /* Un tono amarillo suave para alerta/escenario */
+    border-left: 5px solid #ffc107;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.scenario-box ol { margin-left: 20px; margin-top: 10px; }
+
+/* Tags para la tabla del caso */
+.tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+}
+.tag-performance { background-color: #e74c3c; }
+.tag-security { background-color: #8e44ad; }
+.tag-functional { background-color: #f39c12; }
+.tag-compatibility { background-color: #3498db; }
+
+/* Grid de Estrategia */
+.strategy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.strategy-box {
+    padding: 20px;
+    border-radius: 8px;
+}
+.strategy-box h5 { font-size: 1.1rem; margin-bottom: 15px; }
+.strategy-box ul { list-style: none; }
+.strategy-box li { margin-bottom: 10px; }
+
+.qa-box { background-color: #e8f6f3; border: 1px solid var(--primary-teal); }
+.qa-box h5 { color: var(--primary-teal); }
+
+.qc-box { background-color: #fef9e7; border: 1px solid var(--accent-lime-dark); }
+.qc-box h5 { color: #d4ac0d; }
+
+
+/* --- Footer --- */
+.main-footer {
+    background-color: var(--secondary-blue);
+    color: var(--text-light);
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+}
+
+/* --- Botón Scroll Top (Dinámico) --- */
+#scrollTopBtn {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--primary-teal);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#scrollTopBtn:hover {
+    background-color: var(--accent-lime);
+    color: var(--secondary-blue);
+    transform: translateY(-3px);
+}
+
+/* --- Media Queries (Responsividad) --- */
+@media (max-width: 768px) {
+    .top-bar { flex-direction: column; gap: 10px; }
+    .main-nav .container { flex-direction: column; }
+    .main-nav ul { flex-direction: column; width: 100%; text-align: center; }
+    .btn-accent { margin: 10px 0; width: 100%; text-align: center;}
+    .comparison-cards { flex-direction: column; }
+    .strategy-grid { grid-template-columns: 1fr; }
+    .main-content { padding: 20px; }
+    h1 { font-size: 2rem; }
+}

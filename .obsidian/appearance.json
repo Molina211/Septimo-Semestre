@@ -1,1 +1,11 @@
-{}
+{
+  "theme": "obsidian",
+  "accentColor": "#ff7a7a",
+  "interfaceFontFamily": "",
+  "showRibbon": true,
+  "baseFontSizeAction": true,
+  "showViewHeader": true,
+  "nativeMenus": true,
+  "cssTheme": "Tokyo Night",
+  "baseFontSize": 16
+}

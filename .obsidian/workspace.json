@@ -1,20 +1,24 @@
 {
   "main": {
-    "id": "88ea23bdb8656b46",
+    "id": "3279bad10ce5c32b",
     "type": "split",
     "children": [
       {
-        "id": "dfb5788aa52e9e17",
+        "id": "93414239ad6b5933",
         "type": "tabs",
         "children": [
           {
-            "id": "c53f4c7a700a7200",
+            "id": "4c6f3b6b53d6e451",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Minería de datos/Semana 01/Introducción a Minería de Datos.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "Introducción a Minería de Datos"
             }
           }
         ]
@@ -23,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "ada7d8219cb26a90",
+    "id": "9212a9beff0afa44",
     "type": "split",
     "children": [
       {
-        "id": "2a8fe8d02845b225",
+        "id": "0ff53120d8362e43",
         "type": "tabs",
         "children": [
           {
-            "id": "71d251bb72a1efa5",
+            "id": "ea9cf50950bb1bae",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,7 +48,7 @@
             }
           },
           {
-            "id": "f26e6b7798b8453c",
+            "id": "8941ea5321b080cd",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -61,7 +65,7 @@
             }
           },
           {
-            "id": "65e5a2451cdd6d00",
+            "id": "16c38bbbc442734c",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -74,22 +78,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 224.5
   },
   "right": {
-    "id": "c1ae24cedf25b521",
+    "id": "fabeb3a315e2a995",
     "type": "split",
     "children": [
       {
-        "id": "777626568334d3d8",
+        "id": "babe4cb249e36057",
         "type": "tabs",
         "children": [
           {
-            "id": "8add1dc9f2af6f3b",
+            "id": "eba75690e4cbb9d1",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Análisis financiero/Semana 02/Análisis financiero.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,30 +104,31 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Enlaces entrantes"
+              "title": "Enlaces entrantes de Análisis financiero"
             }
           },
           {
-            "id": "f00bf79bd4bf9786",
+            "id": "297ce335781e0329",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Análisis financiero/Semana 02/Análisis financiero.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Enlaces salientes"
+              "title": "Enlaces salientes de Análisis financiero"
             }
           },
           {
-            "id": "248bdfce6682a8b1",
+            "id": "a93cb9170861b191",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true,
+                "useHierarchy": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -131,58 +137,88 @@
             }
           },
           {
-            "id": "56b8be087b41fdbc",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "Todas las propiedades"
-            }
-          },
-          {
-            "id": "a60ad6d8fd207129",
+            "id": "b1a5f0ba554d7e19",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
+                "file": "Telematica I/Semana 14/Distribución.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Esquema"
+              "title": "Esquema de Distribución"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 284.5,
     "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-excalidraw-plugin:Nuevo Bosquejo": false,
       "switcher:Abrir selector rápido": false,
-      "graph:Abrir vista gráfica": false,
+      "graph:Abrir vista gráfica": true,
       "canvas:Crear nuevo lienzo": false,
-      "daily-notes:Abrir la nota de hoy": false,
-      "templates:Insertar plantilla": false,
+      "daily-notes:Abrir la nota de hoy": true,
       "command-palette:Abrir paleta de comandos": false,
-      "bases:Crear nueva base": false
+      "bases:Crear nueva base": true
     }
   },
-  "active": "71d251bb72a1efa5",
+  "active": "4c6f3b6b53d6e451",
   "lastOpenFiles": [
-    "Trade Marketing/Semana 01",
-    "Telemática II/Semana 01",
-    "Minería de datos/Semana 01",
-    "Investigación de Operaciones I/Semana 01",
-    "Ingeniería Económica/Semana 01",
-    "Calidad de Software/Semana 01"
+    "Minería de datos/Semana 01/Socialización de la asignatura.md",
+    "Minería de datos/Semana 01/Introducción a Minería de Datos.md",
+    "Minería de datos/Semana 01/2. FO-GD-DO-28 SYLLABUS DE MINERÍA DE DATOS.pdf",
+    "Calidad de Software/Semana 01/conceptos_Calidad_Software/css/style.css",
+    "Calidad de Software/Semana 01/conceptos_Calidad_Software/js/script.js",
+    "Calidad de Software/Semana 01/conceptos_Calidad_Software/js",
+    "Calidad de Software/Semana 01/conceptos_Calidad_Software/index.html",
+    "Calidad de Software/Semana 01/conceptos_Calidad_Software/css",
+    "Calidad de Software/Semana 01/conceptos_Calidad_Software",
+    "Calidad de Software/Semana 01/02-Calidad-Software-2026-1.pdf",
+    "Calidad de Software/Semana 01/01-FO-GD-DO-28 SYLLABUS DE CALIDAD DE SOFTWARE V9.docx",
+    "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-19-14-07-image.png",
+    "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-19-08-56-image.png",
+    "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-19-06-45-image.png",
+    "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-02-07-37-image.png",
+    "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-02-03-18-image.png",
+    "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-01-59-02-image.png",
+    "Telematica I/Curso de Cisco/Módulo 13/ANEXOS",
+    "Telematica I/Curso de Cisco/Módulo 12/Módulo 12 - Asignación de direcciones IPv6.md",
+    "Telematica I/Curso de Cisco/Módulo 12/ANEXOS/2025-10-31-13-55-36-image.png",
+    "Telematica I/Curso de Cisco/Módulo 12/ANEXOS/2025-10-31-13-57-54-image.png",
+    "Telematica I/Curso de Cisco/Módulo 12/ANEXOS/2025-10-31-13-54-58-image.png",
+    "Telematica I/Curso de Cisco/Módulo 12/ANEXOS/2025-10-31-13-45-29-image.png",
+    "Telematica I/Curso de Cisco/Módulo 11/Módulo 11 - Asignación de direcciones IPv4.md",
+    "Telematica I/Curso de Cisco/Módulo 10/Módulo 10 - Configuración básica de un router.md",
+    "Telematica I/Curso de Cisco/Módulo 09/Módulo 9 - Resolución de dirección.md",
+    "Telematica I/Curso de Cisco/Módulo 08/Módulo 8 - Capa de red.md",
+    "Telematica I/Curso de Cisco/Módulo 07/Módulo 7 - Switching Ethernet.md",
+    "Telematica I/Curso de Cisco/Módulo 06/Módulo 6 - Capa de enlace de datos.md",
+    "Telematica I/Curso de Cisco/Módulo 05/Módulo 5 - Sistemas numéricos.md",
+    "Telematica I/Curso de Cisco/Módulo 04/Módulo 4  - Capa física.md",
+    "Telematica I/Curso de Cisco/Módulo 03/Módulo 3 - Protocolos y modelos.md",
+    "Telematica I/Curso de Cisco/Módulo 02/Modulo 2 - Configuración básica de switches y terminales.md",
+    "Telematica I/Curso de Cisco/Módulo 01/Módulo 1 - Las redes en la actualidad.md",
+    "README.md",
+    "Metodología de investigación/Semana 16/Realización de Parcial.md",
+    "Metodología de investigación/Semana 11/Realización de Parcial.md",
+    "Arquitectura de software/Semana 16/Entrega de Parcial y añadido de las credenciales.md",
+    "Telematica I/Curso de Cisco/Módulo 16/Módulo 16 - Fundamentos de seguridad de red.md",
+    "Telematica I/Curso de Cisco/Módulo 15/Módulo 15 - Capa de aplicación.md",
+    "Análisis financiero/Semana 16/Entrega y socialización de notas - Corte 3.md",
+    "Sistemas operativos/Semana 16/Narrativa de exposición de algoritmos.md",
+    "Excalidraw/Drawing 2025-11-13 02.31.59.excalidraw.md",
+    "Sin título.canvas",
+    "Sin título 1.canvas",
+    "Sistemas operativos/Semana 15/Parcial de tercer corte.md",
+    "Microcontroladores/Semana 14/Avances del proyecto en clase.md",
+    "Metodología de investigación/Semana 15.md"
   ]
 }
