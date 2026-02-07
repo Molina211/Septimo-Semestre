@@ -14,5 +14,13 @@
       ],
       "key": "`"
     }
+  ],
+  "csv-allinone:open-CSV-explorer": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "'"
+    }
   ]
 }

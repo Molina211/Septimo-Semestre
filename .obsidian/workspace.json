@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "93414239ad6b5933",
+        "id": "982a44006e84c196",
         "type": "tabs",
         "children": [
           {
-            "id": "4c6f3b6b53d6e451",
+            "id": "a4632261397a902f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Minería de datos/Semana 01/Introducción a Minería de Datos.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Introducción a Minería de Datos"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -167,34 +163,39 @@
       "canvas:Crear nuevo lienzo": false,
       "daily-notes:Abrir la nota de hoy": true,
       "command-palette:Abrir paleta de comandos": false,
-      "bases:Crear nueva base": true
+      "bases:Crear nueva base": true,
+      "markdown-table-editor:Open Markdown Table Editor": false
     }
   },
-  "active": "4c6f3b6b53d6e451",
+  "active": "ea9cf50950bb1bae",
   "lastOpenFiles": [
-    "Minería de datos/Semana 01/Socialización de la asignatura.md",
+    "Telemática II/Semana 01/Conf_Inicial Practica.pkt~",
+    "Telemática II/Semana 01/Conf_Ini.csv",
+    "CSV",
+    "Telemática II/Semana 01/Conf_Ini.csv",
+    "Telemática II/Semana 01/~$Conf_Ini.xlsx",
+    "Telemática II/Semana 01/Presentación_Telematica_II_CCNA2_v7_2026A_G2.pdf",
+    "CSV/Sin título.md",
+    "Telemática II/Semana 01/Nueva carpeta",
+    "Telemática II/Semana 01/CSV/Conf_Ini.csv",
+    "Telemática II/Semana 01/CSV",
+    "Telemática II/Semana 01/Sin título.md",
+    "Telemática II/Semana 01/Conf_Inicial Practica.pkt",
+    "Trade Marketing/Semana 01/Temática de todo el semestre.md",
     "Minería de datos/Semana 01/Introducción a Minería de Datos.md",
-    "Minería de datos/Semana 01/2. FO-GD-DO-28 SYLLABUS DE MINERÍA DE DATOS.pdf",
-    "Calidad de Software/Semana 01/conceptos_Calidad_Software/css/style.css",
-    "Calidad de Software/Semana 01/conceptos_Calidad_Software/js/script.js",
-    "Calidad de Software/Semana 01/conceptos_Calidad_Software/js",
-    "Calidad de Software/Semana 01/conceptos_Calidad_Software/index.html",
-    "Calidad de Software/Semana 01/conceptos_Calidad_Software/css",
-    "Calidad de Software/Semana 01/conceptos_Calidad_Software",
-    "Calidad de Software/Semana 01/02-Calidad-Software-2026-1.pdf",
-    "Calidad de Software/Semana 01/01-FO-GD-DO-28 SYLLABUS DE CALIDAD DE SOFTWARE V9.docx",
+    "README.md",
+    "Investigación de Operaciones I/Semana 01/WhatsApp Image 2026-02-05 at 9.17.48 AM (2).jpeg",
+    "Investigación de Operaciones I/Semana 01/WhatsApp Image 2026-02-05 at 9.17.48 AM (1).jpeg",
+    "Investigación de Operaciones I/Semana 01/WhatsApp Image 2026-02-05 at 9.17.48 AM.jpeg",
+    "Minería de datos/Semana 01/Socialización de la asignatura.md",
     "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-19-14-07-image.png",
     "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-19-08-56-image.png",
     "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-19-06-45-image.png",
     "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-02-07-37-image.png",
     "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-02-03-18-image.png",
     "Telematica I/Curso de Cisco/Módulo 13/ANEXOS/2025-11-01-01-59-02-image.png",
-    "Telematica I/Curso de Cisco/Módulo 13/ANEXOS",
     "Telematica I/Curso de Cisco/Módulo 12/Módulo 12 - Asignación de direcciones IPv6.md",
     "Telematica I/Curso de Cisco/Módulo 12/ANEXOS/2025-10-31-13-55-36-image.png",
-    "Telematica I/Curso de Cisco/Módulo 12/ANEXOS/2025-10-31-13-57-54-image.png",
-    "Telematica I/Curso de Cisco/Módulo 12/ANEXOS/2025-10-31-13-54-58-image.png",
-    "Telematica I/Curso de Cisco/Módulo 12/ANEXOS/2025-10-31-13-45-29-image.png",
     "Telematica I/Curso de Cisco/Módulo 11/Módulo 11 - Asignación de direcciones IPv4.md",
     "Telematica I/Curso de Cisco/Módulo 10/Módulo 10 - Configuración básica de un router.md",
     "Telematica I/Curso de Cisco/Módulo 09/Módulo 9 - Resolución de dirección.md",
@@ -206,7 +207,6 @@
     "Telematica I/Curso de Cisco/Módulo 03/Módulo 3 - Protocolos y modelos.md",
     "Telematica I/Curso de Cisco/Módulo 02/Modulo 2 - Configuración básica de switches y terminales.md",
     "Telematica I/Curso de Cisco/Módulo 01/Módulo 1 - Las redes en la actualidad.md",
-    "README.md",
     "Metodología de investigación/Semana 16/Realización de Parcial.md",
     "Metodología de investigación/Semana 11/Realización de Parcial.md",
     "Arquitectura de software/Semana 16/Entrega de Parcial y añadido de las credenciales.md",
@@ -214,11 +214,7 @@
     "Telematica I/Curso de Cisco/Módulo 15/Módulo 15 - Capa de aplicación.md",
     "Análisis financiero/Semana 16/Entrega y socialización de notas - Corte 3.md",
     "Sistemas operativos/Semana 16/Narrativa de exposición de algoritmos.md",
-    "Excalidraw/Drawing 2025-11-13 02.31.59.excalidraw.md",
     "Sin título.canvas",
-    "Sin título 1.canvas",
-    "Sistemas operativos/Semana 15/Parcial de tercer corte.md",
-    "Microcontroladores/Semana 14/Avances del proyecto en clase.md",
-    "Metodología de investigación/Semana 15.md"
+    "Sin título 1.canvas"
   ]
 }
