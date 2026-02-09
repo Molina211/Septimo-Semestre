@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "982a44006e84c196",
+        "id": "78f0c6e6c32a11ee",
         "type": "tabs",
         "children": [
           {
-            "id": "a4632261397a902f",
+            "id": "3c19e223c4626a53",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -163,8 +163,7 @@
       "canvas:Crear nuevo lienzo": false,
       "daily-notes:Abrir la nota de hoy": true,
       "command-palette:Abrir paleta de comandos": false,
-      "bases:Crear nueva base": true,
-      "markdown-table-editor:Open Markdown Table Editor": false
+      "bases:Crear nueva base": true
     }
   },
   "active": "ea9cf50950bb1bae",
