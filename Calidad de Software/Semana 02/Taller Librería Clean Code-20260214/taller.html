@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taller Práctico: Clean Code en Java | Ingeniería de Sistemas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ESTILOS ORIGINALES DE 01-INDEX.HTML --- */
+        :root {
+            --primary-teal: #008083;   
+            --primary-dark: #005f60;   
+            --secondary-blue: #2c3e50; 
+            --accent-lime: #c0e218;    
+            --accent-lime-dark: #aabf10;
+            --text-dark: #333333;      
+            --text-light: #ffffff;     
+            --bg-light: #f4f7f6;       
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--secondary-blue);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-area span {
+            color: var(--accent-lime);
+            font-weight: 300;
+        }
+
+        /* --- Navegación --- */
+        nav {
+            background-color: var(--primary-teal);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-lime);
+        }
+
+        /* --- Contenedor Principal --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            min-height: 80vh; 
+        }
+
+        /* --- Tarjetas y Secciones --- */
+        .content-card {
+            background-color: var(--bg-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-top: 4px solid var(--primary-teal);
+        }
+
+        h2 {
+            color: var(--primary-teal);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--secondary-blue);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        p, li {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Estilos para el Bloque de Código y Botón Copiar --- */
+        .code-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent-lime);
+            color: var(--secondary-blue);
+            border: none;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-lime-dark);
+            transform: translateY(-1px);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        pre {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 1.5rem;
+            padding-top: 2.5rem; /* Espacio para el botón */
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            border-left: 5px solid var(--accent-lime);
+        }
+        
+        .keyword { color: #c678dd; } 
+        .type { color: #e5c07b; }    
+        .string { color: #98c379; }  
+        .comment { color: #5c6370; font-style: italic; } 
+        .method { color: #61afef; }  
+
+        /* --- Grid para Justificación --- */
+        .grid-justification {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .justification-item {
+            background: #f9f9f9; 
+            padding: 20px; 
+            border-radius: 6px; 
+            border-left: 4px solid var(--primary-teal);
+            transition: transform 0.2s ease;
+        }
+
+        .justification-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary-blue);
+            color: var(--text-light);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-area">
+                <h1>Ingeniería de <span>Sistemas</span></h1>
+            </div>
+            <div class="header-info">
+                Calidad de Software | CORHUILA
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li><a href="#" class="nav-link">Inicio</a></li>
+                <li><a href="#enunciado" class="nav-link">Enunciado</a></li>
+                <li><a href="#solucion" class="nav-link">Código Solución</a></li>
+                <li><a href="#justificacion" class="nav-link">Justificación</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="enunciado" class="content-card">
+            <h2>1. Enunciado del Taller: Librería "Clean Code"</h2>
+            <p><strong>Objetivo:</strong> Desarrollar un módulo backend para procesar la compra de libros, aplicando rigurosamente las buenas prácticas estudiadas en clase.</p>
+            
+            <h3>Requerimientos Funcionales</h3>
+            <ul>
+                <li><strong>Validación:</strong> Verificar que el cliente y la orden contengan datos válidos.</li>
+                <li><strong>Inventario:</strong> Confirmar disponibilidad de stock antes de procesar.</li>
+                <li><strong>Cálculo:</strong> Calcular el precio total incluyendo impuestos (IVA 19%).</li>
+                <li><strong>Notificación:</strong> Simular el envío de un correo de confirmación al cliente.</li>
+                <li><strong>Manejo de Errores:</strong> Uso estricto de Excepciones, prohibido el uso de códigos de error numéricos.</li>
+            </ul>
+        </section>
+
+        <section id="solucion" class="content-card">
+            <h2>2. Solución Técnica: BookStoreCleanSystem.java</h2>
+            <p>A continuación se presenta el código completo. Use el botón superior derecho para copiarlo.</p>
+            
+            <div class="code-wrapper">
+                <button class="copy-btn" onclick="copyCode()">Copiar Código</button>
+                <pre><code id="javaCode">
+<span class="keyword">import</span> java.util.Optional;
+
+<span class="comment">/**
+ * SISTEMA DE LIBRERÍA - EJEMPLO DE CÓDIGO LIMPIO
+ */</span>
+<span class="keyword">public class</span> <span class="type">BookStoreCleanSystem</span> {
+
+    <span class="keyword">public static void</span> <span class="method">main</span>(String[] args) {
+        <span class="comment">// 1. Configuración de dependencias (Inyección pura)</span>
+        <span class="type">InventoryService</span> inventory = <span class="keyword">new</span> InventoryService();
+        <span class="type">NotificationService</span> notifier = <span class="keyword">new</span> NotificationService();
+        <span class="type">OrderProcessor</span> processor = <span class="keyword">new</span> OrderProcessor(inventory, notifier);
+
+        System.out.println(<span class="string">"=== INICIO DE PRUEBAS DEL SISTEMA ===\n"</span>);
+
+        <span class="comment">// CASO DE PRUEBA 1: Flujo Exitoso</span>
+        <span class="keyword">try</span> {
+            <span class="type">Customer</span> customer = <span class="keyword">new</span> Customer(<span class="string">"Juan Perez"</span>, <span class="string">"juan@corhuila.edu.co"</span>);
+            <span class="type">Book</span> book = <span class="keyword">new</span> Book(<span class="string">"Clean Code"</span>, 50.00, <span class="string">"REF-9988"</span>);
+            <span class="type">Order</span> order = <span class="keyword">new</span> Order(customer, book, 2);
+
+            processor.<span class="method">processOrder</span>(order);
+            System.out.println(<span class="string">"✅ ÉXITO: Pedido procesado correctamente."</span>);
+
+        } <span class="keyword">catch</span> (<span class="type">OrderException</span> e) {
+            System.err.println(<span class="string">"❌ ERROR: "</span> + e.getMessage());
+        }
+        
+        <span class="comment">// CASO DE PRUEBA 2: Fallo por Stock (Manejo de Errores)</span>
+        <span class="keyword">try</span> {
+            <span class="type">Customer</span> c2 = <span class="keyword">new</span> Customer(<span class="string">"Maria G."</span>, <span class="string">"maria@mail.com"</span>);
+            <span class="type">Book</span> noStockBook = <span class="keyword">new</span> Book(<span class="string">"Libro Agotado"</span>, 20.00, <span class="string">"REF-0000"</span>);
+            <span class="type">Order</span> order2 = <span class="keyword">new</span> Order(c2, noStockBook, 1);
+
+            processor.<span class="method">processOrder</span>(order2); <span class="comment">// Lanzará excepción</span>
+
+        } <span class="keyword">catch</span> (<span class="type">OrderException</span> e) {
+            System.out.println(<span class="string">"✅ CONTROLADO: El sistema detectó falta de stock."</span>);
+            System.out.println(<span class="string">"   Mensaje: "</span> + e.getMessage());
+        }
+    }
+
+    <span class="comment">// --- CAPA DE DOMINIO ---</span>
+    <span class="keyword">static class</span> <span class="type">Customer</span> {
+        <span class="keyword">private final</span> String name;
+        <span class="keyword">private final</span> String email;
+        <span class="keyword">public</span> <span class="method">Customer</span>(String n, String e) { name = n; email = e; }
+        <span class="keyword">public</span> String <span class="method">getEmail</span>() { <span class="keyword">return</span> email; }
+    }
+
+    <span class="keyword">static class</span> <span class="type">Book</span> {
+        <span class="keyword">private final</span> String title;
+        <span class="keyword">private final</span> <span class="keyword">double</span> basePrice;
+        <span class="keyword">private final</span> String sku;
+        <span class="keyword">public</span> <span class="method">Book</span>(String t, <span class="keyword">double</span> p, String s) { title = t; basePrice = p; sku = s; }
+        <span class="keyword">public double</span> <span class="method">getBasePrice</span>() { <span class="keyword">return</span> basePrice; }
+        <span class="keyword">public</span> String <span class="method">getSku</span>() { <span class="keyword">return</span> sku; }
+    }
+
+    <span class="keyword">static class</span> <span class="type">Order</span> {
+        <span class="keyword">private final</span> <span class="type">Customer</span> customer;
+        <span class="keyword">private final</span> <span class="type">Book</span> book;
+        <span class="keyword">private final</span> <span class="keyword">int</span> quantity;
+        <span class="keyword">public</span> <span class="method">Order</span>(<span class="type">Customer</span> c, <span class="type">Book</span> b, <span class="keyword">int</span> q) { customer = c; book = b; quantity = q; }
+        <span class="keyword">public</span> <span class="type">Customer</span> <span class="method">getCustomer</span>() { <span class="keyword">return</span> customer; }
+        <span class="keyword">public</span> <span class="type">Book</span> <span class="method">getBook</span>() { <span class="keyword">return</span> book; }
+        <span class="keyword">public int</span> <span class="method">getQuantity</span>() { <span class="keyword">return</span> quantity; }
+    }
+
+    <span class="comment">// --- EXCEPCIONES PERSONALIZADAS ---</span>
+    <span class="keyword">static class</span> <span class="type">OrderException</span> <span class="keyword">extends</span> RuntimeException {
+        <span class="keyword">public</span> <span class="method">OrderException</span>(String msg) { <span class="keyword">super</span>(msg); }
+    }
+    <span class="keyword">static class</span> <span class="type">OutOfStockException</span> <span class="keyword">extends</span> OrderException {
+        <span class="keyword">public</span> <span class="method">OutOfStockException</span>(String sku) { <span class="keyword">super</span>(<span class="string">"Sin stock: "</span> + sku); }
+    }
+
+    <span class="comment">// --- SERVICIOS ---</span>
+    <span class="keyword">static class</span> <span class="type">OrderProcessor</span> {
+        <span class="keyword">private static final double</span> TAX_RATE = 1.19;
+        <span class="keyword">private final</span> <span class="type">InventoryService</span> inventory;
+        <span class="keyword">private final</span> <span class="type">NotificationService</span> notifier;
+
+        <span class="keyword">public</span> <span class="method">OrderProcessor</span>(<span class="type">InventoryService</span> inv, <span class="type">NotificationService</span> notif) {
+            <span class="keyword">this</span>.inventory = inv;
+            <span class="keyword">this</span>.notifier = notif;
+        }
+
+        <span class="keyword">public void</span> <span class="method">processOrder</span>(<span class="type">Order</span> order) {
+            <span class="method">validateOrder</span>(order);
+            <span class="method">checkStock</span>(order);
+            <span class="keyword">double</span> total = <span class="method">calculateTotal</span>(order);
+            <span class="method">completeTransaction</span>(order, total);
+        }
+
+        <span class="keyword">private void</span> <span class="method">validateOrder</span>(<span class="type">Order</span> order) {
+            <span class="keyword">if</span> (order == <span class="keyword">null</span>) <span class="keyword">throw new</span> OrderException(<span class="string">"Orden nula"</span>);
+        }
+        <span class="keyword">private void</span> <span class="method">checkStock</span>(<span class="type">Order</span> order) {
+            <span class="keyword">if</span> (!inventory.<span class="method">hasStock</span>(order.getBook().getSku())) 
+                <span class="keyword">throw new</span> OutOfStockException(order.getBook().getSku());
+        }
+        <span class="keyword">private double</span> <span class="method">calculateTotal</span>(<span class="type">Order</span> order) {
+            <span class="keyword">return</span> order.getBook().getBasePrice() * order.getQuantity() * TAX_RATE;
+        }
+        <span class="keyword">private void</span> <span class="method">completeTransaction</span>(<span class="type">Order</span> order, <span class="keyword">double</span> total) {
+            notifier.<span class="method">sendConfirmation</span>(order.getCustomer(), total);
+        }
+    }
+
+    <span class="keyword">static class</span> <span class="type">InventoryService</span> {
+        <span class="keyword">public boolean</span> <span class="method">hasStock</span>(String sku) { <span class="keyword">return</span> !<span class="string">"REF-0000"</span>.equals(sku); }
+    }
+
+    <span class="keyword">static class</span> <span class="type">NotificationService</span> {
+        <span class="keyword">public void</span> <span class="method">sendConfirmation</span>(<span class="type">Customer</span> c, <span class="keyword">double</span> amount) {
+            System.out.println(<span class="string">"   📧 Enviando correo a: "</span> + c.getEmail());
+            System.out.println(<span class="string">"   💰 Total confirmado: "</span> + amount);
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </section>
+
+        <section id="justificacion" class="content-card">
+            <h2>3. Justificación de Buenas Prácticas</h2>
+            <p>En el código anterior se evidencian los puntos clave de la guía:</p>
+            
+            <div class="grid-justification">
+                
+                <div class="justification-item">
+                    <h3>Nombres Claros</h3>
+                    <p><code>isStockAvailable</code> en lugar de <code>check()</code>.</p>
+                    <p><code>OrderProcessor</code> describe exactamente qué hace la clase.</p>
+                    <p>No hay variables como <code>x</code>, <code>p</code> o <code>t</code>; se usa <code>price</code>, <code>totalAmount</code>.</p>
+                </div>
+
+                <div class="justification-item">
+                    <h3>Funciones Pequeñas y Enfocadas</h3>
+                    <p>El método <code>process()</code> solo orquesta. Delega los detalles a métodos privados como <code>verifyStock()</code> o <code>calculateTotal()</code>. Esto facilita la lectura.</p>
+                </div>
+
+                <div class="justification-item">
+                    <h3>Manejo de Errores (Exceptions)</h3>
+                    <p>Se creó <code>OrderException</code> (Checkeada o Runtime según diseño, aquí Runtime para limpieza).</p>
+                    <p>Esto evita llenar el código de <code>if (resultado == -1)</code>. El flujo principal es limpio y los errores se capturan en el <code>main</code>.</p>
+                </div>
+
+                <div class="justification-item">
+                    <h3>Desacoplamiento (Inyección de Dependencias)</h3>
+                    <p><code>OrderProcessor</code> no crea el inventario con <code>new InventoryService()</code>, sino que lo recibe. Esto hace que el sistema sea fácil de probar y mantener.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>Material docente creado por: Jose Llanos </p>
+            <p>Ingeniería de Sistemas - Curso de Calidad de Software</p>
+            <p>© 2026 CORHUILA</p>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode() {
+            const codeBlock = document.getElementById('javaCode');
+            const codeText = codeBlock.innerText;
+            
+            navigator.clipboard.writeText(codeText).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                
+                btn.textContent = '¡Copiado!';
+                btn.style.backgroundColor = '#2c3e50'; // Cambio temporal de color
+                btn.style.color = '#ffffff';
+
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.backgroundColor = ''; // Volver al estilo CSS original
+                    btn.style.color = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

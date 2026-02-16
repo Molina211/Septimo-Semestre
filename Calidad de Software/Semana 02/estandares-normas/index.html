@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calidad de Software | Estándares y Normas Internacionales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Variables de Color (Basadas en 01-index.html) --- */
+        :root {
+            --primary-teal: #008083;   
+            --primary-dark: #005f60;   
+            --secondary-blue: #2c3e50; 
+            --accent-lime: #c0e218;    
+            --accent-lime-dark: #aabf10;
+            --text-dark: #333333;      
+            --text-light: #ffffff;     
+            --bg-light: #f4f7f6;       
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        /* --- Reset y Estilos Globales --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--secondary-blue);
+            color: var(--text-light);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-area h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-area span {
+            color: var(--accent-lime);
+            font-weight: 300;
+        }
+
+        .header-info {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* --- Navegación --- */
+        nav {
+            background-color: var(--primary-teal);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+        }
+
+        .nav-link {
+            display: block;
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 1rem 0;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-lime);
+        }
+
+        /* --- Contenedor Principal --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            min-height: 80vh; 
+        }
+
+        /* --- Tarjetas de Contenido --- */
+        .content-card {
+            background-color: var(--bg-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border-top: 5px solid var(--primary-teal);
+            transition: transform 0.3s ease;
+        }
+
+        /* Efecto hover suave en tarjetas */
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--primary-teal);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--secondary-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+            text-align: justify;
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Imágenes y Diagramas --- */
+        .diagram-container {
+            width: 100%;
+            margin: 2rem 0;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px dashed var(--primary-teal);
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .caption {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* --- Tablas Estilizadas --- */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .styled-table thead tr {
+            background-color: var(--primary-teal);
+            color: var(--text-light);
+            text-align: left;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: var(--bg-light);
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid var(--primary-teal);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary-blue);
+            color: var(--text-light);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-area">
+                <h1>Calidad de <span>Software</span></h1>
+            </div>
+            <div class="header-info">
+                Curso Avanzado | Estándares y Normativas
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li><a href="#intro" class="nav-link">Introducción</a></li>
+                <li><a href="#iso9001" class="nav-link">ISO 9001</a></li>
+                <li><a href="#cmmi" class="nav-link">Modelo CMMI</a></li>
+                <li><a href="#iso29119" class="nav-link">ISO/IEC 29119</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="intro" class="content-card">
+            <h2>Introducción a los Estándares de Calidad</h2>
+            <p>
+                En la ingeniería de software moderna, la calidad no es un accidente; es el resultado de una intención inteligente, un esfuerzo sincero y una ejecución hábil. Los estándares y normas internacionales proporcionan el marco de trabajo necesario para garantizar que los productos de software sean seguros, fiables y eficientes.
+            </p>
+            <p>
+                Este curso explora tres pilares fundamentales que todo ingeniero debe conocer: la gestión de calidad general (ISO 9001), la madurez de los procesos de desarrollo (CMMI) y las normativas específicas para pruebas de software (ISO/IEC 29119).
+            </p>
+        </section>
+
+        <section id="iso9001" class="content-card">
+            <h2>ISO 9001: Gestión de la Calidad</h2>
+            <p>
+                La norma <strong>ISO 9001</strong> es el estándar internacional más reconocido para los Sistemas de Gestión de la Calidad (SGC). Aunque es genérica y aplicable a cualquier industria, en el desarrollo de software establece las bases para la satisfacción del cliente y la mejora continua.
+            </p>
+            
+            <h3>Ciclo PHVA (Planificar - Hacer - Verificar - Actuar)</h3>
+            <p>
+                El núcleo de la ISO 9001 se basa en el ciclo de mejora continua. Este enfoque iterativo permite a las organizaciones de software ajustar sus procesos constantemente.
+            </p>
+
+            <div class="diagram-container">
+                <img src="images/ciclo-PHVA.png" alt="Ciclo PHVA ISO 9001">
+                <span class="caption">Figura 1: El ciclo de Deming aplicado a la gestión de calidad según ISO 9001.</span>
+            </div>
+
+            <h3>Principios Clave</h3>
+            <ul>
+                <li><strong>Enfoque al cliente:</strong> Entender las necesidades actuales y futuras.</li>
+                <li><strong>Liderazgo:</strong> Crear un ambiente donde el personal se involucre.</li>
+                <li><strong>Enfoque basado en procesos:</strong> Gestionar las actividades como procesos interrelacionados.</li>
+                <li><strong>Mejora:</strong> La mejora continua del desempeño global de la organización.</li>
+            </ul>
+        </section>
+
+        <section id="cmmi" class="content-card">
+            <h2>CMMI (Capability Maturity Model Integration)</h2>
+            <p>
+                El <strong>CMMI</strong> es un modelo de mejora de procesos y comportamientos que ayuda a las organizaciones a optimizar su desarrollo de software y mantenimiento. A diferencia de la ISO 9001, que certifica un sistema de calidad, CMMI evalúa el nivel de madurez de la ingeniería de la organización.
+            </p>
+
+            <h3>Los 5 Niveles de Madurez</h3>
+            <p>
+                CMMI clasifica a las organizaciones en 5 niveles evolutivos. Una organización de nivel alto tiene procesos predecibles y optimizados, mientras que una de nivel bajo opera de manera reactiva ("apagando incendios").
+            </p>
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Nivel</th>
+                        <th style="width: 25%;">Nombre</th>
+                        <th>Descripción y Características</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Nivel 1</strong></td>
+                        <td>Inicial</td>
+                        <td>Procesos impredecibles, poco controlados y reactivos. El éxito depende del heroísmo individual.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nivel 2</strong></td>
+                        <td>Gestionado</td>
+                        <td>Se gestionan los requisitos, procesos y productos. Se planifican los proyectos y se miden.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nivel 3</strong></td>
+                        <td>Definido</td>
+                        <td>Los procesos están bien caracterizados y entendidos. Existen estándares a nivel de organización.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nivel 4</strong></td>
+                        <td>Gestionado Cuantitativamente</td>
+                        <td>Se controlan los subprocesos usando técnicas estadísticas y cuantitativas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nivel 5</strong></td>
+                        <td>En Optimización</td>
+                        <td>Mejora continua basada en una comprensión cuantitativa de las causas de variación.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="diagram-container">
+                <img src="images/madurez-CMMI.png" alt="Niveles de Madurez CMMI">
+                <span class="caption">Figura 2: Escalera de madurez de procesos según el modelo CMMI.</span>
+            </div>
+        </section>
+
+        <section id="iso29119" class="content-card">
+            <h2>ISO/IEC 29119: Pruebas de Software</h2>
+            <p>
+                La <strong>ISO/IEC 29119</strong> es la norma internacional definitiva para las pruebas de software. Reemplazó a estándares anteriores como la IEEE 829. Su objetivo es unificar vocabulario, procesos, documentación y técnicas de prueba en un solo marco coherente.
+            </p>
+
+            <h3>Estructura de la Norma</h3>
+            <p>
+                Esta norma no solo dice "cómo probar", sino cómo gestionar las pruebas a nivel organizacional, de proyecto y dinámico.
+            </p>
+
+            <div class="diagram-container">
+                <img src="images/arquitectura-ISO-29119.png" alt="Estructura ISO 29119">
+                <span class="caption">Figura 3: Modelo de Procesos de Prueba de la ISO/IEC 29119-2.</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                <div>
+                    <h3>Ventajas de Implementación</h3>
+                    <ul>
+                        <li>Estandarización de la documentación de pruebas (Plan de Pruebas, Casos de Prueba, Reportes).</li>
+                        <li>Cobertura completa del ciclo de vida, desde pruebas unitarias hasta aceptación.</li>
+                        <li>Flexibilidad para adaptarse a metodologías Ágiles o Tradicionales.</li>
+                    </ul>
+                </div>
+                <div style="background-color: #f0f4f4; padding: 15px; border-radius: 5px;">
+                    <h3>Partes Principales</h3>
+                    <ul>
+                        <li><strong>Parte 1:</strong> Conceptos y definiciones.</li>
+                        <li><strong>Parte 2:</strong> Procesos de prueba.</li>
+                        <li><strong>Parte 3:</strong> Documentación de prueba.</li>
+                        <li><strong>Parte 4:</strong> Técnicas de prueba.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="nav-container">
+            <h3>Ingeniería de Sistemas</h3>
+            <p>Corporación Universitaria del Huila - CORHUILA</p>
+            <p class="footer-text">&copy; 2026 - Material Educativo: Calidad de Software</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- Interacción Dinámica en Tablas ---
+        const tableRows = document.querySelectorAll('.styled-table tbody tr');
+        
+        tableRows.forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = "scale(1.01)";
+                row.style.transition = "transform 0.2s ease";
+                row.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
+                row.style.backgroundColor = "#e0f2f1"; // Un toque ligero de teal
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = "scale(1)";
+                row.style.boxShadow = "none";
+                row.style.backgroundColor = ""; 
+            });
+        });
+
+        // --- Animación de Entrada para Tarjetas ---
+        const contentCards = document.querySelectorAll('.content-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        contentCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+
+        // --- Scroll Suave para el Menú ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+    </script>
+</body>
+</html>
