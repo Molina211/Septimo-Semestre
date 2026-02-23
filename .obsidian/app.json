@@ -4,5 +4,6 @@
   "newLinkFormat": "absolute",
   "showUnsupportedFiles": true,
   "attachmentFolderPath": "./ANEXOS",
-  "promptDelete": false
+  "promptDelete": false,
+  "tabSize": 4
 }

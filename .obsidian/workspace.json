@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "373d8523b88f731a",
+        "id": "2d6a94b6bd2f8e28",
         "type": "tabs",
         "children": [
           {
-            "id": "b25a6d320fbf13a5",
+            "id": "8d06f494dffb9dba",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Minería de datos/Semana 03/Inicio de proyecto.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "Inicio de proyecto"
             }
           }
         ]
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 224.5
+    "width": 278.5
   },
   "right": {
     "id": "fabeb3a315e2a995",
@@ -138,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Telematica I/Semana 14/Distribución.md",
+                "file": "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Esquema de Distribución"
+              "title": "Esquema de Módulo 3 - VLANs"
             }
           }
         ],
@@ -168,29 +172,42 @@
   },
   "active": "ea9cf50950bb1bae",
   "lastOpenFiles": [
-    "Investigación de Operaciones I/Semana 03",
-    "Telemática II/Semana 03",
-    "Calidad de Software/Semana 02/Taller Librería Clean Code-20260214/code/BookStoreClean.java",
-    "Calidad de Software/Semana 02/Taller Librería Clean Code-20260214/code",
-    "Calidad de Software/Semana 02/Taller Librería Clean Code-20260214/taller.html",
-    "Calidad de Software/Semana 02/Taller Librería Clean Code-20260214",
-    "Calidad de Software/Semana 02/estandares-normas/images/madurez-CMMI.png",
-    "Calidad de Software/Semana 02/estandares-normas/images/ciclo-PHVA.png",
-    "Calidad de Software/Semana 02/estandares-normas/images/arquitectura-ISO-29119.png",
-    "Calidad de Software/Semana 02/estandares-normas/index.html",
-    "Calidad de Software/Semana 02/estandares-normas/images",
-    "Calidad de Software/Semana 02/estandares-normas",
-    "Trade Marketing/Semana 02/Grupos.md",
+    "Investigación de Operaciones I/Semana 04/WhatsApp Image 2026-02-23 at 5.27.22 PM.jpeg",
+    "Investigación de Operaciones I/Semana 04/WhatsApp Image 2026-02-23 at 5.27.30 PM.jpeg",
+    "Investigación de Operaciones I/Semana 04",
+    "Investigación de Operaciones I/Nueva carpeta",
+    "Investigación de Operaciones I/Semana 03/WhatsApp Image 2026-02-23 at 5.26.15 PM (2).jpeg",
+    "Investigación de Operaciones I/Semana 03/WhatsApp Image 2026-02-23 at 5.26.15 PM (1).jpeg",
+    "Investigación de Operaciones I/Semana 03/WhatsApp Image 2026-02-23 at 5.26.15 PM.jpeg",
+    "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
+    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122739.png",
+    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122651.png",
+    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122250.png",
+    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121825.png",
+    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121511.png",
+    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121349.png",
+    "Minería de datos/Semana 03/Inicio de proyecto.md",
+    "Trade Marketing/Semana 03/~$Herramientas-Tacticas-y-Acciones-de-Activacion.pptx",
+    "Trade Marketing/Semana 03/Herramientas-Tacticas-y-Acciones-de-Activacion.pptx",
+    "Trade Marketing/Semana 03",
+    "Trade Marketing/Nueva carpeta",
+    "Trade Marketing/Semana 02 - copia/Evolucion-del-Trade-Marketing.pptx",
+    "Trade Marketing/Semana 02 - copia/Trade-Marketing-en-la-Cadena-de-Valor.pptx",
+    "Trade Marketing/Semana 02 - copia/Grupos.md",
+    "Trade Marketing/Semana 02 - copia",
+    "Trade Marketing/Semana 02/Trade-Marketing-en-la-Cadena-de-Valor.pptx",
+    "Ingeniería Económica/Semana 03/Principios básicos del análisis costo-beneficio.md",
+    "Ingeniería Económica/Semana 03/El Triángulo de la Inversión - Riesgo, Rentabilidad y Liquidez.md",
+    "Ingeniería Económica/Semana 02/Concepto de Ingeniería Económica y su relevancia en proyectos de inversión..md",
+    "Telemática II/Curso de Cisco II/Módulo 02/Módulo 2 - Conceptos de switching.md",
     "Telemática II/Curso de Cisco II/Módulo 01/Modulo 1 - Configuración básica de dispositivos.md",
-    "Ingeniería Económica/Semana 02/Línea de tiempo.txt",
-    "Ingeniería Económica/Semana 02/Nuevo Documento de texto.txt",
-    "Telemática II/Curso de Cisco II/Módulo 01/ANEXOS/Pasted image 20260214133828.png",
-    "Telemática II/Curso de Cisco II/Módulo 01/ANEXOS/Pasted image 20260214133337.png",
-    "Telemática II/Curso de Cisco II/Módulo 01/ANEXOS/Pasted image 20260214133247.png",
-    "Telemática II/Curso de Cisco II/Módulo 01/ANEXOS/Pasted image 20260214133219.png",
-    "Telemática II/Curso de Cisco II/Módulo 01/ANEXOS/Pasted image 20260214133141.png",
-    "Telemática II/Curso de Cisco II/Módulo 01/ANEXOS/Pasted image 20260214133024.png",
-    "Telemática II/Curso de Cisco II/Módulo 01/ANEXOS/Pasted image 20260214132532.png",
+    "Calidad de Software/Semana 03/Grupo 1 - Talleres Primer Corte/2026A/inteligencia-artificial/talleres/tercer-corte/README.md",
+    "Calidad de Software/Semana 03/Grupo 1 - Talleres Primer Corte/2026A/inteligencia-artificial/talleres/segundo-corte/README.md",
+    "Calidad de Software/Semana 03/Grupo 1 - Talleres Primer Corte/2026A/inteligencia-artificial/talleres/primer-corte/README.md",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/segundo-corte/README.md",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/tercer-corte/README.md",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/README.md",
+    "Trade Marketing/Semana 02/Grupos.md",
     "Minería de datos/Semana 02/Introducción a tecnologías.md",
     "Telemática II/Semana 02/Sin título.md",
     "Ingeniería Económica/Semana 02/Concepto de Ingeniería económica.md",
@@ -201,19 +218,6 @@
     "Trade Marketing/Semana 01/Temática de todo el semestre.md",
     "Minería de datos/Semana 01/Introducción a Minería de Datos.md",
     "Minería de datos/Semana 01/Socialización de la asignatura.md",
-    "Telematica I/Curso de Cisco/Módulo 12/Módulo 12 - Asignación de direcciones IPv6.md",
-    "Telematica I/Curso de Cisco/Módulo 11/Módulo 11 - Asignación de direcciones IPv4.md",
-    "Telematica I/Curso de Cisco/Módulo 10/Módulo 10 - Configuración básica de un router.md",
-    "Telematica I/Curso de Cisco/Módulo 09/Módulo 9 - Resolución de dirección.md",
-    "Telematica I/Curso de Cisco/Módulo 08/Módulo 8 - Capa de red.md",
-    "Telematica I/Curso de Cisco/Módulo 07/Módulo 7 - Switching Ethernet.md",
-    "Telematica I/Curso de Cisco/Módulo 06/Módulo 6 - Capa de enlace de datos.md",
-    "Telematica I/Curso de Cisco/Módulo 05/Módulo 5 - Sistemas numéricos.md",
-    "Telematica I/Curso de Cisco/Módulo 04/Módulo 4  - Capa física.md",
-    "Telematica I/Curso de Cisco/Módulo 03/Módulo 3 - Protocolos y modelos.md",
-    "Telematica I/Curso de Cisco/Módulo 02/Modulo 2 - Configuración básica de switches y terminales.md",
-    "Telematica I/Curso de Cisco/Módulo 01/Módulo 1 - Las redes en la actualidad.md",
-    "Metodología de investigación/Semana 16/Realización de Parcial.md",
     "Sin título.canvas",
     "Sin título 1.canvas"
   ]

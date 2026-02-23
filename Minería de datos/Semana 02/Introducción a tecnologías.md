@@ -2,7 +2,7 @@
 
 ---
 
-**Solo envió de trabajos del semestre:** https://github.com/Molina211/Grupo2_Molina.git
+**Solo envió de trabajos del semestre:** https://github.com/Molina211/etl-weatherstack.git
 
 ---
 
