@@ -204,7 +204,7 @@ La situación explica por qué el estándar IEEE 802.1Q define la VLAN nativa: p
 
 Para VoIP, se necesita una VLAN de voz separada que permita aplicar calidad de servicio (QoS) y seguridad específicas al tráfico de voz, sin mezclarlo con los datos.
 
-Un teléfono IP de Cisco se conecta al switch y puede, a su vez, conectar una PC. El puerto del switch se configura con dos VLAN*:
+Un teléfono IP de Cisco se conecta al switch y puede, a su vez, conectar una PC. El puerto del switch se configura con dos VLAN:
 
 - **VLAN de voz**: transporta el tráfico del teléfono.
 
@@ -327,7 +327,7 @@ En la figura, se muestra cómo se configura la VLAN para estudiantes (VLAN 20) e
 
 ![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114619.png]]
 
-El comando **`vlan vlan-id`** permite crear una o varias VLAN al mismo tiempo.  
+El comando `vlan vlan-id` permite crear una o varias VLAN al mismo tiempo.  
 Se pueden especificar:
 
 - VLAN individuales, separadas por comas
@@ -497,4 +497,149 @@ Esto asegura que no queden configuraciones previas de VLAN ni ajustes guardados.
 
 ---
 
-### 
+## Enlaces troncales de la VLAN
+
+Una vez configuradas y verificadas las VLAN, el siguiente paso es configurar y comprobar los enlaces troncales. Un troncal VLAN permite que por un mismo enlace circule el tráfico de todas las VLAN existentes. Esto evita tener que usar un enlace físico por cada VLAN.
+
+De forma predeterminada, el troncal transporta todas las VLAN, aunque es posible restringir cuáles VLAN pueden pasar, ya sea mediante una configuración manual o dinámica, para mejorar el control y la seguridad de la red.
+
+Para que un enlace funcione como troncal, es necesario configurar los puertos que conectan los switches utilizando comandos específicos de configuración de interfaz. Estos comandos habilitan el modo troncal y permiten el etiquetado del tráfico VLAN, asegurando que los datos lleguen correctamente a su VLAN correspondiente en el otro switch.
+
+| Tarea | Comando de IOS |
+|------|----------------|
+| Ingrese al modo de configuración global. | `Switch# configure terminal` |
+| Ingrese el modo de configuración de interfaz. | `Switch(config)# interface interface-id` |
+| Establezca el puerto en modo de enlace troncal permanente. | `Switch(config-if)# switchport mode trunk` |
+| Cambie la configuración de la VLAN nativa a otra opción que no sea VLAN 1. | `Switch(config-if)# switchport trunk native vlan vlan-id` |
+| Especifique la lista de VLAN que se permitirán en el enlace troncal. | `Switch(config-if)# switchport trunk allowed vlan vlan-list` |
+| Vuelva al modo EXEC privilegiado. | `Switch(config-if)# end` |
+
+---
+
+### Ejemplo de configuración de troncal
+
+En la figura 2, las VLAN 10, 20 y 30 admiten las computadoras de Cuerpo docente, Estudiante e Invitado (PC1, PC2 y PC3). El puerto F0/1 del switch S1 se configuró como puerto de enlace troncal y reenvía el tráfico para las VLAN 10, 20 y 30. La VLAN 99 se configuró como VLAN nativa.
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130113.png]]
+
+El ejemplo muestra la configuración del puerto F0/1 en el conmutador S1 como puerto troncal. La VLAN nativa se cambia a VLAN 99 y la lista de VLAN permitidas se restringe a 10, 20, 30 y 99.
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130315.png]]
+
+Los switches Cisco Catalyst 2960 configuran automáticamente la encapsulación 802.1Q en enlaces troncales. Es importante que ambos extremos del troncal tengan la misma VLAN nativa, ya que una configuración diferente genera errores en el IOS de Cisco.
+
+---
+
+### Verifique la configuración de enlaces troncales.
+
+La salida del switch muestra la configuración del puerto del switch F0/1 en el switch S1. La configuración se verifica con el `show interfaces` comando `switchport interface-ID`.
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130743.png]]
+
+En el área superior resaltada, se muestra que el modo administrativo del puerto F0/1 se estableció en trunk. El puerto está en modo de enlace troncal. En la siguiente área resaltada, se verifica que la VLAN nativa es la VLAN 99. Más abajo en el resultado, en el área inferior resaltada, se muestra que las VLAN 10,20,30 y 99 están habilitadas en el enlace troncal.
+
+---
+
+### Restablecimiento del enlace troncal al estado predeterminado
+
+Para restablecer un enlace troncal a su configuración predeterminada, se utilizan los comandos `no switchport trunk allowed vlan` y `no switchport trunk native vlan`.
+
+Al aplicarlos:
+
+- Se elimina cualquier restricción de VLAN permitidas, haciendo que el troncal permita todas las VLAN.
+    
+- La VLAN nativa vuelve a ser la VLAN 1, que es el valor por defecto.
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131052.png]]
+
+El comando `show interfaces fa0/1 switchport` revela que la troncal se ha reconfigurado a un estado predeterminado.
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131122.png]]
+
+La figura muestra el resultado de los comandos utilizados para eliminar la característica de enlace troncal del puerto F0/1 del switch S1. El `show interfaces f0/1 switchport` comando revela que la interfaz F0/1 ahora está en modo de acceso estático.
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131410.png]]
+
+---
+
+## Protocolo de enlace troncal dinámico
+
+Algunos switches Cisco usan un protocolo propio llamado DTP (Dynamic Trunking Protocol) que sirve para negociar automáticamente si un enlace debe ser troncal entre dos dispositivos. Esto facilita la configuración porque el switch puede decidir solo si usar trunk o no.
+
+DTP:
+
+- Funciona solo entre dispositivos Cisco.
+    
+- Solo trabaja en enlaces punto a punto.
+    
+- Está activado por defecto en switches como Catalyst 2960 y 3560.
+    
+- Solo negocia correctamente si ambos lados soportan DTP.
+
+Los dispositivos que no son Cisco no entienden DTP y pueden causar errores si reciben estas tramas. Por eso, no se recomienda usar DTP con equipos de otros fabricantes.
+
+Si conectas un switch Cisco a un dispositivo que no soporta DTP, debes:
+
+- Forzar el puerto como troncal con `switchport mode trunk`
+    
+- Desactivar la negociación automática con `switchport nonegotiate`
+
+Así:
+
+- El enlace será troncal fijo
+    
+- No se enviarán tramas DTP
+    
+- Se evitan errores de configuración
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301132442.png]]
+
+Para volver a habilitar el protocolo de enlace troncal dinámico, utilice el `switchport mode dynamic auto` comando.
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301141445.png]]
+
+Si un puerto se configura con `switchport mode trunk` y `switchport nonegotiate`, ignora DTP y permanece siempre como enlace troncal activo.
+
+En cambio, si los puertos están en modo dinámico automático, no se negocia el troncal y el enlace queda como puerto de acceso, lo que provoca un troncal inactivo entre switches.
+
+---
+
+### Modos de interfaz negociados 
+
+El `switchport mode` comando tiene opciones adicionales para negociar el modo de interfaz. La siguiente es la sintaxis del comando :
+
+| Opción                | Descripción                                                                                                                                                                                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **access**            | - Configura el puerto como puerto de acceso (no troncal).<br>- Nunca será troncal, aunque el puerto vecino sí lo sea.<br>- Se usa normalmente para conectar PCs, impresoras o dispositivos finales.                                                     |
+| **dynamic auto**      | - El puerto espera a que el dispositivo vecino solicite un enlace troncal.<br>- Solo se vuelve troncal si el vecino está en trunk o dynamic desirable.<br>- Es el modo predeterminado en switches Cisco.<br>- Puede causar enlaces troncales inactivos. |
+| **dynamic desirable** | - El puerto intenta activamente convertirse en troncal usando DTP.<br>- Se vuelve troncal si el vecino está en auto, desirable o trunk.<br>- Facilita la negociación automática, pero no es el modo más seguro.                                         |
+| **trunk**             | - Fuerza el puerto a ser troncal permanente.<br>- El enlace troncal está siempre activo, sin ambigüedades.<br>- Se recomienda para enlaces entre switches.<br>- Puede combinarse con `switchport nonegotiate` para mayor seguridad.                     |
+En pocas palabras:
+
+- **access:** puerto no troncal, solo para una VLAN.
+- **dynamic auto:** espera que el vecino solicite el troncal; puede quedar inactivo.
+- **dynamic desirable:** intenta negociar el troncal automáticamente.
+- **trunk:** puerto troncal fijo y siempre activo (recomendado entre switches).
+
+---
+
+### Resultados de una configuración DTP
+
+La tabla ilustra los resultados de las opciones de configuración DTP en extremos opuestos de un enlace troncal conectado a los puertos del switch Catalyst 2960. Una buena practica es configurar los enlaces troncales estáticamente siempre que sea posible.
+
+|                         | Dinámico automático | Dinámico deseado | Troncal               | Acceso                |
+| ----------------------- | ------------------- | ---------------- | --------------------- | --------------------- |
+| **Dinámico automático** | Acceso              | Troncal          | Troncal               | Acceso                |
+| **Dinámico deseado**    | Troncal             | Troncal          | Troncal               | Acceso                |
+| **Troncal**             | Troncal             | Troncal          | Troncal               | Conectividad limitada |
+| **Acceso**              | Acceso              | Acceso           | Conectividad limitada | Acceso                |
+
+---
+
+### Verificación del modo de DTP
+
+El modo DTP predeterminado depende de la versión del software Cisco IOS y de la plataforma. Para determinar el modo DTP actual, ejecute el `show dtp interface` comando como se muestra en la salida.
+
+![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301142558.png]]
+
+*Nota: Una mejor práctica general cuando se requiere un enlace troncal es establecer la interfaz en `trunk` y `nonegotiate` cuando se necesita un enlace troncal. Se debe inhabilitar DTP en los enlaces cuando no se deben usar enlaces troncales*.

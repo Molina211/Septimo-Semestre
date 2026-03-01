@@ -1,0 +1,51 @@
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #ffffff;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(15, 15, 20, 0.08);
+  align-items: center;
+}
+
+.hero .eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-size: 0.75rem;
+  margin: 0;
+  color: #888;
+}
+
+.hero h1 {
+  margin: 0.25rem 0;
+  font-size: 2.1rem;
+}
+
+.hero .lead {
+  margin: 0;
+  color: #555;
+  max-width: 40rem;
+}
+
+.status-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.status-chip button {
+  border: none;
+  background: #0f62fe;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.status-chip button:hover {
+  background: #084de5;
+}

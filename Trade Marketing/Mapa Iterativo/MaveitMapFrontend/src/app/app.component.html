@@ -1,0 +1,117 @@
+<div class="page">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Live Trade Intelligence</p>
+      <h1>{{ title }}</h1>
+      <p class="lead">
+        Haz clic en el mapa para identificar puntos activos, guarda datos y observa cómo se colorea el escenario en
+        tiempo real.
+      </p>
+    </div>
+    <div class="status-chip">
+      <span>Heatmap</span>
+      <button type="button" (click)="toggleHeatmap()">
+        {{ heatEnabled ? 'Desactivar' : 'Activar' }}
+      </button>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="map-card">
+      <div class="card-header">
+        <div>
+          <h2>Mapa de ventas</h2>
+          <p class="muted">Coordenadas actualizadas según tu backend.</p>
+        </div>
+        <div class="legend">
+          <span
+            *ngFor="let nivel of nivelOptions"
+            class="legend-chip"
+            [style.background]="colorFromNivel(nivel)"
+          >
+            {{ nivel }}
+          </span>
+        </div>
+      </div>
+
+      <div class="map-wrapper">
+        <div id="map"></div>
+      </div>
+    </section>
+
+    <section class="control-card">
+      <form (ngSubmit)="guardarVenta()" class="form">
+        <h3>Nuevo punto registrado</h3>
+        <p class="muted">
+          Haz clic en el mapa para fijar ubicación, añade nombre y cantidad de ventas y guarda el evento con un solo
+          click.
+        </p>
+
+        <label>
+          Nombre del punto
+          <input
+            name="nombrePunto"
+            [(ngModel)]="ventaForm.nombrePunto"
+            placeholder="Ej. Tienda Norte"
+            required
+          />
+        </label>
+
+        <label>
+          Ventas registradas
+          <input
+            type="number"
+            name="cantidad"
+            [(ngModel)]="ventaForm.cantidad"
+            min="1"
+            required
+          />
+        </label>
+
+        <div class="coords" *ngIf="selectedCoords">
+          Coordenadas seleccionadas:
+          <span>{{ selectedCoords.lat.toFixed(5) }}, {{ selectedCoords.lng.toFixed(5) }}</span>
+        </div>
+        <div class="buttons">
+          <button type="submit" [disabled]="!selectedCoords || ventaForm.cantidad <= 0">
+            Guardar punto
+          </button>
+        </div>
+      </form>
+
+      <div class="filters">
+        <h3>Filtrar por rango</h3>
+        <p class="muted">Define una apertura temporal y el mapa solo mostrará esos eventos.</p>
+
+        <label>
+          Desde
+          <input name="inicio" [(ngModel)]="inicioFiltro" type="datetime-local" />
+        </label>
+        <label>
+          Hasta
+          <input name="fin" [(ngModel)]="finFiltro" type="datetime-local" />
+        </label>
+
+        <div class="buttons">
+          <button type="button" (click)="aplicarFiltro()" [disabled]="loading">
+            {{ loading ? 'Aplicando...' : 'Aplicar filtro' }}
+          </button>
+          <button type="button" class="ghost" (click)="resetFiltro()">Ver mapa completo</button>
+        </div>
+      </div>
+
+      <div class="analytics">
+        <header>
+          <h3>Ventas por hora</h3>
+          <p class="muted">Temporaliza tu operación y detecta horas pico.</p>
+        </header>
+        <ul>
+          <li *ngFor="let item of ventasHora">
+            <span>{{ item[0] }}:00</span>
+            <strong>{{ item[1] }} ventas</strong>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>

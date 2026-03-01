@@ -105,12 +105,12 @@ La imagen de arranque se define con el comando `boot system`, y se puede verific
 
 Las partes del comando `boot system` son:
 
-| Comando | Definición |
-|--------|------------|
-| `boot system` | El comando principal |
-| `flash:` | El dispositivo de almacenamiento |
-| `c2960-lanbasek9-mz.150-2.SE/` | La ruta al sistema de archivos |
-| `c2960-lanbasek9-mz.150-2.SE.bin` | El nombre del archivo IOS |
+| Comando                           | Definición                       |
+| --------------------------------- | -------------------------------- |
+| `boot system`                     | El comando principal             |
+| `flash:`                          | El dispositivo de almacenamiento |
+| `c2960-lanbasek9-mz.150-2.SE/`    | La ruta al sistema de archivos   |
+| `c2960-lanbasek9-mz.150-2.SE.bin` | El nombre del archivo IOS        |
 
 ---
 
