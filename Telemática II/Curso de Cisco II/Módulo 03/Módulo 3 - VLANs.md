@@ -353,6 +353,7 @@ Así se garantiza que el puerto quede permanentemente asociado a una única VLAN
 | Establezca el puerto en modo de acceso.       | `Switch(config-if)# switchport mode access`         |
 | Asigne el puerto a una VLAN.                  | `Switch(config-if)# switchport access vlan vlan-id` |
 | Vuelva al modo EXEC privilegiado.             | `Switch(config-if)# end`                            |
+|                                               |                                                     |
 *Nota:* Use el `interface range` comando para configurar simultáneamente varias interfaces.
 
 ---
@@ -482,7 +483,7 @@ Para confirmar que el puerto F0/18 fue restablecido a la VLAN 1 predeterminada, 
 
 - Antes de borrar una VLAN, es obligatorio reasignar sus puertos a otra VLAN activa; de lo contrario, esos puertos quedarán sin comunicación hasta que se les asigne una VLAN válida.
 
-- Si se desea eliminar todas las VLAN configuradas, se puede borrar el archivo completo con `delete flash:vlan.dat` (o `delete vlan.dat`). Tras reiniciar el switch, se perderán todas las VLAN creadas y el switch quedará con la configuración de VLAN por defecto.
+	- Si se desea eliminar todas las VLAN configuradas, se puede borrar el archivo completo con `delete flash:vlan.dat` (o `delete vlan.dat`). Tras reiniciar el switch, se perderán todas las VLAN creadas y el switch quedará con la configuración de VLAN por defecto. 
 
 - Para restaurar completamente el switch a estado de fábrica en cuanto a VLAN y configuración:
     

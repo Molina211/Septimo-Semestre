@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "46e9471aac647b4a",
+            "id": "e988722fd845faed",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Calidad de Software/Semana 04/Métricas de Calidad.md",
+                "file": "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Métricas de Calidad"
+              "title": "Módulo 4 - Inter-VLAN Routing"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Análisis financiero/Semana 02/Análisis financiero.md",
+                "file": "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Enlaces entrantes de Análisis financiero"
+              "title": "Enlaces entrantes de Módulo 4 - Inter-VLAN Routing"
             }
           },
           {
@@ -151,8 +151,7 @@
               "title": "Esquema de Módulo 3 - VLANs"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -170,36 +169,38 @@
       "bases:Crear nueva base": true
     }
   },
-  "active": "46e9471aac647b4a",
+  "active": "e988722fd845faed",
   "lastOpenFiles": [
+    "Telemática II/Semana 05/Inter-VLAN Router-on-the-stick.pkt~",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/~$sultados_CleanCode.docx",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/Resultados_CleanCode.docx",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/snippet_services.png",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/snippet_order.png",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/snippet_main.png",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/patch.py",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/script.py",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/src/BookStoreCleanSystem.java",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/src/MainCleanCode.java",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/src/Main2.java",
+    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/~$imer Taller.docx",
+    "Telemática II/Curso de Cisco II/Módulo 04/4.5.2-lab---implement-inter-vlan-routing_es-XL.pdf",
+    "Telemática II/Curso de Cisco II/Módulo 04/4.5.1-packet-tracer---inter-vlan-routing-challenge_es-XL.pka",
+    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011928.png",
+    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011848.png",
+    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011753.png",
+    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011751.png",
+    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011635.png",
+    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011602.png",
+    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011432.png",
+    "Calidad de Software/Semana 04/Métricas de Calidad.md",
+    "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
     "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
-    "Minería de datos/Semana 04/Portafolio/Portafolio/script-portafolio.js",
-    "Minería de datos/Semana 04/Portafolio/Portafolio/portafolio.html",
-    "Minería de datos/Semana 04/Portafolio/Portafolio/styles-portafolio.css",
-    "Minería de datos/Semana 04/Portafolio/Portafolio",
-    "Minería de datos/Semana 04/Portafolio",
-    "Minería de datos/Semana 04",
-    "Telemática II/Curso de Cisco II/Módulo 03/3.6.2-lab---implement-vlans-and-trunking_es-XL.pdf",
-    "Telemática II/Curso de Cisco II/Módulo 03/3.6.1-packet-tracer---implement-vlans-and-trunking_es-XL.pka",
-    "Telemática II/Curso de Cisco II/Módulo 03/3.5.5-packet-tracer---configure-dtp_es-XL.pka",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301142558.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301141445.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301132442.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131551.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131548.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/3.4.6-packet-tracer---configure-vlans-and-trunking---physical-mode_es-XL.pka",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131410.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131122.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131052.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130743.png",
-    "Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130315.png",
     "Telemática II/Curso de Cisco II/Módulo 02/Módulo 2 - Conceptos de switching.md",
     "Telemática II/Curso de Cisco II/Módulo 01/Modulo 1 - Configuración básica de dispositivos.md",
     "Trade Marketing/Mapa Iterativo/MaveitMap/HELP.md",
     "Trade Marketing/MaveitMap/HELP.md",
     "Trade Marketing/Semana 04/Materiales.md",
     "Calidad de Software/Sin título.md",
-    "Calidad de Software/Semana 04/Métricas de Calidad.md",
     "Ingeniería Económica/Semana 04/Fases del ciclo de vida de un proyecto.md",
     "Investigación de Operaciones I/Semana 04/Primer Quiz - Corte 1.md",
     "Ingeniería Económica/Semana 03/Principios básicos del análisis costo-beneficio.md",
@@ -216,7 +217,6 @@
     "Trade Marketing/Semana 02/Grupos.md",
     "Minería de datos/Semana 02/Introducción a tecnologías.md",
     "Telemática II/Semana 02/Sin título.md",
-    "Ingeniería Económica/Semana 02/Concepto de Ingeniería económica.md",
     "Sin título.canvas",
     "Sin título 1.canvas"
   ]
