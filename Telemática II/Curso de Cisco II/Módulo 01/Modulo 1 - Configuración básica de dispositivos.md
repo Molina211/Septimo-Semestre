@@ -120,7 +120,7 @@ Los switches Cisco Catalyst cuentan con LED de estado que permiten ver rápidame
 La cantidad, tipo y ubicación de estos LED varían según el modelo y sus características.  
 En el Catalyst 2960, los LED y el botón Mode del panel frontal permiten consultar distintos estados del switch.
 
-![](ANEXOS/Pasted image 20260209094820.png)
+![](<./ANEXOS/Pasted image 20260209094820.png>)
 
 #### Clasificación de los estados del puerto
 
@@ -261,7 +261,7 @@ Si la administración se hará desde otra red, también se debe configurar una p
 La dirección IP se asigna a la SVI (interfaz virtual del switch), que no es un puerto físico, sino una interfaz lógica.  
 La configuración inicial se realiza conectando una PC al switch mediante un cable de consola.
 
-![](ANEXOS/Pasted image 20260209195218.png)
+![](<./ANEXOS/Pasted image 20260209195218.png>)
 
 ---
 
@@ -451,7 +451,7 @@ La comunicación en dúplex completo permite enviar y recibir datos al mismo tie
 
 La comunicación en semidúplex solo permite transmitir en una dirección a la vez, lo que genera colisiones y menor rendimiento. Este tipo de comunicación es común en dispositivos antiguos, como los hubs, y hoy en día ha sido reemplazada casi por completo por el dúplex completo.
 
-![](ANEXOS/Pasted image 20260209202727.png)
+![](<./ANEXOS/Pasted image 20260209202727.png>)
 
 Las interfaces Gigabit Ethernet y 10 Gb requieren modo dúplex completo para funcionar correctamente.  
 En este modo, la detección de colisiones se desactiva y se puede transmitir y recibir datos al mismo tiempo, logrando 100 % de eficiencia en ambas direcciones y duplicando el uso efectivo del ancho de banda.
@@ -464,7 +464,7 @@ Los puertos del switch pueden configurarse manualmente en velocidad y dúplex.
 El comando **`duplex`** define el modo (por ejemplo, dúplex completo) y el comando **`speed`** define la velocidad.  
 Por ejemplo, un puerto puede configurarse para funcionar siempre en dúplex completo a 100 Mbps.
 
-![](ANEXOS/Pasted image 20260209202959.png)
+![](<./ANEXOS/Pasted image 20260209202959.png>)
 
 - **Comandos**
 
@@ -582,7 +582,7 @@ En el ejemplo se observa que:
     
 - La puerta de enlace predeterminada es 172.17.99.1.
 
-![](ANEXOS/Pasted image 20260212160352.png)
+![](<./ANEXOS/Pasted image 20260212160352.png>)
 
 El comando **`show interfaces`** se usa para ver el estado y las estadísticas de las interfaces del switch y es muy común en configuración y monitoreo.
 
@@ -592,7 +592,7 @@ En el ejemplo:
     
 - La interfaz opera en dúplex completo (full) y a una velocidad de 100 Mb/s.
 
-![](ANEXOS/Pasted image 20260212160439.png)
+![](<./ANEXOS/Pasted image 20260212160439.png>)
 
 ---
 
@@ -601,7 +601,7 @@ En el ejemplo:
 El comando **`show interfaces`** es útil para detectar problemas de cableado o medios.  
 Una parte clave de su salida es el estado de la línea y del protocolo, que permite saber si la interfaz está funcionando correctamente o presenta fallas.
 
-![](ANEXOS/Pasted image 20260213191851.png)
+![](<./ANEXOS/Pasted image 20260213191851.png>)
 
 El comando **`show interfaces`** muestra el estado del hardware y del protocolo de enlace:
 
@@ -615,7 +615,7 @@ El comando **`show interfaces`** muestra el estado del hardware y del protocolo 
 
 Además, el comando muestra contadores y estadísticas útiles para detectar errores en la interfaz.
 
-![](ANEXOS/Pasted image 20260213192000.png)
+![](<./ANEXOS/Pasted image 20260213192000.png>)
 
 Algunos errores de los medios no son lo suficientemente graves como para hacer que el circuito falle, pero causan problemas de rendimiento de la red. La tabla explica algunos de estos errores comunes que se pueden detectar con el comando `show interfaces`.
 
@@ -674,7 +674,7 @@ La mayoría de los problemas en redes conmutadas aparecen durante la instalació
 
 Una colisión tardía ocurre cuando la colisión se produce después de transmitir 512 bits de la trama, lo que normalmente indica errores de cableado o mala configuración de dúplex.
 
-![](ANEXOS/Pasted image 20260213203049.png)
+![](<./ANEXOS/Pasted image 20260213203049.png>)
 
 El comando **`show interfaces`** se usa para comprobar el estado de una interfaz y diagnosticar problemas de red.
 
@@ -700,7 +700,7 @@ Cuando no se puede acceder físicamente a un switch, es necesario administrarlo 
 
 Telnet, en cambio, usa el puerto TCP 23 y transmite usuario, contraseña y datos en texto plano, lo que lo hace inseguro. Un atacante puede capturar esta información fácilmente con herramientas de análisis de tráfico como Wireshark.
 
-![](ANEXOS/Pasted image 20260213203922.png)
+![](<./ANEXOS/Pasted image 20260213203922.png>)
 
 ---
 
@@ -710,7 +710,7 @@ SSH (Secure Shell) es un protocolo seguro que usa el puerto TCP 22 y permite adm
 
 A diferencia de Telnet, SSH no muestra la información en texto plano, por lo que herramientas como Wireshark no pueden leer las credenciales.
 
-![](ANEXOS/Pasted image 20260214001653.png)
+![](<./ANEXOS/Pasted image 20260214001653.png>)
 
 ---
 
@@ -721,7 +721,7 @@ Esto se verifica usando el comando **`show version`**.
 
 Si el nombre del archivo IOS contiene “k9”, significa que sí admite cifrado y, por lo tanto, permite configurar SSH.
 
-![](ANEXOS/Pasted image 20260214001838.png)
+![](<./ANEXOS/Pasted image 20260214001838.png>)
 
 ---
 
@@ -829,18 +829,18 @@ En el ejemplo:
 
 Desde PC1, se configura PuTTY para conectarse por SSH a la dirección 172.17.99.11, lo que permite administrar el switch de forma segura y cifrada.
 
-![](ANEXOS/Pasted image 20260214004202.png)
+![](<./ANEXOS/Pasted image 20260214004202.png>)
 
 Al establecer la conexión SSH, el sistema solicita un nombre de usuario y contraseña.  
 En el ejemplo, se ingresa usuario: admin y contraseña: ccna.  
 Si los datos son correctos, el usuario accede de forma segura a la CLI del switch Catalyst 2960 mediante SSH.
 
-![](ANEXOS/Pasted image 20260214010003.png)
+![](<./ANEXOS/Pasted image 20260214010003.png>)
 
 El comando `show ip ssh` se utiliza para verificar la versión y la configuración de SSH en el dispositivo.  
 En el ejemplo, la salida confirma que SSH versión 2 está habilitada en el switch.
 
-![](ANEXOS/Pasted image 20260214010011.png)
+![](<./ANEXOS/Pasted image 20260214010011.png>)
 
 ---
 
@@ -864,15 +864,15 @@ Por eso, la configuración inicial en un router es similar a la de un switch, e 
 
 Estas configuraciones son siempre los primeros pasos al trabajar con un router.
 
-![](ANEXOS/Pasted image 20260214014325.png)
+![](<./ANEXOS/Pasted image 20260214014325.png>)
 
 Configure un banner para proporcionar notificaciones legales de acceso no autorizado, como se muestra en el ejemplo.
 
-![](ANEXOS/Pasted image 20260214014342.png)
+![](<./ANEXOS/Pasted image 20260214014342.png>)
 
 Guarde los cambios en un router, como se muestra en el ejemplo.
 
-![](ANEXOS/Pasted image 20260214014355.png)
+![](<./ANEXOS/Pasted image 20260214014355.png>)
 
 ---
 
@@ -886,7 +886,7 @@ Los switches y los routers se diferencian principalmente por el tipo de interfac
 
 La topología de pila dual se usa como ejemplo para mostrar cómo configurar en un router direcciones IPv4 e IPv6 al mismo tiempo.
 
-![](ANEXOS/Pasted image 20260214015452.png)
+![](<./ANEXOS/Pasted image 20260214015452.png>)
 
 ---
 
@@ -916,7 +916,7 @@ Para que una interfaz del router funcione correctamente, debe cumplir estos requ
         
     - Es muy útil en redes reales para solución de problemas, documentación y reconocimiento de conexiones externas.
 
-![](ANEXOS/Pasted image 20260214015948.png)
+![](<./ANEXOS/Pasted image 20260214015948.png>)
 
 ---
 
@@ -930,7 +930,7 @@ La interfaz loopback en un router Cisco IOS es una interfaz lógica interna que 
 
 Un router puede tener varias interfaces loopback habilitadas. Cada una debe contar con una dirección IPv4 única, que no puede ser compartida con ninguna otra interfaz del router.
 
-![](ANEXOS/Pasted image 20260214020830.png)
+![](<./ANEXOS/Pasted image 20260214020830.png>)
 
 ---
 
@@ -938,7 +938,7 @@ Un router puede tener varias interfaces loopback habilitadas. Cada una debe cont
 
 No basta con configurar un router; es necesario verificar la configuración y la conectividad. Para ello se utilizan comandos `show`, que permiten comprobar el estado y funcionamiento de las interfaces y las redes conectadas directamente. Estos comandos, junto con verificadores de sintaxis y herramientas de trazado de paquetes, ayudan a confirmar que la configuración del router es correcta.
 
-![](ANEXOS/Pasted image 20260214121221.png)
+![](<./ANEXOS/Pasted image 20260214121221.png>)
 
 Algunos comandos `show` permiten verificar rápidamente el estado de las interfaces del router:
 
@@ -954,7 +954,7 @@ Algunos comandos `show` permiten verificar rápidamente el estado de las interfa
 
 Los comandos `show ip interface brief` y `show ipv6 interface brief` permiten verificar rápidamente el estado de todas las interfaces del router. Si aparecen como up/up, significa que están activas y funcionando correctamente; cualquier otro estado indica un posible problema de configuración o cableado.
 
-![](ANEXOS/Pasted image 20260214121531.png)
+![](<./ANEXOS/Pasted image 20260214121531.png>)
 
 ---
 
@@ -970,7 +970,7 @@ Las interfaces IPv6 siempre deben tener una dirección link-local, aunque no es 
 
 El comando `show ipv6 interface gigabitethernet 0/0/0` muestra información más detallada, incluyendo el estado de la interfaz, sus direcciones IPv6 (global y link-local) y las direcciones de multidifusión, que usan el prefijo FF02.
 
-![](ANEXOS/Pasted image 20260214121631.png)
+![](<./ANEXOS/Pasted image 20260214121631.png>)
 
 ---
 
@@ -978,7 +978,7 @@ El comando `show ipv6 interface gigabitethernet 0/0/0` muestra información más
 
 El comando `show running-config interface` muestra, además de la dirección link-local y la dirección de unidifusión global, las direcciones de multidifusión asignadas a la interfaz, identificadas por el prefijo FF02.
 
-![](ANEXOS/Pasted image 20260214122019.png)
+![](<./ANEXOS/Pasted image 20260214122019.png>)
 
 Para obtener información más detallada de las interfaces se utilizan estos comandos:
 
@@ -994,7 +994,7 @@ Los comandos `show ip route` y `show ipv6 route` muestran las redes conectadas d
 
 Las rutas de host local representan las direcciones IP propias del router, tienen distancia administrativa 0 y usan una máscara /32 en IPv4 y /128 en IPv6. Estas rutas permiten que el router reconozca y procese los paquetes que van dirigidos a sus propias direcciones IP.
 
-![](ANEXOS/Pasted image 20260214122717.png)
+![](<./ANEXOS/Pasted image 20260214122717.png>)
 
 En la tabla de enrutamiento, la letra “C” indica una red conectada directamente. Cuando una interfaz tiene una dirección IPv6 de unidifusión global y está en estado up/up, su prefijo se agrega a la tabla IPv6 como ruta conectada.
 
@@ -1002,7 +1002,7 @@ Además, la dirección IPv6 de la interfaz se instala como ruta local con prefij
 
 El comando ping en IPv6 funciona igual que en IPv4, usando una dirección IPv6, y se emplea para verificar la conectividad de Capa 3 entre dispositivos.
 
-![](ANEXOS/Pasted image 20260214132532.png)
+![](<./ANEXOS/Pasted image 20260214132532.png>)
 
 ---
 
@@ -1016,25 +1016,25 @@ Además, Cisco IOS ofrece filtrado de salida para ver solo información específ
 
 Muestra la sección completa que comienza con la expresión de filtrado.
 
-![](ANEXOS/Pasted image 20260214133024.png)
+![](<./ANEXOS/Pasted image 20260214133024.png>)
 
 2. *Include*
 
 Incluye todas las líneas de salida que coinciden con la expresión de filtrado.
 
-![](ANEXOS/Pasted image 20260214133141.png)
+![](<./ANEXOS/Pasted image 20260214133141.png>)
 
 3. *Exclude*
 
 Excluye todas las líneas de salida que coinciden con la expresión de filtrado.
 
-![](ANEXOS/Pasted image 20260214133247.png)
+![](<./ANEXOS/Pasted image 20260214133247.png>)
 
 4. *Begin*
 
 Muestra todas las líneas de salida desde un punto determinado, comenzando con la línea que coincide con la expresión de filtrado.
 
-![](ANEXOS/Pasted image 20260214133337.png)
+![](<./ANEXOS/Pasted image 20260214133337.png>)
 
 *Nota:* Los filtros de salida se pueden usar en combinación con cualquier `show` comando.
 
@@ -1052,6 +1052,6 @@ Por defecto, el historial está habilitado y guarda las últimas 10 líneas. El 
 
 Si se necesita, se puede aumentar o reducir el tamaño del historial solo para la sesión actual usando el comando `terminal history size`, lo que facilita el trabajo en la CLI sin volver a escribir comandos largos.
 
-![](ANEXOS/Pasted image 20260214133828.png)
+![](<./ANEXOS/Pasted image 20260214133828.png>)
 
 
