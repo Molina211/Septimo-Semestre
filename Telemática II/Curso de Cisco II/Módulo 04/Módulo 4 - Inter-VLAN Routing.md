@@ -36,7 +36,7 @@ La elección depende del tamaño y los requerimientos de la red.
 La primera solución de inter-VLAN routing utilizaba un router con múltiples interfaces Ethernet, donde cada interfaz se conectaba a una VLAN diferente del switch. Cada interfaz del router actuaba como gateway predeterminado para los hosts de su VLAN.
 Por ejemplo, consulte la topología donde R1 tiene dos interfaces conectadas al switch S1.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301201713.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301201713.png)
 
 Observe que en el ejemplo la tabla de direcciones MAC de S1 se completa de la siguiente manera:
 
@@ -78,7 +78,7 @@ Cada subinterfaz tiene:
 
 Cuando un paquete llega al router con una etiqueta VLAN, el router lo envía a la subinterfaz correcta, decide a qué VLAN debe ir y lo devuelve por el mismo puerto físico, etiquetado con la nueva VLAN.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301204646.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301204646.png)
 
 Como se ve en la animación, PC1 en la VLAN 10 se comunica con PC3 en la VLAN 30. El router R1 acepta el tráfico de unidifusión etiquetado en la VLAN 10 y lo enruta a la VLAN 30 mediante sus subinterfaces configuradas. El switch S2 elimina la etiqueta de la VLAN de la trama de unidifusión y reenvía la trama a PC3 en el puerto F0/23.
 
@@ -94,7 +94,7 @@ Estos switches crean interfaces virtuales (SVI), una por cada VLAN. Cada SVI tie
 
 Así, el propio switch puede enrutar el tráfico entre VLANs sin necesidad de un router externo, lo que hace la red más rápida, simple y escalable.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301210556.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301210556.png)
 
 Los SVI se configuran en un switch de capa 3 para VLAN que ya existen y funcionan como lo haría una interfaz de router, actuando como gateway y manejando el enrutamiento de capa 3 para todos los dispositivos de esa VLAN.
 
@@ -122,7 +122,7 @@ Este tema explica cómo configurar inter-VLAN routing con router-on-a-stick. En 
 
 La interfaz del router se conecta a un puerto troncal del switch, y los switches entre sí también usan enlaces troncales, permitiendo que el tráfico de múltiples VLAN circule dentro de la red y entre VLANs usando una sola interfaz física del router.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301224428.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301224428.png)
 
 Para enrutar entre VLAN, la interfaz R1 GigabitEthernet 0/0/1 se divide lógicamente en tres subinterfaces, como se muestra en la tabla. La tabla también muestra las tres VLAN que se configurarán en los switches.
 
@@ -151,31 +151,31 @@ Complete los siguientes pasos para configurar S1 con VLAN y trunking:
 
 **Paso 4**. Configurar puertos de enlace troncal.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301224838.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301224838.png)
 
 #### Paso 1 - Crear y nombrar las VLANs
 
 En primer lugar, las VLAN se crean y nombran. Las VLAN sólo se crean después de salir del modo de subconfiguración de VLAN.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225058.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225058.png)
 
 #### Paso 2 - Crear la interfaz de administración
 
 A continuación, se crea la interfaz de administración en VLAN 99 junto con el default gateway de R1.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225135.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225135.png)
 
 #### Paso 3 - Configurar puertos de acceso
 
 A continuación, el puerto Fa0/6 que se conecta a PC1 se configura como un puerto de acceso en la VLAN 10. Supongamos que PC1 se ha configurado con la dirección IP correcta y el default gateway.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225226.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225226.png)
 
 #### Paso 4 - Configurar puertos de enlace troncal
 
 Por último, los puertos Fa0/1 que se conectan a S2 y Fa05 que se conectan a R1 se configuran como puertos troncal.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225302.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225302.png)
 
 ---
 
@@ -183,9 +183,9 @@ Por último, los puertos Fa0/1 que se conectan a S2 y Fa05 que se conectan a R1 
 
 La configuración para S2 es similar a S1.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225343.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225343.png)
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225349.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301225349.png)
 
 ---
 
@@ -205,9 +205,9 @@ Este proceso se repite para cada VLAN (por ejemplo VLAN 10, 20 y 99), y cada una
 
 Finalmente, se debe activar la interfaz física con `no shutdown`, ya que si esta está apagada, todas las subinterfaces también lo estarán.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301230302.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301230302.png)
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301230309.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301230309.png)
 
 ---
 
@@ -221,11 +221,11 @@ Para verificar que funciona:
     
 - Luego, use el comando **`ping`** para comprobar la conectividad con un host de otra VLAN.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301230928.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301230928.png)
 
 El resultado confirma la dirección IPv4 y el default gateway de PC1. A continuación, utilice `ping` para verificar la conectividad con PC2 y S1, como se muestra en la figura. El `ping` resultado confirma correctamente que el enrutamiento entre VLANs está funcionando.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231015.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231015.png)
 
 ---
 
@@ -244,21 +244,21 @@ Además de utilizar `ping` entre dispositivos, se pueden utilizar los siguient
 Se verifica la configuración usando el comando **`show ip route`** en el router.  
 La presencia de rutas conectadas (C) con sus subinterfaces correspondientes confirma que las VLAN, subredes y subinterfaces están correctamente configuradas y activas.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231552.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231552.png)
 
 
 2. **Show ip interface brief**
 
 Otro comando útil del router es `show ip interface brief`, como se muestra en el resultado. El resultado confirma que las subinterfaces tienen configurada la dirección IPv4 correcta y que están operativas.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231723.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231723.png)
 
 
 3. **Show interfaces**
 
 Las subinterfaces se pueden verificar mediante el comando `show interfaces subinterface-id`, como se muestra.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231817.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231817.png)
 
 4. **Show interfaces trunk**
 
@@ -267,7 +267,7 @@ Con el comando **`show interfaces trunk`** se comprueba que el enlace hacia el r
 
 Aunque la VLAN 1 no se configure de forma explícita, aparece automáticamente porque el tráfico de control siempre se envía por la VLAN 1 en los enlaces troncales.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231911.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301231911.png)
 
 ---
 
@@ -291,7 +291,7 @@ Para que el inter-VLAN routing funcione, se crea un SVI por cada VLAN, usando el
 
 En la figura, el switch de capa 3, D1, está conectado a dos hosts en diferentes VLAN. PC1 está en VLAN 10 y PC2 está en VLAN 20, como se muestra. El switch de capa 3 proporcionará servicios inter-VLAN routing a los dos hosts.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301232346.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260301232346.png)
 
 La tabla muestra las direcciones IP de cada VLAN.
 
@@ -320,25 +320,25 @@ Complete los siguientes pasos para configurar S1 con VLAN y trunking :
 
 Primero, cree las dos VLAN como se muestra en el ejemplo.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001232.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001232.png)
 
 #### Paso 2 - Crear las interfaces VLAN SVI
 
 Configurar el SVI para VLANs 10 y 20 Las direcciones IP configuradas servirán como `default gateways` para los hosts de las VLAN respectivas. Observe que los mensajes informativos que muestran el protocolo de línea en ambos SVIs cambiaron a funcionales.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001404.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001404.png)
 
 #### Paso 3 - Configurar puertos de acceso
 
 A continuación, configure los puertos de acceso que se conectan a los hosts y asígnelos a sus respectivas VLAN.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001452.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001452.png)
 
 #### Paso 4 - Habilitar IP routing
 
 Por último, habilite el enrutamiento IPv4 con el comando de configuración `ip routing` global para permitir el intercambio de tráfico entre las VLAN 10 y 20. Este comando debe configurarse para habilitar el inter-VAN routing en un switch de capa 3 para IPv4.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001617.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001617.png)
 
 ---
 
@@ -353,11 +353,11 @@ Una vez configurado, se verifica fácilmente desde los hosts:
 
 Si el `ping` responde, significa que el enrutamiento entre VLANs está funcionando correctamente.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001756.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001756.png)
 
 A continuación, verifique la conectividad con PC2 mediante el comando host de `ping` Windows, como se muestra en el ejemplo. El `ping` resultado confirma correctamente que el enrutamiento entre VLANs está funcionando.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001824.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302001824.png)
 
 ---
 
@@ -381,7 +381,7 @@ El inter-VLAN routing ya funciona correctamente en D1, y la interfaz G0/0/1 de R
 
 Aunque OSPF se estudia en otro curso, aquí solo se utiliza para que el enrutamiento entre redes funcione, sin necesidad de comprender su configuración en detalle.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302002037.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302002037.png)
 
 ---
 
@@ -403,31 +403,31 @@ Complete los siguientes pasos para configurar D1 para enrutar con R1:
 
 Configure G1/0/1 para que sea un puerto enrutado, asígnele una dirección IPv4 y habilítelo.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302003846.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302003846.png)
 
 #### Paso 2 - Activar el routing
 
 Asegúrese de que el enrutamiento IPv4 esté habilitado con el comando de configuración **ip routing** global.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302003927.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302003927.png)
 
 #### Paso 3 - Configurar el enrutamiento
 
 Configure el protocolo de enrutamiento OSPF para anunciar las redes VLAN 10 y VLAN 20, junto con la red que está conectada a R1. Observe el mensaje informándole de que se ha establecido una adyacencia con R1.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302003952.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302003952.png)
 
 #### Paso 4 - Verificar enrutamiento
 
 Verifique la tabla de enrutamiento en D1. Observe que D1 ahora tiene una ruta a la red 10.20.20.0/24.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302004024.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302004024.png)
 
 #### Paso 5 - Verificar la conectividad
 
 En este momento, PC1 y PC2 pueden hacer ping al servidor conectado a R1.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302004052.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302004052.png)
 
 ---
 
@@ -457,7 +457,7 @@ Los ejemplos de algunos de estos problemas de Inter-VLAN Routing ahora se tratar
 
 Esta topología se utilizara para todos estos problemas.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010310.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010310.png)
 
 La información de direccionamiento VLAN e IPv4 para R1 se muestra en la tabla.
 
@@ -477,26 +477,26 @@ Un problema de conectividad entre VLAN podría deberse a la falta de una VLAN. L
 
 Por ejemplo, PC1 está conectado actualmente a la VLAN 10, como se muestra en el ejemplo del `show vlan brief` comando.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010540.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010540.png)
 
 Ahora suponga que la VLAN 10 se elimina accidentalmente, como se muestra en el siguiente resultado.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010616.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010616.png)
 
 Observe que ahora falta VLAN 10 en el resultado Observe también que el puerto Fa0/6 no se ha reasignado a la VLAN predeterminada.
 Cuando elimina una VLAN, cualquier puerto asignado a esa VLAN queda inactivo. Permanecen asociados con la VLAN (y, por lo tanto, inactivos) hasta que los asigne a una nueva VLAN o vuelva a crear la VLAN que falta.
 
 Utilice el `show interface` comando `switchport interface-id` para verificar la pertenencia a VLAN.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010717.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010717.png)
 
 Si se vuelve a crear la VLAN que falta, se reasignarán automáticamente los hosts a ella, como se muestra en el siguiente resultado.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010748.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010748.png)
 
 Observe que la VLAN no se ha creado como se esperaba. La razón se debe a que debe salir del modo de subconfiguración de VLAN para crear la VLAN, como se muestra en el siguiente resultado.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010801.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302010801.png)
 
 Ahora observe que la VLAN esta incluida en la lista y que el host conectado a Fa0/6 esta en la VLAN 10.
 
@@ -512,19 +512,19 @@ Un problema común en el inter-VLAN routing es la mala configuración de puertos
 
 Por ejemplo, si PC1 antes tenía conectividad entre VLANs y de repente deja de funcionar, y se sabe que el switch fue modificado recientemente, es razonable sospechar que el problema está en la configuración del switch, especialmente en el enlace troncal.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011009.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011009.png)
 
 En S1, verifique que el puerto que se conecta a R1 (es decir, F0/5) esté configurado correctamente como enlace troncal utilizando el `show interfaces trunk` comando, como se muestra.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011045.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011045.png)
 
 El puerto Fa0/5 que conecta a R1 falta misteriosamente en el resultado. Verifique la configuración de la interfaz mediante el show running-config interface fa0/5 comando, como se muestra.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011120.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011120.png)
 
 Como pueden ver, el puerto fue apagado accidentalmente. Para corregir el problema, vuelva a habilitar el puerto y verifique el estado de enlace troncal, como se muestra en el ejemplo.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011148.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011148.png)
 
 Para reducir el riesgo de una falla en el enlace entre switch es que interrumpa el inter-VLAN routing, el diseño de red debe contar con enlaces redundantes y rutas alternativas.
 
@@ -537,19 +537,19 @@ Cuando se sospecha de un problema en la configuración del switch, se deben usar
 Por ejemplo, si PC1 tiene correctamente su dirección IPv4 y su gateway, pero no puede hacer ping a su propio gateway, es muy probable que el problema esté en el switch.  
 En este caso, lo primero que se debe revisar es que PC1 esté conectado a un puerto configurado en la VLAN 10, como corresponde.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011310.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011310.png)
 
 Verifique la configuración del puerto en S1 mediante el show interfaces comando `switchport interface-id`.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011351.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011351.png)
 
 El puerto Fa0/6 se ha configurado como un puerto de acceso como se indica en «acceso estático». Sin embargo, parece que no se ha configurado para estar en VLAN 10. Verifique la configuración de la interfaz.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011415.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011415.png)
 
 Asigne el puerto Fa0/6 a la VLAN 10 y verifique la asignación del puerto.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011432.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011432.png)
 
 PC1 ahora puede comunicarse con hosts de otras VLAN.
 
@@ -561,28 +561,28 @@ En router-on-a-stick, los problemas más comunes se deben a errores en las subin
 
 Por ejemplo, aunque R1 debería enrutar entre las VLAN 10, 20 y 99, si los usuarios de VLAN 10 no pueden comunicarse con otras VLAN, es probable que la subinterfaz de la VLAN 10 esté mal configurada.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011602.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011602.png)
 
 Verificó el enlace troncal del switch y todo parece estar en orden. Verificar el estatus de las interfaces usando el `show ip interface brief` comando.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011635.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011635.png)
 
 A las subinterfaces se les han asignado las direcciones IPv4 correctas y están operativas.
 
 Compruebe en qué VLAN se encuentra cada una de las subinterfaces. Para ello, el `show interfaces` comando es útil, pero genera una gran cantidad de resultados adicionales no requeridos. El resultado del comando se puede reducir utilizando filtros de comando IOS como se muestra en el ejemplo.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011753.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011753.png)
 
 El símbolo de tubería ( | ) se usa para filtrar la salida de comandos y facilitar la búsqueda de información específica.  
 En este caso, se utilizó `include` para mostrar solo las líneas que contienen “Gig” o “802.1Q”, lo que permite ver rápidamente las subinterfaces y las VLAN asociadas.
 
 Gracias a este filtrado, se detecta el error: la subinterfaz G0/0/1.10 está asignada a la VLAN 100 en lugar de la VLAN 10, lo cual se confirma revisando su configuración.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011848.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011848.png)
 
 Para corregir este problema, configure la subinterfaz G0/0/1.10 para que este en la VLAN correcta mediante el comando `encapsulation dot1q 10` en el modo de configuración de subinterfaz.
 
-![[Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011928.png]]
+![](Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011928.png)
 
 Una vez asignada la subinterfaz a la VLAN correcta, los dispositivos en esa VLAN pueden acceder a ella, y el router puede realizar inter-VLAN routing.
 

@@ -23,7 +23,7 @@
 
 Las VLAN permiten segmentar una red conmutada en redes más pequeñas y fáciles de administrar. Agrupan dispositivos de forma lógica, no física, haciendo que se comuniquen como si estuvieran conectados al mismo cable. Así, usuarios de distintos departamentos pueden compartir la misma infraestructura de red sin importar el switch o la ubicación, logrando mayor flexibilidad y organización.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218093329.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218093329.png)
 
 Las VLAN permiten dividir una red en segmentos lógicos según función, proyecto o aplicación, sin depender de la ubicación física. Cada VLAN funciona como una red independiente, aunque comparta la misma infraestructura, y cualquier puerto del switch puede asignarse a una VLAN.
 
@@ -37,7 +37,7 @@ Al crear dominios de difusión más pequeños, las VLAN mejoran el rendimiento y
 
 Cada VLAN corresponde a una red IP, por lo que su diseño debe considerar un direccionamiento jerárquico. Esto implica asignar las direcciones IP de forma ordenada y estructurada, reservando bloques contiguos para VLAN o áreas específicas de la red. Así, la red se administra como un todo, facilitando su organización, escalabilidad y gestión.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218093719.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218093719.png)
 
 En la tabla se enumeran las ventajas de diseñar una red con VLAN.
 
@@ -72,7 +72,7 @@ Aspectos clave de la VLAN 1:
 
 Si no se configuran otras VLAN, todos los puertos permanecen en la VLAN 1 y esta actúa como VLAN nativa y de administración, lo que representa un riesgo de seguridad, ya que concentra todo el tráfico crítico en una sola VLAN.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218100133.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218100133.png)
 
 2. *VLAN de datos:*
 
@@ -97,7 +97,7 @@ La VLAN de voz se utiliza para manejar el tráfico VoIP, separándolo del tráfi
 
 Por esta razón, la red se diseña específicamente para VoIP. En el ejemplo, la VLAN 150 transporta la voz, mientras que la computadora PC5 usa la VLAN 20 para datos, aunque esté conectada a través del teléfono IP, manteniendo ambos tipos de tráfico separados y optimizados.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218101104.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218101104.png)
 
 ---
 
@@ -111,7 +111,7 @@ Un enlace troncal es un enlace punto a punto que transporta varias VLAN usando e
 
 En el ejemplo, los enlaces entre S1–S2 y S1–S3 transportan las VLAN 10, 20, 30 y 99, lo que permite que la red funcione correctamente.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218225200.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218225200.png)
 
 ---
 
@@ -119,7 +119,7 @@ En el ejemplo, los enlaces entre S1–S2 y S1–S3 transportan las VLAN 10, 20, 
 
 Cuando un switch recibe una trama de difusión, la reenvía por todos los puertos excepto el de entrada. En el ejemplo, toda la red está configurada en la misma subred 172.17.40.0/24 y no existen VLAN, por lo que se forma un único dominio de difusión. Como resultado, cuando la computadora del cuerpo docente (PC1) envía una trama de difusión, el switch S2 la propaga por todos sus puertos y toda la red recibe la difusión.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218225536.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218225536.png)
 
 ---
 
@@ -127,7 +127,7 @@ Cuando un switch recibe una trama de difusión, la reenvía por todos los puerto
 
 Al segmentar la red en dos VLAN, los dispositivos del cuerpo docente se asignan a la VLAN 10 y los de estudiantes a la VLAN 20. Así, cuando PC1 envía una trama de difusión al switch S2, el switch solo la reenvía por los puertos pertenecientes a la VLAN 10, evitando que llegue a los dispositivos de la VLAN 20.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218230307.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218230307.png)
 
 Los enlaces entre S2–S1 (F0/1) y S1–S3 (F0/3) son troncales y permiten el tráfico de todas las VLAN. Cuando una trama de difusión de la VLAN 10 llega a S1 por F0/1, este la reenvía solo por F0/3, el puerto que admite la VLAN 10. Luego, S3 la envía por F0/11, el único puerto de acceso de la VLAN 10, alcanzando únicamente a PC4 (cuerpo docente).
 
@@ -153,7 +153,7 @@ La etiqueta VLAN (802.1Q) contiene:
 
 Después de insertar la etiqueta, el switch vuelve a calcular la FCS para garantizar la integridad de la trama.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218231151.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218231151.png)
 
 ---
 
@@ -184,7 +184,7 @@ Toda trama sin etiqueta que llega o sale por un enlace troncal se asigna automá
 
 La VLAN nativa sirve para manejar el tráfico sin etiqueta en enlaces troncales; por buenas prácticas, se recomienda cambiarla de VLAN 1 a otra (como VLAN 99) y evitar enviar tráfico etiquetado por ella.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218231822.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218231822.png)
 
 La PC1 envía tráfico sin etiquetar, por lo que los switches lo asocian a la VLAN nativa del enlace troncal y lo reenvían según esa configuración. En cambio, el tráfico etiquetado que llega a la PC1 se descarta.
 
@@ -224,7 +224,7 @@ El switch usa CDP para indicar al teléfono cómo enviar el tráfico de voz, que
 
 **Ejemplo**: la PC5 (datos) está en la VLAN 20, conectada al teléfono IP; el tráfico de voz viaja por la VLAN 150. Así, voz y datos se mantienen separados y optimizados.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218232239.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218232239.png)
 
 ---
 
@@ -246,7 +246,7 @@ Esto indica que el puerto está preparado para soportar VoIP, ya que:
 
 En la práctica, aunque el puerto se configure como acceso, funciona de forma similar a un enlace troncal entre el switch y el teléfono IP, permitiendo transportar simultáneamente voz y datos sin mezclarlos.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218232445.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260218232445.png)
 
 ---
 
@@ -266,7 +266,7 @@ Las VLAN se dividen en dos rangos:
 
 En un switch Catalyst 2960 que ejecuta IOS de Cisco versión 15.x, estas VLAN están disponibles y listas para ser configuradas según las necesidades de la red.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114043.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114043.png)
 
 **VLAN de Rango Normal**
 
@@ -321,11 +321,11 @@ Para crear una VLAN en Cisco IOS, se usa un comando específico que permite agre
 
 En el ejemplo de topología, la computadora del estudiante (PC2) todavía no se asoció a ninguna VLAN, pero tiene la dirección IP 172.17.20.22, que pertenece a la VLAN 20.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114557.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114557.png)
 
 En la figura, se muestra cómo se configura la VLAN para estudiantes (VLAN 20) en el switch S1.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114619.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114619.png)
 
 El comando `vlan vlan-id` permite crear una o varias VLAN al mismo tiempo.  
 Se pueden especificar:
@@ -362,11 +362,11 @@ Así se garantiza que el puerto quede permanentemente asociado a una única VLAN
 
 En la figura, el puerto F0/6 en el conmutador S1 se configura como un puerto de acceso y se asigna a la VLAN 20. Cualquier dispositivo conectado a ese puerto está asociado con la VLAN 20. Por lo tanto, en nuestro ejemplo, PC2 está en la VLAN 20.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114952.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221114952.png)
 
 El ejemplo muestra la configuración de S1 para asignar F0/6 a VLAN 20.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221115003.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221115003.png)
 
 Las VLAN se configuran en el puerto del switch y no en el terminal. La PC2 se configura con una dirección IPv4 y una máscara de subred asociadas a la VLAN, que se configura en el puerto de switch. En este ejemplo, es la VLAN 20. Cuando se configura la VLAN 20 en otros switches, el administrador de red debe configurar las otras computadoras de alumnos para que estén en la misma subred que la PC2 (172.17.20.0/24).
 
@@ -383,7 +383,7 @@ Un puerto de acceso normalmente pertenece a una sola VLAN, pero puede manejar do
 En el ejemplo, la PC5 se conecta al teléfono IP de Cisco, y este al puerto FastEthernet 0/18 del switch S3.  
 Para que esta conexión funcione correctamente, se configuran una VLAN de datos y una VLAN de voz en ese mismo puerto.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121055.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121055.png)
 
 ---
 
@@ -414,12 +414,12 @@ Para configurar voz sobre IP (VoIP) en un switch, se siguen estos pasos clave:
             
     - El switch confía en la Clase de Servicio (CoS) que asigna el teléfono IP, permitiendo que el tráfico de voz tenga mayor prioridad que otros tipos de tráfico.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121349.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121349.png)
 
 El comando **`switchport access vlan`** crea automáticamente una VLAN si esta no existe en el switch.  
 Por ejemplo, si la VLAN 30 no aparece en la salida de `show vlan brief` y se configura un puerto con `switchport access vlan 30`, el switch crea la VLAN 30 de forma automática y asigna ese puerto a dicha VLAN, sin necesidad de crearla previamente de manera manual.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121511.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121511.png)
 
 ---
 
@@ -449,14 +449,14 @@ Estos comandos ayudan a confirmar que las VLAN fueron creadas correctamente y qu
 
 El show vlan summary comando muestra la lista de todas las VLAN configuradas.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121825.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221121825.png)
 
 Existen otros comandos útiles para verificar la configuración de VLAN en un switch.  
 El comando **`show interfaces interface-id switchport`** permite comprobar cómo está configurado un puerto específico. Por ejemplo, **`show interfaces fa0/18 switchport`** confirma si el puerto FastEthernet 0/18 está asignado correctamente a la VLAN de datos y a la VLAN de voz.
 
 Por su parte, el comando **`show interfaces vlan vlan-id`** muestra el estado y la información de una VLAN específica.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122250.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122250.png)
 
 ---
 
@@ -468,12 +468,12 @@ Si un puerto fue asignado a una VLAN incorrecta, basta con volver a ejecutar el 
 Si se desea que el puerto vuelva a la VLAN 1 predeterminada, se utiliza el comando `no switchport access vlan`, lo que elimina la asignación manual.  
 La configuración final se puede verificar con el comando `show vlan brief`, que muestra a qué VLAN pertenece cada puerto.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122651.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122651.png)
 
 La VLAN 20 permanece activa en el switch aunque no tenga puertos asignados, ya que las VLAN no se eliminan automáticamente cuando dejan de usarse.  
 Para confirmar que el puerto F0/18 fue restablecido a la VLAN 1 predeterminada, se puede usar el comando **`show interfaces f0/18 switchport`**, el cual muestra que la VLAN de acceso de esa interfaz ahora es la VLAN 1.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122739.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260221122739.png)
 
 ---
 
@@ -521,11 +521,11 @@ Para que un enlace funcione como troncal, es necesario configurar los puertos qu
 
 En la figura 2, las VLAN 10, 20 y 30 admiten las computadoras de Cuerpo docente, Estudiante e Invitado (PC1, PC2 y PC3). El puerto F0/1 del switch S1 se configuró como puerto de enlace troncal y reenvía el tráfico para las VLAN 10, 20 y 30. La VLAN 99 se configuró como VLAN nativa.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130113.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130113.png)
 
 El ejemplo muestra la configuración del puerto F0/1 en el conmutador S1 como puerto troncal. La VLAN nativa se cambia a VLAN 99 y la lista de VLAN permitidas se restringe a 10, 20, 30 y 99.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130315.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130315.png)
 
 Los switches Cisco Catalyst 2960 configuran automáticamente la encapsulación 802.1Q en enlaces troncales. Es importante que ambos extremos del troncal tengan la misma VLAN nativa, ya que una configuración diferente genera errores en el IOS de Cisco.
 
@@ -535,7 +535,7 @@ Los switches Cisco Catalyst 2960 configuran automáticamente la encapsulación 8
 
 La salida del switch muestra la configuración del puerto del switch F0/1 en el switch S1. La configuración se verifica con el `show interfaces` comando `switchport interface-ID`.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130743.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301130743.png)
 
 En el área superior resaltada, se muestra que el modo administrativo del puerto F0/1 se estableció en trunk. El puerto está en modo de enlace troncal. En la siguiente área resaltada, se verifica que la VLAN nativa es la VLAN 99. Más abajo en el resultado, en el área inferior resaltada, se muestra que las VLAN 10,20,30 y 99 están habilitadas en el enlace troncal.
 
@@ -551,15 +551,15 @@ Al aplicarlos:
     
 - La VLAN nativa vuelve a ser la VLAN 1, que es el valor por defecto.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131052.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131052.png)
 
 El comando `show interfaces fa0/1 switchport` revela que la troncal se ha reconfigurado a un estado predeterminado.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131122.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131122.png)
 
 La figura muestra el resultado de los comandos utilizados para eliminar la característica de enlace troncal del puerto F0/1 del switch S1. El `show interfaces f0/1 switchport` comando revela que la interfaz F0/1 ahora está en modo de acceso estático.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131410.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301131410.png)
 
 ---
 
@@ -593,11 +593,11 @@ Así:
     
 - Se evitan errores de configuración
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301132442.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301132442.png)
 
 Para volver a habilitar el protocolo de enlace troncal dinámico, utilice el `switchport mode dynamic auto` comando.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301141445.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301141445.png)
 
 Si un puerto se configura con `switchport mode trunk` y `switchport nonegotiate`, ignora DTP y permanece siempre como enlace troncal activo.
 
@@ -641,6 +641,6 @@ La tabla ilustra los resultados de las opciones de configuración DTP en extremo
 
 El modo DTP predeterminado depende de la versión del software Cisco IOS y de la plataforma. Para determinar el modo DTP actual, ejecute el `show dtp interface` comando como se muestra en la salida.
 
-![[Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301142558.png]]
+![](Telemática II/Curso de Cisco II/Módulo 03/ANEXOS/Pasted image 20260301142558.png)
 
 *Nota: Una mejor práctica general cuando se requiere un enlace troncal es establecer la interfaz en `trunk` y `nonegotiate` cuando se necesita un enlace troncal. Se debe inhabilitar DTP en los enlaces cuando no se deben usar enlaces troncales*.
