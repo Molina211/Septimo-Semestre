@@ -18,7 +18,7 @@ En una red LAN, el switch utiliza una tabla de switching que asocia direcciones 
 
 Así, una trama destinada a una MAC específica siempre saldrá por el mismo puerto, y nunca se reenviará por el mismo puerto por el que entró. Este mecanismo garantiza un reenvío eficiente y ordenado del tráfico dentro de la red.
 
-![](Telemática II/Curso de Cisco II/Módulo 02/ANEXOS/Pasted image 20260217162852.png)
+![](ANEXOS/Pasted image 20260217162852.png)
 
 ---
 
@@ -80,7 +80,7 @@ El método de almacenamiento y reenvío se diferencia del método de corte por d
 
 Este método garantiza mayor confiabilidad, ya que solo se reenvían tramas libres de errores.
 
-![](Telemática II/Curso de Cisco II/Módulo 02/ANEXOS/Pasted image 20260217163703.png)
+![](ANEXOS/Pasted image 20260217163703.png)
 
 ---
 
@@ -90,7 +90,7 @@ El switching por almacenamiento y reenvío descarta las tramas que no superan la
 
 En cambio, el método de corte no verifica el FCS, por lo que puede reenviar tramas no válidas, pero ofrece una mayor velocidad, ya que toma la decisión de reenvío apenas identifica la dirección MAC de destino en la tabla MAC.
 
-![](Telemática II/Curso de Cisco II/Módulo 02/ANEXOS/Pasted image 20260217163828.png)
+![](ANEXOS/Pasted image 20260217163828.png)
 
 En el switching por corte, el switch no espera a recibir toda la trama para reenviarla. Una variante es el switching libre de fragmentos, que comienza el reenvío después de leer el campo Tipo, logrando mejor detección de errores sin aumentar casi la latencia.
 
@@ -108,7 +108,7 @@ En un switch, cada puerto en semidúplex constituye su propio dominio de colisi�
 
 Cuando ambos dispositivos lo soportan, se selecciona dúplex completo y el mayor ancho de banda común, optimizando el rendimiento de la red.
 
-![](Telemática II/Curso de Cisco II/Módulo 02/ANEXOS/Pasted image 20260217164417.png)
+![](ANEXOS/Pasted image 20260217164417.png)
 
 ---
 
@@ -118,7 +118,7 @@ Un conjunto de switches interconectados forma un único dominio de difusión de 
 
 Solo los dispositivos de capa 3, como los routers, pueden dividir un dominio de difusión. Al hacerlo, también separan los dominios de colisión, ayudando a reducir el tráfico innecesario y mejorar el rendimiento de la red.
 
-![](Telemática II/Curso de Cisco II/Módulo 02/ANEXOS/Pasted image 20260217164724.png)
+![](ANEXOS/Pasted image 20260217164724.png)
 
 Cuando un switch recibe una trama de difusión, la reenvía por todos sus puertos excepto el de entrada, por lo que todos los dispositivos conectados reciben y procesan una copia.
 
