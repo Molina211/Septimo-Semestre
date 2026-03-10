@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "98abfbbe53fac104",
+        "id": "b5d545a959349bfb",
         "type": "tabs",
         "children": [
           {
-            "id": "e988722fd845faed",
+            "id": "27b644554dd16527",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Módulo 4 - Inter-VLAN Routing"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -150,6 +146,20 @@
               "icon": "lucide-list",
               "title": "Esquema de Módulo 3 - VLANs"
             }
+          },
+          {
+            "id": "5d2fdf071525ffe9",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
           }
         ]
       }
@@ -160,6 +170,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "templates:Insertar plantilla": false,
       "obsidian-excalidraw-plugin:Nuevo Bosquejo": false,
       "switcher:Abrir selector rápido": false,
       "graph:Abrir vista gráfica": true,
@@ -169,31 +180,47 @@
       "bases:Crear nueva base": true
     }
   },
-  "active": "e988722fd845faed",
+  "active": "ea9cf50950bb1bae",
   "lastOpenFiles": [
-    "Telemática II/Semana 05/Inter-VLAN Router-on-the-stick.pkt~",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/~$sultados_CleanCode.docx",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/Resultados_CleanCode.docx",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/snippet_services.png",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/snippet_order.png",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/snippet_main.png",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/patch.py",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/script.py",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/src/BookStoreCleanSystem.java",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/src/MainCleanCode.java",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/Taller - Clean Code/src/Main2.java",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/~$imer Taller.docx",
-    "Telemática II/Curso de Cisco II/Módulo 04/4.5.2-lab---implement-inter-vlan-routing_es-XL.pdf",
-    "Telemática II/Curso de Cisco II/Módulo 04/4.5.1-packet-tracer---inter-vlan-routing-challenge_es-XL.pka",
-    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011928.png",
-    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011848.png",
-    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011753.png",
-    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011751.png",
-    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011635.png",
-    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011602.png",
-    "Telemática II/Curso de Cisco II/Módulo 04/ANEXOS/Pasted image 20260302011432.png",
+    "Trade Marketing/Semana 06",
+    "Telemática II/Semana 06",
+    "Minería de datos/Semana 06/DataAnalyticsEssentialsUpdate20260310-32-u9mkot.pdf",
+    "Ingeniería Económica/Semana 06/Entrega de Notas.md",
+    "Minería de datos/Semana 06",
+    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (1).jpeg",
+    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-10 at 3.23.22 PM.jpeg",
+    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-10 at 3.23.10 PM.jpeg",
+    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM.jpeg",
+    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (3).jpeg",
+    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (2).jpeg",
+    "Investigación de Operaciones I/Semana 06",
+    "Ingeniería Económica/Semana 05/Primer Parcial.md",
+    "Ingeniería Económica/Semana 06",
+    "Calidad de Software/Semana 01/Conceptos de calidad de software y evolución histórica.md",
+    "Calidad de Software/Semana 02/Conceptos y modelos de calidad de software.md",
+    "Calidad de Software/Semana 03/Estandares y Normas.md",
+    "Calidad de Software/Semana 03/estandares-normas/images/madurez-CMMI.png",
+    "Calidad de Software/Semana 03/estandares-normas/images/ciclo-PHVA.png",
+    "Calidad de Software/Semana 03/estandares-normas/images/arquitectura-ISO-29119.png",
+    "Calidad de Software/Semana 03/estandares-normas/index.html",
+    "Calidad de Software/Semana 03/estandares-normas/images",
+    "Calidad de Software/Semana 03/estandares-normas",
+    "Calidad de Software/Semana 02/estandares-normas/images/arquitectura-ISO-29119.png",
+    "Calidad de Software/Semana 02/estandares-normas/index.html",
+    "Calidad de Software/Semana 02/estandares-normas/images",
     "Calidad de Software/Semana 04/Métricas de Calidad.md",
+    "Calidad de Software/Repositorio Para Trabajos/README.md",
+    "Trade Marketing/Semana 05/Primer Parcial - Revisión de Progreso.md",
+    "Telemática II/Semana 05/Primer Parcial.md",
+    "Minería de datos/Semana 05/Primer Parcial.md",
+    "Investigación de Operaciones I/Semana 05/Primer Parcial.md",
+    "Calidad de Software/Semana 05/Primer Parcial.md",
     "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
+    "Telemática II/Curso de Cisco II/Módulo 05/Módulo 5 - STP Conceptos.md",
+    "Ingeniería Económica/Semana 03/El Triángulo de la Inversión - Riesgo, Rentabilidad y Liquidez.md",
+    "Ingeniería Económica/Semana 03/Principios básicos del análisis costo-beneficio.md",
+    "Ingeniería Económica/Semana 04/Fases del ciclo de vida de un proyecto.md",
+    "Ingeniería Económica/Semana 02/Concepto de Ingeniería Económica y su relevancia en proyectos de inversión..md",
     "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
     "Telemática II/Curso de Cisco II/Módulo 02/Módulo 2 - Conceptos de switching.md",
     "Telemática II/Curso de Cisco II/Módulo 01/Modulo 1 - Configuración básica de dispositivos.md",
@@ -201,22 +228,6 @@
     "Trade Marketing/MaveitMap/HELP.md",
     "Trade Marketing/Semana 04/Materiales.md",
     "Calidad de Software/Sin título.md",
-    "Ingeniería Económica/Semana 04/Fases del ciclo de vida de un proyecto.md",
-    "Investigación de Operaciones I/Semana 04/Primer Quiz - Corte 1.md",
-    "Ingeniería Económica/Semana 03/Principios básicos del análisis costo-beneficio.md",
-    "Ingeniería Económica/Semana 03/El Triángulo de la Inversión - Riesgo, Rentabilidad y Liquidez.md",
-    "Ingeniería Económica/Semana 02/Concepto de Ingeniería Económica y su relevancia en proyectos de inversión..md",
-    "Minería de datos/Semana 03/Inicio de proyecto.md",
-    "Trade Marketing/Semana 02 - copia/Grupos.md",
-    "Calidad de Software/Semana 03/Grupo 1 - Talleres Primer Corte/2026A/inteligencia-artificial/talleres/tercer-corte/README.md",
-    "Calidad de Software/Semana 03/Grupo 1 - Talleres Primer Corte/2026A/inteligencia-artificial/talleres/segundo-corte/README.md",
-    "Calidad de Software/Semana 03/Grupo 1 - Talleres Primer Corte/2026A/inteligencia-artificial/talleres/primer-corte/README.md",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/segundo-corte/README.md",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/tercer-corte/README.md",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/primer-corte/README.md",
-    "Trade Marketing/Semana 02/Grupos.md",
-    "Minería de datos/Semana 02/Introducción a tecnologías.md",
-    "Telemática II/Semana 02/Sin título.md",
     "Sin título.canvas",
     "Sin título 1.canvas"
   ]
