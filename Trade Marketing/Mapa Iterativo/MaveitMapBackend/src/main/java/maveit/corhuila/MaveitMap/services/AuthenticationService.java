@@ -5,4 +5,6 @@ import maveit.corhuila.MaveitMap.dto.LoginRequest;
 
 public interface AuthenticationService {
     AuthResponse login(LoginRequest request);
+
+    AuthResponse refresh(String refreshToken);
 }

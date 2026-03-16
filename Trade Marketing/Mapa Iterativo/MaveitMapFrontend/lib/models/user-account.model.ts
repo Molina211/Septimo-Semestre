@@ -16,5 +16,6 @@ export interface UserAccountResponse {
   viewers: AccountReference[];
   owner?: AccountReference | null;
   sessionActive: boolean;
+  enabled: boolean;
   createdAt: string;
 }

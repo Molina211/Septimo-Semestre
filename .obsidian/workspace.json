@@ -11,10 +11,14 @@
             "id": "27b644554dd16527",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Trade Marketing/Semana 06/Refuerzo de roles.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "Refuerzo de roles"
             }
           }
         ]
@@ -180,8 +184,15 @@
       "bases:Crear nueva base": true
     }
   },
-  "active": "ea9cf50950bb1bae",
+  "active": "27b644554dd16527",
   "lastOpenFiles": [
+    "Telemática II/Semana 06/Clase inversa.md",
+    "Trade Marketing/Semana 06/Refuerzo de roles.md",
+    "Telemática II/Curso de Cisco II/Módulo 05/Módulo 5 - STP Conceptos.md",
+    "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
+    "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
+    "Telemática II/Curso de Cisco II/Módulo 02/Módulo 2 - Conceptos de switching.md",
+    "Telemática II/Curso de Cisco II/Módulo 01/Modulo 1 - Configuración básica de dispositivos.md",
     "Trade Marketing/Semana 06",
     "Telemática II/Semana 06",
     "Minería de datos/Semana 06/DataAnalyticsEssentialsUpdate20260310-32-u9mkot.pdf",
@@ -207,7 +218,6 @@
     "Calidad de Software/Semana 03/estandares-normas",
     "Calidad de Software/Semana 02/estandares-normas/images/arquitectura-ISO-29119.png",
     "Calidad de Software/Semana 02/estandares-normas/index.html",
-    "Calidad de Software/Semana 02/estandares-normas/images",
     "Calidad de Software/Semana 04/Métricas de Calidad.md",
     "Calidad de Software/Repositorio Para Trabajos/README.md",
     "Trade Marketing/Semana 05/Primer Parcial - Revisión de Progreso.md",
@@ -215,19 +225,13 @@
     "Minería de datos/Semana 05/Primer Parcial.md",
     "Investigación de Operaciones I/Semana 05/Primer Parcial.md",
     "Calidad de Software/Semana 05/Primer Parcial.md",
-    "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
-    "Telemática II/Curso de Cisco II/Módulo 05/Módulo 5 - STP Conceptos.md",
     "Ingeniería Económica/Semana 03/El Triángulo de la Inversión - Riesgo, Rentabilidad y Liquidez.md",
     "Ingeniería Económica/Semana 03/Principios básicos del análisis costo-beneficio.md",
     "Ingeniería Económica/Semana 04/Fases del ciclo de vida de un proyecto.md",
     "Ingeniería Económica/Semana 02/Concepto de Ingeniería Económica y su relevancia en proyectos de inversión..md",
-    "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
-    "Telemática II/Curso de Cisco II/Módulo 02/Módulo 2 - Conceptos de switching.md",
-    "Telemática II/Curso de Cisco II/Módulo 01/Modulo 1 - Configuración básica de dispositivos.md",
     "Trade Marketing/Mapa Iterativo/MaveitMap/HELP.md",
     "Trade Marketing/MaveitMap/HELP.md",
     "Trade Marketing/Semana 04/Materiales.md",
-    "Calidad de Software/Sin título.md",
     "Sin título.canvas",
     "Sin título 1.canvas"
   ]

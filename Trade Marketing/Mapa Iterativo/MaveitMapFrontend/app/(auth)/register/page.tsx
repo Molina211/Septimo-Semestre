@@ -20,6 +20,7 @@ import { Label } from "@/components/ui/label"
 import { register } from "@/lib/services/auth.service"
 import { ApiError } from "@/lib/services/api.client"
 import { setRegistrationSession } from "@/lib/services/registration.store"
+import { getPasswordValidation } from "@/lib/utils/password-rules"
 
 const extractApiMessage = (error: unknown, fallback: string) => {
   if (error instanceof ApiError) {
@@ -46,11 +47,11 @@ export default function RegisterPage() {
   const [formError, setFormError] = useState<string | null>(null)
 
   const passwordsMatch = formData.password === formData.confirmPassword && formData.confirmPassword.length > 0
-  const passwordMinLength = formData.password.length >= 8
+  const passwordValidation = getPasswordValidation(formData.password)
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    if (!passwordsMatch || !passwordMinLength) return
+    if (!passwordsMatch || !passwordValidation.isValid) return
     setFormError(null)
     setIsLoading(true)
     try {
@@ -161,16 +162,21 @@ export default function RegisterPage() {
               {formData.password.length > 0 && (
                 <div
                   className={`flex items-center gap-2 text-xs ${
-                    passwordMinLength ? "text-green-400" : "text-muted-foreground"
+                    passwordValidation.length ? "text-green-400" : "text-muted-foreground"
                   }`}
                 >
                   <CheckCircle2
                     className={`w-3.5 h-3.5 ${
-                      passwordMinLength ? "text-green-400" : "text-muted-foreground/50"
+                      passwordValidation.length ? "text-green-400" : "text-muted-foreground/50"
                     }`}
                   />
                   Mínimo 8 caracteres
                 </div>
+              )}
+              {formData.password.length > 0 && !passwordValidation.isValid && (
+                <p className="text-xs text-destructive">
+                  Debe incluir mayúscula, minúscula, número, carácter especial y mínimo 8 caracteres.
+                </p>
               )}
             </div>
 
@@ -217,7 +223,7 @@ export default function RegisterPage() {
 
             <Button
               type="submit"
-              disabled={isLoading || !passwordsMatch || !passwordMinLength}
+              disabled={isLoading || !passwordsMatch || !passwordValidation.isValid}
               className="w-full h-12 mt-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold rounded-xl shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-primary/40 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {isLoading ? (
@@ -264,3 +270,4 @@ export default function RegisterPage() {
     </div>
   )
 }
+

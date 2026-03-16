@@ -9,7 +9,6 @@ import maveit.corhuila.MaveitMap.security.AuthGuard;
 import maveit.corhuila.MaveitMap.services.WaypointService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @Validated
-@CrossOrigin(origins = "*")
 public class WaypointController {
 
     private final WaypointService waypointService;
@@ -38,13 +36,15 @@ public class WaypointController {
 
     @GetMapping("/waypoints")
     public List<WaypointResponse> list(@RequestParam(value = "search", required = false) String search) {
-        authGuard.requireAuth();
+        AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         return waypointService.listWaypoints(search);
     }
 
     @GetMapping("/waypoints/{id}")
     public WaypointResponse get(@PathVariable Long id) {
-        authGuard.requireAuth();
+        AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         return waypointService.getWaypoint(id);
     }
 
@@ -52,6 +52,7 @@ public class WaypointController {
     @ResponseStatus(HttpStatus.CREATED)
     public WaypointResponse create(@Valid @RequestBody WaypointRequest request) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         return waypointService.createWaypoint(request);
     }
@@ -59,6 +60,7 @@ public class WaypointController {
     @PutMapping("/waypoints/{id}")
     public WaypointResponse update(@PathVariable Long id, @Valid @RequestBody WaypointRequest request) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         return waypointService.updateWaypoint(id, request);
     }
@@ -67,6 +69,7 @@ public class WaypointController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         waypointService.deleteWaypoint(id);
     }

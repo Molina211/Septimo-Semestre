@@ -7,6 +7,8 @@ public class JwtProperties {
 
     private String secret;
     private long expirationMillis = 3600000;
+    // Default: 30 days
+    private long refreshExpirationMillis = 30L * 24L * 60L * 60L * 1000L;
 
     public String getSecret() {
         return secret;
@@ -22,5 +24,13 @@ public class JwtProperties {
 
     public void setExpirationMillis(long expirationMillis) {
         this.expirationMillis = expirationMillis;
+    }
+
+    public long getRefreshExpirationMillis() {
+        return refreshExpirationMillis;
+    }
+
+    public void setRefreshExpirationMillis(long refreshExpirationMillis) {
+        this.refreshExpirationMillis = refreshExpirationMillis;
     }
 }

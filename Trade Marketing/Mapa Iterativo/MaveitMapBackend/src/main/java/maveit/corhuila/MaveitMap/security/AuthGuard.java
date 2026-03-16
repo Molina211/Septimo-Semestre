@@ -21,4 +21,11 @@ public class AuthGuard {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "No autorizado");
         }
     }
+
+    public void ensureNotSuperAdmin(AuthDetails auth) {
+        if (auth.getRole() == UserRole.SUPER_ADMIN) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "SuperAdmin no tiene acceso a datos del mapa o ventas");
+        }
+    }
 }

@@ -1,12 +1,15 @@
 import { apiFetch } from './api.client';
-import { clearToken, setToken } from './token.store';
+import { clearTokens, setToken } from './token.store';
 import type { AuthResponse, RegistrationSessionResponse } from '../models/auth.model';
 
 const LOGIN_ENDPOINT = '/api/auth/login';
 const REGISTER_ENDPOINT = '/api/auth/register';
 const CONFIRM_ENDPOINT = '/api/auth/register/confirm';
 const RESEND_ENDPOINT = '/api/auth/resend-code';
+const EMAIL_CONFIRM_ENDPOINT = '/api/auth/email/confirm';
+const EMAIL_RESEND_ENDPOINT = '/api/auth/email/resend';
 const LOGOUT_ENDPOINT = '/api/auth/logout';
+const REFRESH_ENDPOINT = '/api/auth/refresh';
 
 export interface LoginPayload {
   email: string;
@@ -36,7 +39,8 @@ export async function login(payload: LoginPayload): Promise<AuthResponse> {
     body: payload,
     requireAuth: false,
   });
-  setToken(response.token);
+  const accessToken = response.accessToken ?? response.token;
+  setToken(accessToken);
   return response;
 }
 
@@ -71,10 +75,38 @@ export async function resendCode(payload: ResendPayload): Promise<void> {
   });
 }
 
+export async function confirmEmailVerification(payload: ConfirmationPayload): Promise<void> {
+  await apiFetch<void>(EMAIL_CONFIRM_ENDPOINT, {
+    method: 'POST',
+    body: payload,
+    requireAuth: false,
+  });
+}
+
+export async function resendEmailVerification(payload: ResendPayload): Promise<void> {
+  await apiFetch<void>(EMAIL_RESEND_ENDPOINT, {
+    method: 'POST',
+    body: payload,
+    requireAuth: false,
+  });
+}
+
 export async function logout(): Promise<void> {
   try {
-    await apiFetch<void>(LOGOUT_ENDPOINT, { method: 'POST' });
+    await apiFetch<void>(LOGOUT_ENDPOINT, {
+      method: 'POST',
+    });
   } finally {
-    clearToken();
+    clearTokens();
   }
+}
+
+export async function refresh(): Promise<AuthResponse> {
+  const response = await apiFetch<AuthResponse>(REFRESH_ENDPOINT, {
+    method: 'POST',
+    requireAuth: false,
+  });
+  const accessToken = response.accessToken ?? response.token;
+  setToken(accessToken);
+  return response;
 }

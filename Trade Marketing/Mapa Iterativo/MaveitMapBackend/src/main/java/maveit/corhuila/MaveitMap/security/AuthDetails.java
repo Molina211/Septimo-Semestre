@@ -6,11 +6,13 @@ public class AuthDetails {
 
     private final Long userId;
     private final UserRole role;
+    private final long issuedAt;
     private final long expiresAt;
 
-    public AuthDetails(Long userId, UserRole role, long expiresAt) {
+    public AuthDetails(Long userId, UserRole role, long issuedAt, long expiresAt) {
         this.userId = userId;
         this.role = role;
+        this.issuedAt = issuedAt;
         this.expiresAt = expiresAt;
     }
 
@@ -20,6 +22,10 @@ public class AuthDetails {
 
     public UserRole getRole() {
         return role;
+    }
+
+    public long getIssuedAt() {
+        return issuedAt;
     }
 
     public long getExpiresAt() {

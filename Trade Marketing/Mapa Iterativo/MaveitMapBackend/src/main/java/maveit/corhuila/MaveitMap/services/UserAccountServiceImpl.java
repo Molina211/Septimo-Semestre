@@ -45,6 +45,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     private final SecuritySetupProperties setupProperties;
     private final InvitationRepository invitationRepository;
     private final UserSessionService userSessionService;
+    private final RefreshTokenService refreshTokenService;
     private final WaypointRepository waypointRepository;
     private final SalesGroupRepository salesGroupRepository;
     private final CatalogProductRepository catalogProductRepository;
@@ -60,6 +61,7 @@ public class UserAccountServiceImpl implements UserAccountService {
             SecuritySetupProperties setupProperties,
             InvitationRepository invitationRepository,
             UserSessionService userSessionService,
+            RefreshTokenService refreshTokenService,
             WaypointRepository waypointRepository,
             SalesGroupRepository salesGroupRepository,
             CatalogProductRepository catalogProductRepository,
@@ -73,6 +75,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         this.emailService = emailService;
         this.invitationRepository = invitationRepository;
         this.userSessionService = userSessionService;
+        this.refreshTokenService = refreshTokenService;
         this.waypointRepository = waypointRepository;
         this.salesGroupRepository = salesGroupRepository;
         this.catalogProductRepository = catalogProductRepository;
@@ -225,16 +228,22 @@ public class UserAccountServiceImpl implements UserAccountService {
         UserAccount account = repository.findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
         account.setEncryptedPassword(encryptionService.encrypt(request.getPassword().toCharArray()));
+        account.setTokensRevokedAt(OffsetDateTime.now());
         account.setUpdatedAt(OffsetDateTime.now());
         repository.save(account);
         userSessionService.deleteSessionFor(account);
+        refreshTokenService.revokeAllForUser(account.getId());
         passwordResetRepository.delete(reset);
     }
 
     @Override
     public List<UserAccountResponse> listUsers(UserRole requestingRole, Long requestingUserId) {
         if (requestingRole == UserRole.SUPER_ADMIN) {
-            return repository.findAll().stream().map(this::toResponse).collect(Collectors.toList());
+            return repository.findAll().stream()
+                    .filter((acct) -> requestingUserId == null || acct.getId() == null
+                            || !acct.getId().equals(requestingUserId))
+                    .map(this::toResponse)
+                    .collect(Collectors.toList());
         }
         ensureAdmin(requestingRole);
         if (requestingUserId == null) {
@@ -285,6 +294,36 @@ public class UserAccountServiceImpl implements UserAccountService {
         }
         account.setUpdatedAt(OffsetDateTime.now());
         return toResponse(repository.save(account));
+    }
+
+    @Override
+    @Transactional
+    public UserAccountResponse updateUserStatus(Long id, boolean enabled,
+            UserRole requestingRole, Long requestingUserId) {
+        if (requestingRole != UserRole.SUPER_ADMIN) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Solo SuperAdmin puede actualizar el estado");
+        }
+        if (requestingUserId != null && id != null && id.equals(requestingUserId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "No puedes cambiar el estado de tu propia cuenta");
+        }
+        UserAccount account = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+        account.setEnabled(enabled);
+        if (!enabled) {
+            account.setTokensRevokedAt(OffsetDateTime.now());
+            account.setSessionActive(false);
+            userSessionService.deleteSessionFor(account);
+            refreshTokenService.revokeAllForUser(account.getId());
+        }
+        account.setUpdatedAt(OffsetDateTime.now());
+        return toResponse(repository.save(account));
+    }
+
+    @Override
+    @Transactional
+    public void revokeRefreshToken(String refreshToken) {
+        refreshTokenService.revoke(refreshToken);
     }
 
     @Override
@@ -429,6 +468,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         account.setUpdatedAt(now);
         account.setVerified(true);
         account.setVerifiedAt(now);
+        account.setEnabled(true);
         return repository.save(account);
     }
 
@@ -460,6 +500,7 @@ public class UserAccountServiceImpl implements UserAccountService {
             releaseSelf(target.getId());
         }
         userSessionService.deleteSessionFor(target);
+        refreshTokenService.revokeAllForUser(target.getId());
         if (targetId != null) {
             salesGroupRepository.deleteByOwnerId(targetId);
             waypointRepository.deleteByOwnerId(targetId);
@@ -479,6 +520,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         response.setViewers(getViewersFor(account));
         response.setOwner(toReference(account.getOwner()));
         response.setSessionActive(account.isSessionActive());
+        response.setEnabled(account.isEnabled());
         response.setCreatedAt(account.getCreatedAt());
         return response;
     }

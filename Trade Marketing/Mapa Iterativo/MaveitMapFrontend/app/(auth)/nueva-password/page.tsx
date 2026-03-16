@@ -13,6 +13,7 @@ import {
   clearPasswordResetSession,
 } from "@/lib/services/password-reset.store"
 import { ApiError } from "@/lib/services/api.client"
+import { getPasswordValidation } from "@/lib/utils/password-rules"
 
 const extractApiMessage = (error: unknown, fallback: string) => {
   if (error instanceof ApiError) {
@@ -44,11 +45,11 @@ export default function NewPasswordPage() {
   }, [resetSession, router])
 
   const passwordsMatch = formData.password === formData.confirmPassword && formData.confirmPassword.length > 0
-  const passwordMinLength = formData.password.length >= 8
+  const passwordValidation = getPasswordValidation(formData.password)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!passwordsMatch || !passwordMinLength) return
+    if (!passwordsMatch || !passwordValidation.isValid) return
     if (!resetSession?.email || !resetSession?.code) {
       router.replace("/recuperar-password")
       return
@@ -166,8 +167,8 @@ export default function NewPasswordPage() {
                 </button>
               </div>
               {formData.password.length > 0 && (
-                <div className={`flex items-center gap-2 text-xs ${passwordMinLength ? 'text-green-400' : 'text-muted-foreground'}`}>
-                  <CheckCircle2 className={`w-3.5 h-3.5 ${passwordMinLength ? 'text-green-400' : 'text-muted-foreground/50'}`} />
+                <div className={`flex items-center gap-2 text-xs ${passwordValidation.length ? 'text-green-400' : 'text-muted-foreground'}`}>
+                  <CheckCircle2 className={`w-3.5 h-3.5 ${passwordValidation.length ? 'text-green-400' : 'text-muted-foreground/50'}`} />
                   Mínimo 8 caracteres
                 </div>
               )}
@@ -212,7 +213,7 @@ export default function NewPasswordPage() {
             {/* Submit */}
             <Button
               type="submit"
-              disabled={isLoading || !passwordsMatch || !passwordMinLength}
+              disabled={isLoading || !passwordsMatch || !passwordValidation.isValid}
               className="w-full h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold rounded-xl shadow-lg shadow-primary/25 transition-all duration-300 hover:shadow-primary/40 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {isLoading ? (
@@ -230,3 +231,4 @@ export default function NewPasswordPage() {
     </div>
   )
 }
+

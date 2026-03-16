@@ -26,8 +26,6 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class InvitationServiceImpl implements InvitationService {
 
-    private static final int DEFAULT_EXPIRATION_MINUTES = 10;
-
     private final InvitationRepository invitationRepository;
     private final UserAccountRepository userRepository;
     private final CatalogProductRepository catalogProductRepository;
@@ -37,6 +35,7 @@ public class InvitationServiceImpl implements InvitationService {
     private final WaypointRepository waypointRepository;
     private final EmailService emailService;
     private final TokenRevocationService tokenRevocationService;
+    private final AdminConfigService adminConfigService;
 
     public InvitationServiceImpl(InvitationRepository invitationRepository,
             UserAccountRepository userRepository,
@@ -46,7 +45,8 @@ public class InvitationServiceImpl implements InvitationService {
             SalesGroupRepository salesGroupRepository,
             WaypointRepository waypointRepository,
             EmailService emailService,
-            TokenRevocationService tokenRevocationService) {
+            TokenRevocationService tokenRevocationService,
+            AdminConfigService adminConfigService) {
         this.invitationRepository = invitationRepository;
         this.userRepository = userRepository;
         this.catalogProductRepository = catalogProductRepository;
@@ -56,6 +56,7 @@ public class InvitationServiceImpl implements InvitationService {
         this.waypointRepository = waypointRepository;
         this.emailService = emailService;
         this.tokenRevocationService = tokenRevocationService;
+        this.adminConfigService = adminConfigService;
     }
 
     @Override
@@ -63,7 +64,7 @@ public class InvitationServiceImpl implements InvitationService {
     public InvitationResponse createInvitation(InvitationRequest request, Long adminId) {
         UserAccount admin = validateInvoker(adminId);
         OffsetDateTime now = OffsetDateTime.now();
-        int minutes = request.getExpiresInMinutes() == null ? DEFAULT_EXPIRATION_MINUTES
+        int minutes = request.getExpiresInMinutes() == null ? adminConfigService.getDefaultInvitationExpiryMinutes()
                 : request.getExpiresInMinutes();
         OffsetDateTime expires = now.plusMinutes(minutes);
         Invitation invitation = new Invitation();

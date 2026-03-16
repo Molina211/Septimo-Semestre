@@ -49,7 +49,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendInvitation(Invitation invitation) {
         String subject = "Te invitaron a ver un mapa en MapWebBusiness";
-        String link = frontendUrl + "/?invitation=" + invitation.getToken();
+        String link = frontendUrl + "/mapa?invitation=" + invitation.getToken();
         String formattedExpiry = invitation.getExpiresAt().format(EXPIRY_FORMATTER);
         String html = "<div style=\"font-family: 'Inter', 'Segoe UI', sans-serif; background:#0d1117; color:#f7faff; padding:24px; border-radius:24px; max-width:640px; margin:0 auto; box-shadow:0 20px 40px rgba(0,0,0,0.5);\">"
                 + "<h2 style=\"margin-top:0; color:#ff6b81; font-size:26px;\">Invitación recibida</h2>"

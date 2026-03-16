@@ -133,7 +133,7 @@ export default function ProfilePage() {
           <div className="w-full max-w-lg space-y-6 text-foreground">
             <div>
               <Link
-                href="/"
+                href="/mapa"
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 <ChevronLeft className="w-4 h-4" />

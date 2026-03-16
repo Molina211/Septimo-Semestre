@@ -11,4 +11,9 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
     List<UserAccount> findByOwner_Id(Long ownerId);
     List<UserAccount> findByRole(UserRole role);
     long countByOwner(UserAccount owner);
+    long countByEnabledTrue();
+    long countByEnabledFalse();
+    long countBySessionActiveTrue();
+    long countBySessionActiveFalse();
+    long countByOwnerIsNotNull();
 }

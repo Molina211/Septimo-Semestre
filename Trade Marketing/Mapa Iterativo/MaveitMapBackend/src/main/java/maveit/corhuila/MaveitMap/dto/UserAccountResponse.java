@@ -15,6 +15,7 @@ public class UserAccountResponse {
     private List<AccountReference> viewers = new ArrayList<>();
     private AccountReference owner;
     private boolean sessionActive;
+    private boolean enabled;
     private OffsetDateTime createdAt;
 
     public Long getId() {
@@ -79,6 +80,14 @@ public class UserAccountResponse {
 
     public void setSessionActive(boolean sessionActive) {
         this.sessionActive = sessionActive;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public OffsetDateTime getCreatedAt() {

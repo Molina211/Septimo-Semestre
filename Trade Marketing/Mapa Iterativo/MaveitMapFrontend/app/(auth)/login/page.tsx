@@ -9,10 +9,12 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { login } from "@/lib/services/auth.service"
 import { extractApiMessage } from "@/lib/utils/api-errors"
+import { getToken } from "@/lib/services/token.store"
+import { parseAuthToken } from "@/lib/utils/jwt.utils"
 
 export default function LoginPage() {
   const router = useRouter()
-  const [redirectTarget, setRedirectTarget] = useState("/")
+  const [redirectTarget, setRedirectTarget] = useState("/mapa")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -25,7 +27,7 @@ export default function LoginPage() {
     if (typeof window === "undefined") return
     const params = new URLSearchParams(window.location.search)
     const redirectParam = params.get("redirect")
-    setRedirectTarget(redirectParam ? decodeURIComponent(redirectParam) : "/")
+    setRedirectTarget(redirectParam ? decodeURIComponent(redirectParam) : "/mapa")
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,9 +36,15 @@ export default function LoginPage() {
     setIsLoading(true)
     try {
       await login({ email: formData.email, password: formData.password })
-      router.replace(redirectTarget)
+      const parsed = parseAuthToken(getToken())
+      router.replace(parsed?.role === "SUPER_ADMIN" ? "/admin" : redirectTarget)
     } catch (error) {
-      setFormError(extractApiMessage(error, "No se pudo iniciar sesión"))
+      const message = extractApiMessage(error, "No se pudo iniciar sesión")
+      if (message.toLowerCase().includes("verificar tu correo")) {
+        router.replace(`/verificar?mode=email&email=${encodeURIComponent(formData.email.trim())}`)
+        return
+      }
+      setFormError(message)
     } finally {
       setIsLoading(false)
     }

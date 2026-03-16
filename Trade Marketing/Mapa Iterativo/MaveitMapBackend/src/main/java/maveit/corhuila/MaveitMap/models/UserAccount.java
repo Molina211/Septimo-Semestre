@@ -51,6 +51,12 @@ public class UserAccount {
     @Column(name = "session_active", nullable = false)
     private boolean sessionActive = false;
 
+    @Column(name = "tokens_revoked_at")
+    private OffsetDateTime tokensRevokedAt;
+
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled = true;
+
     @Column(nullable = false)
     private boolean verified = false;
 
@@ -135,6 +141,22 @@ public class UserAccount {
 
     public void setSessionActive(boolean sessionActive) {
         this.sessionActive = sessionActive;
+    }
+
+    public OffsetDateTime getTokensRevokedAt() {
+        return tokensRevokedAt;
+    }
+
+    public void setTokensRevokedAt(OffsetDateTime tokensRevokedAt) {
+        this.tokensRevokedAt = tokensRevokedAt;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public boolean isVerified() {

@@ -20,6 +20,7 @@ public interface UserAccountService {
     List<UserAccountResponse> listUsers(UserRole requestingRole, Long requestingUserId);
     UserAccountResponse getUser(Long id, UserRole requestingRole, Long requestingUserId);
     UserAccountResponse updateUser(Long id, UpdateUserRequest request, UserRole requestingRole, Long requestingUserId);
+    UserAccountResponse updateUserStatus(Long id, boolean enabled, UserRole requestingRole, Long requestingUserId);
     void deleteUser(Long id, UserRole requestingRole);
     void resendWelcomeEmail(String email, UserRole requestingRole, Long requestingUserId);
     UserAccount confirmRegistration(RegistrationConfirmationRequest request);
@@ -30,4 +31,7 @@ public interface UserAccountService {
     void markSessionActive(Long id, boolean active);
     void releaseAccounts(List<Long> userIds, UserRole requestingRole, Long requestingUserId);
     void releaseSelf(Long userId);
+
+    // Auth helpers
+    void revokeRefreshToken(String refreshToken);
 }

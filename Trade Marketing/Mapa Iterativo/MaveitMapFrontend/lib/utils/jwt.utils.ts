@@ -33,13 +33,13 @@ export function parseAuthToken(token: string | null): ParsedAuthToken | null {
   try {
     const payload = decodeBase64Url(parts[0]);
     const segments = payload.split(':');
-    if (segments.length !== 4) {
+    if (segments.length !== 4 && segments.length !== 5) {
       return null;
     }
     const userId = Number(segments[0]);
     const role = segments[1];
-    const expiresAt = Number(segments[2]);
-    const email = decodeBase64Url(segments[3]);
+    const expiresAt = Number(segments.length === 5 ? segments[3] : segments[2]);
+    const email = decodeBase64Url(segments.length === 5 ? segments[4] : segments[3]);
     if (Number.isNaN(userId) || Number.isNaN(expiresAt)) {
       return null;
     }

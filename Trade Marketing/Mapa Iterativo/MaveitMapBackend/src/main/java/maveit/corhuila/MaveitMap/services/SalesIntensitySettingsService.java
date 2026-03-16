@@ -7,6 +7,7 @@ import maveit.corhuila.MaveitMap.models.SalesIntensitySettings;
 import maveit.corhuila.MaveitMap.repositories.SalesIntensitySettingsRepository;
 import maveit.corhuila.MaveitMap.security.AuthContext;
 import maveit.corhuila.MaveitMap.security.AuthDetails;
+import maveit.corhuila.MaveitMap.models.UserRole;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -72,6 +73,10 @@ public class SalesIntensitySettingsService {
         AuthDetails auth = AuthContext.get();
         if (auth == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token requerido");
+        }
+        if (auth.getRole() == UserRole.SUPER_ADMIN) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                    "SuperAdmin no tiene acceso a datos del mapa o ventas");
         }
         return auth.getUserId();
     }

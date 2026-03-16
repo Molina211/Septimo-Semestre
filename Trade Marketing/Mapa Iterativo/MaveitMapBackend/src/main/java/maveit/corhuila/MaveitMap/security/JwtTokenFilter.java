@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
+import maveit.corhuila.MaveitMap.models.UserAccount;
+import maveit.corhuila.MaveitMap.repositories.UserAccountRepository;
 import maveit.corhuila.MaveitMap.services.TokenRevocationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,14 +17,20 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     private static final Set<String> PUBLIC_PATHS = Set.of("/api/auth/register", "/api/auth/login",
             "/api/auth/register/confirm", "/api/auth/resend-code",
-            "/api/auth/password/forgot", "/api/auth/password/verify", "/api/auth/password/reset");
+            "/api/auth/email/confirm", "/api/auth/email/resend",
+            "/api/auth/password/forgot", "/api/auth/password/verify", "/api/auth/password/reset",
+            "/api/auth/refresh");
 
     private final JwtTokenService jwtTokenService;
     private final TokenRevocationService tokenRevocationService;
+    private final UserAccountRepository userAccountRepository;
 
-    public JwtTokenFilter(JwtTokenService jwtTokenService, TokenRevocationService tokenRevocationService) {
+    public JwtTokenFilter(JwtTokenService jwtTokenService,
+            TokenRevocationService tokenRevocationService,
+            UserAccountRepository userAccountRepository) {
         this.jwtTokenService = jwtTokenService;
         this.tokenRevocationService = tokenRevocationService;
+        this.userAccountRepository = userAccountRepository;
     }
 
     @Override
@@ -54,7 +62,18 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             if (tokenRevocationService.isRevoked(token)) {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token revocado");
             }
-            AuthContext.set(jwtTokenService.parseToken(token));
+            AuthDetails details = jwtTokenService.parseToken(token);
+            UserAccount account = userAccountRepository.findById(details.getUserId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuario no encontrado"));
+            if (!account.isEnabled()) {
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+                        "Cuenta deshabilitada. Contacta al SuperAdministrador para habilitarla");
+            }
+            if (account.getTokensRevokedAt() != null
+                    && details.getIssuedAt() < account.getTokensRevokedAt().toInstant().toEpochMilli()) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Token revocado");
+            }
+            AuthContext.set(details);
             filterChain.doFilter(request, response);
         } finally {
             AuthContext.clear();

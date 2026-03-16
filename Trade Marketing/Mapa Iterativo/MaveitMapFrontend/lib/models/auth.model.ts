@@ -1,5 +1,8 @@
 export interface AuthResponse {
-  token: string;
+  // Backward compatible (backend still emits "token" = accessToken)
+  token?: string;
+  accessToken: string;
+  refreshToken?: string;
 }
 
 export interface RegistrationSessionResponse {

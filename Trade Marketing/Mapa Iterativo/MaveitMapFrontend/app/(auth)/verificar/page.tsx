@@ -2,14 +2,15 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { ArrowLeft, Loader2, CheckCircle2, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { confirmRegistration, resendCode } from "@/lib/services/auth.service"
+import { confirmEmailVerification, confirmRegistration, resendCode, resendEmailVerification } from "@/lib/services/auth.service"
 import { ApiError } from "@/lib/services/api.client"
 import {
   RegistrationSession,
   getRegistrationSession,
+  setRegistrationSession,
   updateRegistrationAttempts,
   updateRegistrationExpiration,
   clearRegistrationSession,
@@ -43,6 +44,7 @@ const formatExpiry = (value: string | undefined) => {
 
 export default function VerifyCodePage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
   const [code, setCode] = useState<string[]>(Array(6).fill(""))
   const [isLoading, setIsLoading] = useState(false)
@@ -53,22 +55,36 @@ export default function VerifyCodePage() {
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const mode = searchParams.get("mode") === "email" ? "email" : "register"
+  const emailFromQuery = searchParams.get("email")?.trim() || null
 
   useEffect(() => {
     inputRefs.current[0]?.focus()
   }, [])
 
   useEffect(() => {
-    setSession(getRegistrationSession())
+    let current = getRegistrationSession()
+    if (mode === "email" && emailFromQuery) {
+      const normalizedQuery = emailFromQuery.toLowerCase()
+      if (!current || current.email.toLowerCase() !== normalizedQuery) {
+        current = {
+          email: emailFromQuery,
+          expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
+          attemptsLeft: 5,
+        }
+        setRegistrationSession(current)
+      }
+    }
+    setSession(current)
     setHydrated(true)
-  }, [])
+  }, [mode, emailFromQuery])
 
   useEffect(() => {
     if (!hydrated) return
     if (!session && !successMessage) {
-      router.replace("/register")
+      router.replace(mode === "email" ? "/login" : "/register")
     }
-  }, [hydrated, session, router, successMessage])
+  }, [hydrated, session, router, successMessage, mode])
 
   useEffect(() => {
     if (resendTimer > 0) {
@@ -120,7 +136,11 @@ export default function VerifyCodePage() {
     setIsLoading(true)
     setErrorMessage(null)
     try {
-      await confirmRegistration({ email: session.email, code: combinedCode })
+      if (mode === "email") {
+        await confirmEmailVerification({ email: session.email, code: combinedCode })
+      } else {
+        await confirmRegistration({ email: session.email, code: combinedCode })
+      }
       clearRegistrationSession()
       setSuccessMessage("Cuenta verificada. Redirigiendo...")
       router.replace("/login")
@@ -148,7 +168,11 @@ export default function VerifyCodePage() {
     setStatusMessage(null)
     setErrorMessage(null)
     try {
-      await resendCode({ email: session.email })
+      if (mode === "email") {
+        await resendEmailVerification({ email: session.email })
+      } else {
+        await resendCode({ email: session.email })
+      }
       const newExpiry = new Date(Date.now() + 10 * 60 * 1000).toISOString()
       const updated = updateRegistrationExpiration(newExpiry)
       setSession(updated)

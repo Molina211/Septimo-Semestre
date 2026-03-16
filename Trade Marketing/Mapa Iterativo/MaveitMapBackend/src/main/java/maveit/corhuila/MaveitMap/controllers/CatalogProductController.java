@@ -9,7 +9,6 @@ import maveit.corhuila.MaveitMap.security.AuthGuard;
 import maveit.corhuila.MaveitMap.services.CatalogProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @Validated
-@CrossOrigin(origins = "*")
 public class CatalogProductController {
 
     private final CatalogProductService catalogProductService;
@@ -38,13 +36,15 @@ public class CatalogProductController {
 
     @GetMapping("/catalog/products")
     public List<CatalogProductResponse> list(@RequestParam(value = "search", required = false) String search) {
-        authGuard.requireAuth();
+        AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         return catalogProductService.listProducts(search);
     }
 
     @GetMapping("/catalog/products/{id}")
     public CatalogProductResponse get(@PathVariable Long id) {
-        authGuard.requireAuth();
+        AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         return catalogProductService.getProduct(id);
     }
 
@@ -52,6 +52,7 @@ public class CatalogProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public CatalogProductResponse create(@Valid @RequestBody CatalogProductRequest request) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         return catalogProductService.createProduct(request);
     }
@@ -59,6 +60,7 @@ public class CatalogProductController {
     @PutMapping("/catalog/products/{id}")
     public CatalogProductResponse update(@PathVariable Long id, @Valid @RequestBody CatalogProductRequest request) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         return catalogProductService.updateProduct(id, request);
     }
@@ -69,6 +71,7 @@ public class CatalogProductController {
             @PathVariable Long id,
             @RequestParam(value = "force", defaultValue = "false") boolean force) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         catalogProductService.deleteProduct(id, force);
     }

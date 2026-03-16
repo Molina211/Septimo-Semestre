@@ -9,7 +9,6 @@ import maveit.corhuila.MaveitMap.security.AuthGuard;
 import maveit.corhuila.MaveitMap.services.SalesGroupService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @Validated
-@CrossOrigin(origins = "*")
 public class SalesGroupController {
 
     private final SalesGroupService salesGroupService;
@@ -38,13 +36,15 @@ public class SalesGroupController {
 
     @GetMapping("/catalog/groups")
     public List<SalesGroupResponse> list(@RequestParam(value = "productId", required = false) Long productId) {
-        authGuard.requireAuth();
+        AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         return salesGroupService.listGroups(productId);
     }
 
     @GetMapping("/catalog/groups/{id}")
     public SalesGroupResponse get(@PathVariable Long id) {
-        authGuard.requireAuth();
+        AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         return salesGroupService.getGroup(id);
     }
 
@@ -52,6 +52,7 @@ public class SalesGroupController {
     @ResponseStatus(HttpStatus.CREATED)
     public SalesGroupResponse create(@Valid @RequestBody SalesGroupRequest request) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         return salesGroupService.createGroup(request);
     }
@@ -59,6 +60,7 @@ public class SalesGroupController {
     @PutMapping("/catalog/groups/{id}")
     public SalesGroupResponse update(@PathVariable Long id, @Valid @RequestBody SalesGroupRequest request) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         return salesGroupService.updateGroup(id, request);
     }
@@ -67,6 +69,7 @@ public class SalesGroupController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         AuthDetails auth = authGuard.requireAuth();
+        authGuard.ensureNotSuperAdmin(auth);
         authGuard.ensureNotViewer(auth);
         salesGroupService.deleteGroup(id);
     }
