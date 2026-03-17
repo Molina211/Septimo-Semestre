@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "b5d545a959349bfb",
+        "id": "cf1c70eafcd32d89",
         "type": "tabs",
         "children": [
           {
-            "id": "27b644554dd16527",
+            "id": "6cf0f3a2f02ca20c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Trade Marketing/Semana 06/Refuerzo de roles.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Refuerzo de roles"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -184,40 +180,43 @@
       "bases:Crear nueva base": true
     }
   },
-  "active": "27b644554dd16527",
+  "active": "ea9cf50950bb1bae",
   "lastOpenFiles": [
-    "Telemática II/Semana 06/Clase inversa.md",
-    "Trade Marketing/Semana 06/Refuerzo de roles.md",
+    "Investigación de Operaciones I/Semana 07",
+    "Telemática II/Semana 07/STP.pkt",
+    "Telemática II/Semana 07/InterVLAN_Routing.pkt",
+    "Telemática II/Semana 07",
+    "Ingeniería Económica/Semana 07/Equivalencia en los proyectos.md",
+    "Ingeniería Económica/Semana 07/~$Introducción a la Equivalencia de Valores en el Tiempo.pptx",
+    "Ingeniería Económica/Semana 07/Introducción a la Equivalencia de Valores en el Tiempo.pptx",
+    "Ingeniería Económica/Semana 07/Ética y Responsabilidad en la Evaluación de Proyectos.md",
     "Telemática II/Curso de Cisco II/Módulo 05/Módulo 5 - STP Conceptos.md",
+    "Ingeniería Económica/Semana 07/~$Ética y Responsabilidad en la Evaluación de Proyectos.pptx",
+    "Ingeniería Económica/Semana 07/Ética y Responsabilidad en la Evaluación de Proyectos.pptx",
+    "Ingeniería Económica/Semana 07",
+    "Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260316171510.png",
+    "Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260316170751.png",
+    "Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260316165952.png",
+    "Trade Marketing/Semana 06/Refuerzo de roles.md",
+    "Telemática II/Semana 06/Clase inversa.md",
     "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
     "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
     "Telemática II/Curso de Cisco II/Módulo 02/Módulo 2 - Conceptos de switching.md",
     "Telemática II/Curso de Cisco II/Módulo 01/Modulo 1 - Configuración básica de dispositivos.md",
     "Trade Marketing/Semana 06",
     "Telemática II/Semana 06",
-    "Minería de datos/Semana 06/DataAnalyticsEssentialsUpdate20260310-32-u9mkot.pdf",
     "Ingeniería Económica/Semana 06/Entrega de Notas.md",
-    "Minería de datos/Semana 06",
     "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (1).jpeg",
     "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-10 at 3.23.22 PM.jpeg",
     "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-10 at 3.23.10 PM.jpeg",
     "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM.jpeg",
     "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (3).jpeg",
     "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (2).jpeg",
-    "Investigación de Operaciones I/Semana 06",
     "Ingeniería Económica/Semana 05/Primer Parcial.md",
-    "Ingeniería Económica/Semana 06",
     "Calidad de Software/Semana 01/Conceptos de calidad de software y evolución histórica.md",
     "Calidad de Software/Semana 02/Conceptos y modelos de calidad de software.md",
     "Calidad de Software/Semana 03/Estandares y Normas.md",
     "Calidad de Software/Semana 03/estandares-normas/images/madurez-CMMI.png",
-    "Calidad de Software/Semana 03/estandares-normas/images/ciclo-PHVA.png",
-    "Calidad de Software/Semana 03/estandares-normas/images/arquitectura-ISO-29119.png",
-    "Calidad de Software/Semana 03/estandares-normas/index.html",
-    "Calidad de Software/Semana 03/estandares-normas/images",
-    "Calidad de Software/Semana 03/estandares-normas",
-    "Calidad de Software/Semana 02/estandares-normas/images/arquitectura-ISO-29119.png",
-    "Calidad de Software/Semana 02/estandares-normas/index.html",
     "Calidad de Software/Semana 04/Métricas de Calidad.md",
     "Calidad de Software/Repositorio Para Trabajos/README.md",
     "Trade Marketing/Semana 05/Primer Parcial - Revisión de Progreso.md",
@@ -229,9 +228,6 @@
     "Ingeniería Económica/Semana 03/Principios básicos del análisis costo-beneficio.md",
     "Ingeniería Económica/Semana 04/Fases del ciclo de vida de un proyecto.md",
     "Ingeniería Económica/Semana 02/Concepto de Ingeniería Económica y su relevancia en proyectos de inversión..md",
-    "Trade Marketing/Mapa Iterativo/MaveitMap/HELP.md",
-    "Trade Marketing/MaveitMap/HELP.md",
-    "Trade Marketing/Semana 04/Materiales.md",
     "Sin título.canvas",
     "Sin título 1.canvas"
   ]

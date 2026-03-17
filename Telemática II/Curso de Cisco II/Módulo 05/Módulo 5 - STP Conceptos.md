@@ -120,3 +120,68 @@ Además:
 - Las tramas de multidifusión (multicast) de Capa 2 se reenvían de forma similar a las de difusión.
 
 - Aunque IPv6 no usa broadcast, sí utiliza multicast para funciones como ICMPv6 Neighbor Discovery, lo que también puede verse afectado por bucles.
+
+![[Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260316165952.png]]
+
+Cuando un host queda atrapado en un bucle de Capa 2, los demás dispositivos de la red no pueden comunicarse con él.
+
+Esto ocurre porque:
+
+- El switch actualiza constantemente su tabla de direcciones MAC debido a que recibe las mismas tramas por diferentes puertos.
+
+- Como resultado, el switch no sabe por qué puerto enviar las tramas de unidifusión hacia ese host.
+
+Por ejemplo, si una trama va dirigida a PC1:
+
+- El switch puede tener registrado el puerto incorrecto en su tabla MAC.
+
+- Entonces la trama se envía por varios puertos y termina circulando en bucle por la red.
+
+A medida que más tramas se repiten:
+
+- Se acumula tráfico innecesario.
+
+- Puede generarse una tormenta de difusión (broadcast storm) que sature la red.
+
+Para evitar estos problemas en redes con rutas redundantes, se debe usar un protocolo de árbol de expansión (Spanning Tree Protocol – STP).
+
+- STP bloquea algunas rutas redundantes para evitar bucles.
+
+- En los switches Cisco, STP está habilitado por defecto para prevenir bucles en la Capa 2.
+
+---
+
+### El algoritmo de árbol de expansión
+
+El STP (Spanning Tree Protocol) se basa en un algoritmo creado por Radia Perlman en 1985, llamado algoritmo de árbol de expansión (STA). Este algoritmo permite evitar bucles en redes Ethernet.
+
+El funcionamiento básico es:
+
+1. Se elige un switch raíz (root bridge) en la red.
+
+2. Los demás switches calculan la ruta de menor costo hacia ese switch raíz.
+
+3. STP bloquea algunos enlaces redundantes, dejando solo un camino activo entre los dispositivos.
+
+De esta forma se crea una topología sin bucles, pero manteniendo enlaces redundantes disponibles en caso de fallos.
+
+- **Topología de la situación**
+
+	Este escenario STA utiliza una LAN Ethernet con conexiones redundantes entre varios conmutadores.
+
+![[Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260316170751.png]]
+
+- **Seleccionar el Root Bridge**
+
+	El algoritmo de árbol de expansión (STA) primero elige un switch principal llamado puente raíz (Root Bridge). En el ejemplo, S1 es el puente raíz.
+
+	Luego, cada switch calcula cuál es la ruta de menor costo para llegar al puente raíz.  
+	Como todos los enlaces tienen el mismo costo, cada switch simplemente elige el camino más corto hacia S1.
+
+	Finalmente, STP bloquea algunos enlaces redundantes para evitar bucles en la red.
+
+	*Nota: Se usa el término “puente (bridge)” porque en los inicios de Ethernet los switches se llamaban así.*
+
+![[Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260316171510.png]]
+
+- **Bloquear rutas redundantes**
