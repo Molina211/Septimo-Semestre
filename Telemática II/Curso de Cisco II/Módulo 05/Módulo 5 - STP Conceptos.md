@@ -1,4 +1,4 @@
-	# Módulo 5: STP Conceptos
+# Módulo 5: STP Conceptos
 
 ---
 

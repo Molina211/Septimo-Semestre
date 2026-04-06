@@ -36,7 +36,8 @@ const INTENSITY_COLORS: Record<IntensityLevel, string> = {
 
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string; payload?: { color?: string } }>; label?: string }) {
   if (!active || !payload?.length) return null;
-  const formattedLabel = label ? formatBogotaDateTime(label) : '';
+  const isLikelyDateLabel = typeof label === 'string' && /^\d{4}-\d{2}-\d{2}/.test(label);
+  const formattedLabel = label ? (isLikelyDateLabel ? formatBogotaDateTime(label) : label) : '';
   return (
     <div className="rounded-lg border border-border bg-card px-3 py-2 shadow-xl">
       <p className="mb-1 text-xs font-medium text-foreground">{formattedLabel}</p>
@@ -98,9 +99,9 @@ export default function StatisticsDashboard({ waypoints }: StatisticsDashboardPr
             icon: <MapPin className="h-4 w-4 text-accent" />,
           },
           {
-            label: 'Promedio',
-            value: `$${Math.round(stats.avgSales).toLocaleString()}`,
-            icon: <TrendingUp className="h-4 w-4 text-chart-3" />,
+            label: 'Productos Vendidos',
+            value: `${stats.totalProductsSold.toLocaleString()}`,
+            icon: <Package className="h-4 w-4 text-chart-3" />,
           },
         ].map((card) => (
           <div
@@ -241,8 +242,8 @@ export default function StatisticsDashboard({ waypoints }: StatisticsDashboardPr
         </div>
         <div className="space-y-2">
           {stats.topProducts.slice(0, 8).map((product, idx) => {
-            const maxRevenue = stats.topProducts[0]?.revenue || 1;
-            const widthPercent = (product.revenue / maxRevenue) * 100;
+            const maxScore = stats.topProducts[0]?.score || 1;
+            const widthPercent = (product.score / maxScore) * 100;
             return (
               <div key={product.name}>
                 <div className="mb-0.5 flex items-center justify-between">

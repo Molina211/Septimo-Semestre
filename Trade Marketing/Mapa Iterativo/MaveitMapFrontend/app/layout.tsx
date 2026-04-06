@@ -4,8 +4,8 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-const _geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
-const _geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
+const _geist = Geist({ subsets: ['latin'], display: 'swap' })
+const _geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap', preload: false })
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
@@ -42,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
-      <body className={`${_geist.variable} ${_geistMono.variable} font-sans antialiased`}>
+      <body className={`${_geist.className} ${_geistMono.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableColorScheme={false}>
           {children}
           <Analytics />

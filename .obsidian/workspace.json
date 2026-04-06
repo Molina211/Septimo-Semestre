@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "01d42450c1a8b246",
+        "id": "6e758ecb226d36eb",
         "type": "tabs",
         "children": [
           {
-            "id": "94c9a1559bc3ed19",
+            "id": "594184e5d7b50058",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -49,7 +49,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "CFI",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -90,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +99,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Enlaces entrantes de Módulo 4 - Inter-VLAN Routing"
+              "title": "Enlaces entrantes"
             }
           },
           {
@@ -109,12 +108,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Análisis financiero/Semana 02/Análisis financiero.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Enlaces salientes de Análisis financiero"
+              "title": "Enlaces salientes"
             }
           },
           {
@@ -138,13 +136,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
+                "file": "Sin título.base",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Esquema de Módulo 3 - VLANs"
+              "title": "Esquema de Sin título"
             }
           },
           {
@@ -160,8 +158,21 @@
               "icon": "lucide-archive",
               "title": "Todas las propiedades"
             }
+          },
+          {
+            "id": "0c97309b01afe459",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "Sin título.base"
+              },
+              "icon": "lucide-info",
+              "title": "Propiedades de los archivos para Sin título"
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -180,54 +191,54 @@
       "bases:Crear nueva base": true
     }
   },
-  "active": "94c9a1559bc3ed19",
+  "active": "594184e5d7b50058",
   "lastOpenFiles": [
-    "Trade Marketing/Semana 07/Evento en Prado Alto - Historias de Éxito.md",
-    "Trade Marketing/Semana 07",
-    "Minería de datos/Semana 07/Prueba de diagnostico.md",
-    "Minería de datos/Semana 07",
-    "Investigación de Operaciones I/Semana 07/Primer Quiz - Corte 2.md",
-    "Investigación de Operaciones I/Semana 04/Primer Quiz - Corte 1 1.md",
-    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-10 at 3.23.22 PM.jpeg",
-    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-10 at 3.23.10 PM.jpeg",
-    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (3).jpeg",
-    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (2).jpeg",
-    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM (1).jpeg",
-    "Investigación de Operaciones I/Semana 06/WhatsApp Image 2026-03-09 at 10.12.33 AM.jpeg",
-    "Telemática II/Curso de Cisco II/Módulo 05/Módulo 5 - STP Conceptos.md",
-    "Telemática II/Curso de Cisco II/Módulo 06",
-    "Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260321194711.png",
-    "Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260321194607.png",
-    "Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260321194425.png",
-    "Telemática II/Curso de Cisco II/Módulo 05/ANEXOS/Pasted image 20260321194147.png",
-    "Telemática II/Semana 07/FO-GD-LB-153 GUIA PARA PRÁCTICAS DE LABORATORIO Y TALLER_TEL_II_ROU_INTER.pdf",
-    "README.md",
-    "Calidad de Software/Semana 07/taller-defect-density.pdf",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/segundo-corte/Taller - Defect Density/defect-density-demo/TokenSonarQube/Token de SonarQube.txt",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/segundo-corte/Taller - Defect Density/defect-density-demo/TokenSonarQube",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/segundo-corte/Taller - Defect Density/defect-density-demo/Nueva carpeta",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/segundo-corte/Taller - Defect Density/defect-density-demo/target/classes/com/corhuila/calidad/BankAccount.class",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/segundo-corte/Taller - Defect Density/README.md",
-    "Calidad de Software/Repositorio Para Trabajos/2026A/calidad-software/talleres/segundo-corte/Taller - Defect Density/com-corhuila-calidad-defect-density-demo.zip",
-    "Ingeniería Económica/Semana 07/Equivalencia en los proyectos.md",
-    "Ingeniería Económica/Semana 07/Ética y Responsabilidad en la Evaluación de Proyectos.md",
-    "Trade Marketing/Semana 06/Refuerzo de roles.md",
-    "Telemática II/Semana 06/Clase inversa.md",
-    "Telemática II/Curso de Cisco II/Módulo 04/Módulo 4 - Inter-VLAN Routing.md",
-    "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
-    "Telemática II/Curso de Cisco II/Módulo 02/Módulo 2 - Conceptos de switching.md",
-    "Telemática II/Curso de Cisco II/Módulo 01/Modulo 1 - Configuración básica de dispositivos.md",
-    "Ingeniería Económica/Semana 06/Entrega de Notas.md",
-    "Ingeniería Económica/Semana 05/Primer Parcial.md",
-    "Calidad de Software/Semana 01/Conceptos de calidad de software y evolución histórica.md",
-    "Calidad de Software/Semana 02/Conceptos y modelos de calidad de software.md",
-    "Calidad de Software/Semana 03/Estandares y Normas.md",
-    "Calidad de Software/Semana 04/Métricas de Calidad.md",
-    "Calidad de Software/Repositorio Para Trabajos/README.md",
-    "Trade Marketing/Semana 05/Primer Parcial - Revisión de Progreso.md",
-    "Telemática II/Semana 05/Primer Parcial.md",
-    "Minería de datos/Semana 05/Primer Parcial.md",
-    "Investigación de Operaciones I/Semana 05/Primer Parcial.md",
+    "Investigación de Operaciones I/Semana 09/Semana Santa.md",
+    "Minería de datos/Semana 09/Semana Santa.md",
+    "Minería de datos/Semana 08/data-dogs/requirements-lock.txt",
+    "Minería de datos/Semana 08/data-dogs",
+    "Minería de datos/Semana 09",
+    "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Ocean's Deep-Diving Animals/ANEXOS/Pasted image 20260331230624.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402141216.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402141037.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402141013.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402140949.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402140917.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402140832.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402140744.png",
+    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/ANEXOS/Pasted image 20260330140414.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Internet and Dating/ANEXOS/Pasted image 20260401143041.png",
+    "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/Flight Delays/flight-delays-project.zip",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/The Cicadas are Coming.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/cicadas-are-coming-project.zip",
+    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/Our World Connected.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS",
+    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/world-connected-project.zip",
+    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/ANEXOS",
+    "Minería de datos 1/Semana 04/Portafolio/Portafolio/script-portafolio.js",
+    "Minería de datos 1/Semana 04/Portafolio/Portafolio/styles-portafolio.css",
+    "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Internet and Dating/The Internet and Dating.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Ocean's Deep-Diving Animals/The Ocean's Deep-Diving Animals.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Visualization/Open-Ended Projects 3/Open-Ended Projects 3.md",
+    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Open-Ended Proyecto 1/Open-Ended Proyecto 1.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Visualization/Is Granola Healthy/Is Granola Healthy.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/Warm Waters off Peru/Warm Waters off Peru.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/Plotting Animal Words/Plotting Animal Words.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/Any Animal Except/Any Animal Except....md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/Open-Ended Projects 5/Open-Ended Projects 5.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Modeling/Tusked Elephants/Tusked Elephants.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/Open-Ended Proyecto 2/Open-Ended Proyecto 2.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Modeling/Open-Ended Projects 4/Open-Ended Projects 4.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Modeling/Lion Attacks/Lion Attacks.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Modeling/E-Bike Stopping Distances/E-Bike Stopping Distances.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/Flight Delays/Flight Delays.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/A Plant-Based Coffee Shop/A Plant-Based Coffee Shop.md",
+    "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/A Century of Top Songs/A Century of Top Songs.md",
+    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Art as Data/Art as Data.md",
+    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Skeletal Variation/Skeletal Variation.md",
+    "Minería de datos 1/Curso de Minería de Datos/Game-Based Intro/Zero to Python in 60 Seconds.md",
+    "Minería de datos 1/Curso de Minería de Datos/Game-Based Intro/Matplotlib's Pyplot.md",
+    "Minería de datos 1/Curso de Minería de Datos/Game-Based Intro/Meet the DataFrame.md",
     "Sin título.canvas",
     "Sin título 1.canvas"
   ]

@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useState, useCallback, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import dynamic from 'next/dynamic';
 import type {
   Waypoint,
@@ -9,11 +10,11 @@ import type {
   ProductSale,
   SalesEntry,
   SalesIntensitySettings,
+  IntensityLevel,
 } from '@/lib/models/waypoint.model';
 import {
   DEFAULT_INTENSITY_SETTINGS,
   buildIntensityLegend,
-  getIntensityFromSales,
   getIntensityColor,
 } from '@/lib/models/waypoint.model';
 import {
@@ -29,6 +30,8 @@ import {
 import MapModeToggle from '@/components/map/map-mode-toggle';
 import WaypointForm from '@/components/waypoint/waypoint-form';
 import AppSidebar from '@/components/layout/app-sidebar';
+import SalesGroupsModal from '@/components/sales/sales-groups-modal';
+import SalesGroupDetailModal from '@/components/sales/sales-group-detail-modal';
 import type { CatalogProductApi } from '@/lib/models/catalog-product.model';
 import {
   listCatalogProducts,
@@ -80,6 +83,97 @@ type ProductDefinition = CatalogProductApi;
 
 const formatEntryDate = (value: string) => formatBogotaDateTime(value);
 
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+const TREND_WINDOW_DAYS = 30;
+
+function normalize(values: number[]): number[] {
+  if (values.length === 0) return [];
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const denom = max - min;
+  if (!Number.isFinite(denom) || denom <= 0) return values.map(() => 0);
+  return values.map((v) => (v - min) / denom);
+}
+
+function intensityFromPercentile(percentile: number): IntensityLevel {
+  if (percentile < 0.2) return 'very-low';
+  if (percentile < 0.4) return 'low';
+  if (percentile < 0.6) return 'medium';
+  if (percentile < 0.8) return 'high';
+  return 'very-high';
+}
+
+function applyWaypointIntensityHeuristic(waypoints: Waypoint[]): Waypoint[] {
+  const now = Date.now();
+  const monetary = waypoints.map((wp) => Math.log1p(Math.max(0, wp.totalSales ?? 0)));
+  const frequency = waypoints.map((wp) => (wp.salesHistory ?? []).length);
+  const recency = waypoints.map((wp) => {
+    const entries = wp.salesHistory ?? [];
+    if (entries.length === 0) return 0;
+    const times = entries
+      .map((e) => new Date(e.date).getTime())
+      .filter((t) => Number.isFinite(t));
+    if (times.length === 0) return 0;
+    const last = Math.max(...times);
+    const days = Math.max(0, Math.floor((now - last) / MS_PER_DAY));
+    return 1 / (days + 1);
+  });
+
+  const monetaryN = normalize(monetary);
+  const frequencyN = normalize(frequency);
+  const recencyN = normalize(recency);
+
+  const scoreRFM = waypoints.map((_, idx) => {
+    return recencyN[idx] * 0.4 + frequencyN[idx] * 0.3 + monetaryN[idx] * 0.3;
+  });
+
+  const trendRaw = waypoints.map((wp) => {
+    const entries = wp.salesHistory ?? [];
+    if (entries.length === 0) return 0;
+    const currentFrom = now - TREND_WINDOW_DAYS * MS_PER_DAY;
+    const previousFrom = now - TREND_WINDOW_DAYS * 2 * MS_PER_DAY;
+    const current = entries.reduce((sum, entry) => {
+      const t = new Date(entry.date).getTime();
+      if (!Number.isFinite(t)) return sum;
+      return t >= currentFrom ? sum + (entry.totalSales || 0) : sum;
+    }, 0);
+    const previous = entries.reduce((sum, entry) => {
+      const t = new Date(entry.date).getTime();
+      if (!Number.isFinite(t)) return sum;
+      return t >= previousFrom && t < currentFrom ? sum + (entry.totalSales || 0) : sum;
+    }, 0);
+    return (current - previous) / (previous + 1);
+  });
+  const trendN = normalize(trendRaw);
+
+  const scoredRFM = scoreRFM.map((score, idx) => ({ score, idx }));
+  scoredRFM.sort((a, b) => a.score - b.score);
+  const percentilesRFM = new Array(waypoints.length).fill(0);
+  scoredRFM.forEach((item, rank) => {
+    const denom = scoredRFM.length > 1 ? scoredRFM.length - 1 : 1;
+    percentilesRFM[item.idx] = rank / denom;
+  });
+
+  const scoreFinal = scoreRFM.map((score, idx) => {
+    return score * 0.5 + trendN[idx] * 0.3 + percentilesRFM[idx] * 0.2;
+  });
+
+  const scoredFinal = scoreFinal.map((score, idx) => ({ score, idx }));
+  scoredFinal.sort((a, b) => a.score - b.score);
+  const percentilesFinal = new Array(waypoints.length).fill(0);
+  scoredFinal.forEach((item, rank) => {
+    const denom = scoredFinal.length > 1 ? scoredFinal.length - 1 : 1;
+    percentilesFinal[item.idx] = rank / denom;
+  });
+
+  return waypoints.map((wp, idx) => {
+    const intensity = intensityFromPercentile(percentilesFinal[idx]);
+    const color = getIntensityColor(intensity);
+    if (wp.intensity === intensity && wp.color === color) return wp;
+    return { ...wp, intensity, color };
+  });
+}
+
 export default function SalesMapApp() {
   const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
   const [mode, setMode] = useState<MapMode>('navigate');
@@ -89,16 +183,23 @@ export default function SalesMapApp() {
   const [editingWaypoint, setEditingWaypoint] = useState<Waypoint | null>(null);
   const [editingEntry, setEditingEntry] = useState<SalesEntry | null>(null);
   const [formMode, setFormMode] = useState<'new' | 'group' | 'point'>('new');
-  const [pendingUpdateWaypoint, setPendingUpdateWaypoint] = useState<Waypoint | null>(null);
   const [newEntryDateTime, setNewEntryDateTime] = useState<string | null>(null);
-  const [entryPickerVisible, setEntryPickerVisible] = useState(false);
+  const [salesGroupsWaypointId, setSalesGroupsWaypointId] = useState<number | null>(null);
+  const [salesGroupsOpen, setSalesGroupsOpen] = useState(false);
+  const [salesGroupsOpenMode, setSalesGroupsOpenMode] = useState<'fresh' | 'resume'>('fresh');
+  const [salesGroupDetailOpen, setSalesGroupDetailOpen] = useState(false);
+  const [salesGroupDetailEntryId, setSalesGroupDetailEntryId] = useState<string | null>(null);
+  const [resumeSalesGroups, setResumeSalesGroups] = useState(false);
+  const [resumeGroupDetailEntryId, setResumeGroupDetailEntryId] = useState<string | null>(null);
   const [formContextKey, setFormContextKey] = useState(0);
   const [pendingDelete, setPendingDelete] = useState<{
-    type: 'waypoint' | 'group';
+    type: 'waypoint' | 'group' | 'bulk-groups';
     waypoint: Waypoint;
     entry?: SalesEntry;
+    entryIds?: string[];
     fallbackToWaypoint?: boolean;
   } | null>(null);
+  const [deleteSubmitting, setDeleteSubmitting] = useState(false);
   const [productCatalog, setProductCatalog] = useState<ProductDefinition[]>([]);
   const [catalogModalOpen, setCatalogModalOpen] = useState(false);
   const [newCatalogProduct, setNewCatalogProduct] = useState({ name: '', basePrice: '' });
@@ -140,6 +241,7 @@ export default function SalesMapApp() {
   const [showViewerNotice, setShowViewerNotice] = useState(false);
   const authPayload = useMemo(() => parseAuthToken(token), [token]);
   const isViewer = userProfile?.role === 'VIEWER';
+  // La leyenda usa rangos fijos en COP (configurados por usuario) para grupos de venta; los puntos usan RFM+Tendencia+Percentil.
   const intensityLegend = useMemo(
     () => buildIntensityLegend(intensitySettings),
     [intensitySettings]
@@ -162,7 +264,7 @@ export default function SalesMapApp() {
     }
     try {
       const items = await getWaypoints(intensitySettings);
-      setWaypoints(items);
+      setWaypoints(applyWaypointIntensityHeuristic(items));
     } catch (error) {
       if (extractApiMessage(error, 'Token requerido').toLowerCase().includes('token')) {
         router.replace('/login');
@@ -191,7 +293,7 @@ export default function SalesMapApp() {
         }
         const items = await getWaypoints(resolvedSettings);
         if (!active) return;
-        setWaypoints(items);
+        setWaypoints(applyWaypointIntensityHeuristic(items));
       } catch (error) {
         if (extractApiMessage(error, 'Token requerido').toLowerCase().includes('token')) {
           router.replace('/login');
@@ -293,17 +395,6 @@ export default function SalesMapApp() {
       setIntensitySettings(saved);
       setIntensityDraft(saved);
       setIntensityFieldErrors({});
-      setWaypoints((prev) =>
-        prev.map((wp) => {
-          const intensity = getIntensityFromSales(wp.totalSales, saved);
-          if (intensity === wp.intensity) return wp;
-          return {
-            ...wp,
-            intensity,
-            color: getIntensityColor(intensity),
-          };
-        })
-      );
       setIntensityEditorOpen(false);
       setIntensityError(null);
     } catch (error) {
@@ -433,13 +524,7 @@ export default function SalesMapApp() {
         const settings = await getSalesIntensitySettings();
         setIntensitySettings(settings);
         setIntensityDraft(settings);
-        setWaypoints((prev) =>
-          prev.map((wp) => {
-            const intensity = getIntensityFromSales(wp.totalSales, settings);
-            if (intensity === wp.intensity) return wp;
-            return { ...wp, intensity, color: getIntensityColor(intensity) };
-          })
-        );
+        setWaypoints((prev) => applyWaypointIntensityHeuristic(prev));
       } catch (settingsError) {
         setIntensitySettings(DEFAULT_INTENSITY_SETTINGS);
         setIntensityDraft(DEFAULT_INTENSITY_SETTINGS);
@@ -504,7 +589,6 @@ export default function SalesMapApp() {
     };
   }, [router, token]);
 
-  const filteredWaypoints = useMemo(() => filterWaypoints(waypoints, filter), [filter, waypoints]);
   const productPricePresets = useMemo(() => {
     return productCatalog.reduce<Record<string, number[]>>((acc, product) => {
       if (!product.name.trim()) return acc;
@@ -513,6 +597,102 @@ export default function SalesMapApp() {
     }, {});
   }, [productCatalog]);
 
+  const salesGroupsWaypoint = useMemo(() => {
+    if (salesGroupsWaypointId == null) return null;
+    return waypoints.find((w) => w.id === salesGroupsWaypointId) ?? null;
+  }, [salesGroupsWaypointId, waypoints]);
+
+  const salesGroupIndex = useMemo(() => {
+    const flat = waypoints.flatMap((waypoint) =>
+      (waypoint.salesHistory ?? []).map((entry) => ({
+        waypointId: waypoint.id,
+        entryId: entry.id,
+        salesGroupId: entry.salesGroup?.id ?? null,
+        sortDate: entry.salesGroup?.saleDateTime ?? entry.date,
+      }))
+    );
+
+    flat.sort((a, b) => {
+      const aNum = a.salesGroupId != null ? Number(a.salesGroupId) : Number.NaN;
+      const bNum = b.salesGroupId != null ? Number(b.salesGroupId) : Number.NaN;
+      const aHasNum = Number.isFinite(aNum);
+      const bHasNum = Number.isFinite(bNum);
+      if (aHasNum && bHasNum && aNum !== bNum) return aNum - bNum;
+      if (aHasNum !== bHasNum) return aHasNum ? -1 : 1;
+
+      const aTime = Date.parse(a.sortDate);
+      const bTime = Date.parse(b.sortDate);
+      const aHasTime = Number.isFinite(aTime);
+      const bHasTime = Number.isFinite(bTime);
+      if (aHasTime && bHasTime && aTime !== bTime) return aTime - bTime;
+      if (aHasTime !== bHasTime) return aHasTime ? -1 : 1;
+
+      return a.entryId.localeCompare(b.entryId);
+    });
+
+    const numberByEntryId = new Map<string, number>();
+    const waypointIdsByNumber = new Map<number, Set<number>>();
+    flat.forEach((item, index) => {
+      const groupNumber = index + 1;
+      numberByEntryId.set(item.entryId, groupNumber);
+      const existing = waypointIdsByNumber.get(groupNumber);
+      if (existing) {
+        existing.add(item.waypointId);
+      } else {
+        waypointIdsByNumber.set(groupNumber, new Set([item.waypointId]));
+      }
+    });
+    return { numberByEntryId, waypointIdsByNumber };
+  }, [waypoints]);
+
+  const groupSearchNumber = useMemo(() => {
+    const raw = filter.searchTerm.trim();
+    const match = raw.match(/^#\s*(\d+)$/);
+    if (!match) return null;
+    const parsed = Number(match[1]);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+  }, [filter.searchTerm]);
+
+  const filteredWaypoints = useMemo(() => {
+    if (groupSearchNumber == null) return filterWaypoints(waypoints, filter);
+    const allowedIds = salesGroupIndex.waypointIdsByNumber.get(groupSearchNumber);
+    if (!allowedIds || allowedIds.size === 0) return [];
+    const subset = waypoints.filter((waypoint) => allowedIds.has(waypoint.id));
+    return filterWaypoints(subset, { ...filter, searchTerm: '' });
+  }, [filter, groupSearchNumber, salesGroupIndex.waypointIdsByNumber, waypoints]);
+
+  const openSalesGroups = useCallback((waypoint: Waypoint) => {
+    setSelectedWaypointId(waypoint.id);
+    setSalesGroupsWaypointId(waypoint.id);
+    setSalesGroupsOpen(true);
+    setSalesGroupsOpenMode('fresh');
+    setSalesGroupDetailOpen(false);
+    setSalesGroupDetailEntryId(null);
+  }, []);
+
+  const openSalesGroupDetail = useCallback((waypoint: Waypoint, entry: SalesEntry) => {
+    setSelectedWaypointId(waypoint.id);
+    setSalesGroupsWaypointId(waypoint.id);
+    setSalesGroupsOpen(false);
+    setSalesGroupsOpenMode('resume');
+    setSalesGroupDetailEntryId(entry.id);
+    setSalesGroupDetailOpen(true);
+  }, []);
+
+  const closeSalesGroups = useCallback(() => {
+    setSalesGroupsOpen(false);
+    setSalesGroupsOpenMode('fresh');
+  }, []);
+
+  const returnToSalesGroups = useCallback(() => {
+    setSalesGroupDetailOpen(false);
+    setSalesGroupDetailEntryId(null);
+    if (salesGroupsWaypointId != null) {
+      setSalesGroupsOpenMode('resume');
+      setSalesGroupsOpen(true);
+    }
+  }, [salesGroupsWaypointId]);
+
   const handleMapClick = useCallback(
     (lng: number, lat: number) => {
       if (mode === 'add-waypoint') {
@@ -520,8 +700,6 @@ export default function SalesMapApp() {
         setEditingWaypoint(null);
         setEditingEntry(null);
         setNewEntryDateTime(null);
-        setPendingUpdateWaypoint(null);
-        setEntryPickerVisible(false);
         setFormMode('new');
       }
     },
@@ -531,6 +709,18 @@ export default function SalesMapApp() {
   const handleWaypointSelect = useCallback((id: number) => {
     setSelectedWaypointId((prev) => (prev === id ? null : id));
   }, []);
+
+  const handleWaypointOpenFromMap = useCallback(
+    (id: number) => {
+      const waypoint = waypoints.find((w) => w.id === id);
+      if (!waypoint) {
+        setSelectedWaypointId(id);
+        return;
+      }
+      openSalesGroups(waypoint);
+    },
+    [openSalesGroups, waypoints]
+  );
 
   const handleSaveWaypoint = useCallback(
     async (data: {
@@ -583,14 +773,21 @@ export default function SalesMapApp() {
         }
         await reloadWaypoints();
         setFormMode('new');
-        setPendingUpdateWaypoint(null);
-        setEntryPickerVisible(false);
         setMode('navigate');
+        if (resumeGroupDetailEntryId && salesGroupsWaypointId != null) {
+          setSalesGroupDetailEntryId(resumeGroupDetailEntryId);
+          setSalesGroupDetailOpen(true);
+          setResumeGroupDetailEntryId(null);
+        } else if (resumeSalesGroups && salesGroupsWaypointId != null) {
+          setSalesGroupsOpenMode('resume');
+          setSalesGroupsOpen(true);
+          setResumeSalesGroups(false);
+        }
       } catch (error) {
         console.error(error);
       }
     },
-    [formMode, reloadWaypoints]
+    [formMode, reloadWaypoints, resumeGroupDetailEntryId, resumeSalesGroups, salesGroupsWaypointId]
   );
 
   const performDeleteWaypoint = useCallback(
@@ -610,15 +807,31 @@ export default function SalesMapApp() {
     setEditingWaypoint(waypoint);
     setEditingEntry(entry);
     setPendingPoint(null);
-    setPendingUpdateWaypoint(null);
     setNewEntryDateTime(null);
-    setEntryPickerVisible(false);
     setFormMode('group');
   }, []);
+
+  const handleEditGroupFromDetail = useCallback(
+    (waypoint: Waypoint, entry: SalesEntry) => {
+      // We entered the form from the single-group detail view; return to that same group after save/cancel.
+      setResumeGroupDetailEntryId(entry.id);
+      setResumeSalesGroups(false);
+      setSalesGroupDetailOpen(false);
+      setSalesGroupDetailEntryId(null);
+      setSalesGroupsOpen(false);
+      setSalesGroupsOpenMode('resume');
+      handleRequestEditEntry(waypoint, entry);
+    },
+    [handleRequestEditEntry]
+  );
 
   const requestDeleteGroup = useCallback((waypoint: Waypoint, entry: SalesEntry) => {
     const fallbackToWaypoint = waypoint.salesHistory.length <= 1;
     setPendingDelete({ type: 'group', waypoint, entry, fallbackToWaypoint });
+  }, []);
+
+  const requestBulkDeleteGroups = useCallback((waypoint: Waypoint, entryIds: string[]) => {
+    setPendingDelete({ type: 'bulk-groups', waypoint, entryIds });
   }, []);
 
   const requestDeleteWaypoint = useCallback((waypoint: Waypoint) => {
@@ -626,31 +839,77 @@ export default function SalesMapApp() {
   }, []);
 
   const handleConfirmDelete = useCallback(async () => {
-    if (!pendingDelete) return;
+    if (!pendingDelete || deleteSubmitting) return;
+    setDeleteSubmitting(true);
+    const deleteContext = pendingDelete;
     try {
-      if (pendingDelete.type === 'waypoint') {
-        await performDeleteWaypoint(pendingDelete.waypoint.id);
-      } else if (pendingDelete.entry) {
-        if (pendingDelete.fallbackToWaypoint) {
-          await performDeleteWaypoint(pendingDelete.waypoint.id);
+      if (deleteContext.type === 'waypoint') {
+        await performDeleteWaypoint(deleteContext.waypoint.id);
+      } else if (deleteContext.type === 'bulk-groups') {
+        const ids = deleteContext.entryIds ?? [];
+        const allGroupsSelected = ids.length >= deleteContext.waypoint.salesHistory.length;
+        if (allGroupsSelected) {
+          await performDeleteWaypoint(deleteContext.waypoint.id);
         } else {
-          await deleteWaypointEntry(pendingDelete.entry.id);
+          await Promise.all(ids.map((id) => deleteWaypointEntry(id)));
+          await reloadWaypoints();
+          setEditingWaypoint(null);
+          setEditingEntry(null);
+          setFormMode('new');
+        }
+      } else if (deleteContext.entry) {
+        if (deleteContext.fallbackToWaypoint) {
+          await performDeleteWaypoint(deleteContext.waypoint.id);
+        } else {
+          await deleteWaypointEntry(deleteContext.entry.id);
           await reloadWaypoints();
           setEditingWaypoint(null);
           setEditingEntry(null);
           setFormMode('new');
         }
       }
+
+      // Close the confirmation first, then switch views (so the user never sees the list while the delete is still processing).
+      setPendingDelete(null);
+      setDeleteSubmitting(false);
+
+      setTimeout(() => {
+        if (deleteContext.type === 'group' || deleteContext.type === 'bulk-groups') {
+          const removingWholeWaypoint =
+            deleteContext.type === 'group'
+              ? !!deleteContext.fallbackToWaypoint
+              : (deleteContext.entryIds?.length ?? 0) >= deleteContext.waypoint.salesHistory.length;
+
+          setSalesGroupDetailOpen(false);
+          setSalesGroupDetailEntryId(null);
+
+          if (removingWholeWaypoint) {
+            setSalesGroupsOpen(false);
+            setSalesGroupsOpenMode('fresh');
+            setSalesGroupsWaypointId(null);
+          } else {
+            setSalesGroupsWaypointId(deleteContext.waypoint.id);
+            setSalesGroupsOpenMode('resume');
+            setSalesGroupsOpen(true);
+          }
+        } else if (deleteContext.type === 'waypoint') {
+          setSalesGroupDetailOpen(false);
+          setSalesGroupDetailEntryId(null);
+          setSalesGroupsOpen(false);
+          setSalesGroupsOpenMode('fresh');
+          setSalesGroupsWaypointId(null);
+        }
+      }, 0);
     } catch (error) {
       console.error(error);
-    } finally {
-      setPendingDelete(null);
+      setDeleteSubmitting(false);
     }
-  }, [pendingDelete, performDeleteWaypoint, reloadWaypoints]);
+  }, [deleteSubmitting, pendingDelete, performDeleteWaypoint, reloadWaypoints]);
 
   const handleCancelDelete = useCallback(() => {
+    if (deleteSubmitting) return;
     setPendingDelete(null);
-  }, []);
+  }, [deleteSubmitting]);
 
   const handleSaveCatalogProduct = useCallback(async (product: ProductDefinition) => {
     try {
@@ -730,60 +989,56 @@ export default function SalesMapApp() {
     setPendingCatalogDelete(null);
   }, []);
 
-  const handleRequestUpdateWaypoint = useCallback((waypoint: Waypoint) => {
-    setPendingUpdateWaypoint(waypoint);
-    setEditingWaypoint(null);
-    setEditingEntry(null);
-    setEntryPickerVisible(false);
-  }, []);
-
   const handleWaypointCreateGroup = useCallback((waypoint: Waypoint) => {
     setNewEntryDateTime(toBogotaLocalInputValue());
     setEditingWaypoint(waypoint);
     setEditingEntry(null);
     setPendingPoint(null);
-    setPendingUpdateWaypoint(null);
-    setEntryPickerVisible(false);
     setFormMode('group');
   }, []);
+
+  const handleCreateGroupFromSalesGroups = useCallback(
+    (waypoint: Waypoint) => {
+      setSalesGroupsOpenMode('resume');
+      setResumeSalesGroups(true);
+      handleWaypointCreateGroup(waypoint);
+    },
+    [handleWaypointCreateGroup]
+  );
 
   const handleRequestEditPointDetails = useCallback((waypoint: Waypoint) => {
     setFormMode('point');
     setEditingWaypoint(waypoint);
     setEditingEntry(null);
     setPendingPoint(null);
-    setPendingUpdateWaypoint(null);
-    setEntryPickerVisible(false);
     setNewEntryDateTime(null);
   }, []);
 
-  const handleOpenEntryPicker = useCallback(() => {
-    if (!pendingUpdateWaypoint) return;
-    setEntryPickerVisible(true);
-  }, [pendingUpdateWaypoint]);
-
-  const handleSelectEntry = useCallback(
-    (entry: SalesEntry) => {
-      if (!pendingUpdateWaypoint) return;
-      handleRequestEditEntry(pendingUpdateWaypoint, entry);
+  const handleEditGroupFromSalesGroups = useCallback(
+    (waypoint: Waypoint, entry: SalesEntry) => {
+      setSalesGroupsOpenMode('resume');
+      setResumeSalesGroups(true);
+      handleRequestEditEntry(waypoint, entry);
     },
-    [handleRequestEditEntry, pendingUpdateWaypoint]
+    [handleRequestEditEntry]
   );
-
-  const handleCancelUpdateDecision = useCallback(() => {
-    setPendingUpdateWaypoint(null);
-    setEntryPickerVisible(false);
-  }, []);
 
   const handleCancelForm = useCallback(() => {
     setPendingPoint(null);
     setEditingWaypoint(null);
     setEditingEntry(null);
     setNewEntryDateTime(null);
-    setPendingUpdateWaypoint(null);
-    setEntryPickerVisible(false);
     setFormMode('new');
-  }, []);
+    if (resumeGroupDetailEntryId && salesGroupsWaypointId != null) {
+      setSalesGroupDetailEntryId(resumeGroupDetailEntryId);
+      setSalesGroupDetailOpen(true);
+      setResumeGroupDetailEntryId(null);
+    } else if (resumeSalesGroups && salesGroupsWaypointId != null) {
+      setSalesGroupsOpenMode('resume');
+      setSalesGroupsOpen(true);
+      setResumeSalesGroups(false);
+    }
+  }, [resumeGroupDetailEntryId, resumeSalesGroups, salesGroupsWaypointId]);
 
   const formCoordinates = editingWaypoint
     ? { lng: editingWaypoint.lng, lat: editingWaypoint.lat }
@@ -796,7 +1051,6 @@ export default function SalesMapApp() {
     pendingPoint?.lng,
     editingWaypoint?.id,
     editingEntry?.id,
-    entryPickerVisible,
   ]);
   const formContextSignature = useMemo(() => {
     if (editingEntry && editingWaypoint) {
@@ -826,21 +1080,20 @@ export default function SalesMapApp() {
     <AuthGuard>
       <div className="flex h-screen w-screen overflow-hidden bg-background">
       {/* Sidebar */}
-      <AppSidebar
-        waypoints={waypoints}
-        filteredWaypoints={filteredWaypoints}
-        selectedWaypointId={selectedWaypointId}
-        filter={filter}
-        onFilterChange={setFilter}
-        onWaypointSelect={handleWaypointSelect}
-        onWaypointDelete={requestDeleteWaypoint}
-        onWaypointUpdateRequest={handleRequestUpdateWaypoint}
-        onWaypointEditEntry={handleRequestEditEntry}
-        onWaypointEditPoint={handleRequestEditPointDetails}
-        onWaypointDeleteGroup={requestDeleteGroup}
-        onCatalogOpen={() => setCatalogModalOpen(true)}
-        readOnly={isViewer}
-      />
+        <AppSidebar
+          waypoints={waypoints}
+          filteredWaypoints={filteredWaypoints}
+          selectedWaypointId={selectedWaypointId}
+          filter={filter}
+          onFilterChange={setFilter}
+          onWaypointSelect={handleWaypointSelect}
+          onWaypointDelete={requestDeleteWaypoint}
+          onWaypointEditPoint={handleRequestEditPointDetails}
+          onWaypointOpenGroups={openSalesGroups}
+          onWaypointOpenGroup={openSalesGroupDetail}
+          onCatalogOpen={() => setCatalogModalOpen(true)}
+          readOnly={isViewer}
+        />
 
       {/* Map area */}
       <div className="relative flex-1 overflow-hidden">
@@ -850,7 +1103,7 @@ export default function SalesMapApp() {
             mode={mode}
             selectedWaypointId={selectedWaypointId}
             onMapClick={handleMapClick}
-            onWaypointSelect={handleWaypointSelect}
+            onWaypointSelect={handleWaypointOpenFromMap}
             intensityLegend={intensityLegend}
             onEditIntensity={openIntensityEditor}
             showEditIntensity={!isViewer}
@@ -1028,131 +1281,105 @@ export default function SalesMapApp() {
         )}
       </div>
 
-      {pendingUpdateWaypoint && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
-          onClick={handleCancelUpdateDecision}
-        >
-          <div
-            className="mx-4 w-full max-w-lg rounded-2xl bg-card p-6 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-sm font-semibold text-foreground">Actualizar venta</p>
-                <p className="text-[11px] text-muted-foreground">
-                  ¿Quieres editar un grupo existente o crear otro con fecha y hora diferentes?
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={handleCancelUpdateDecision}
-                className="text-[11px] text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Cerrar
-              </button>
-            </div>
+      <SalesGroupsModal
+        waypoint={salesGroupsWaypoint}
+        isOpen={salesGroupsOpen}
+        openMode={salesGroupsOpenMode}
+        intensitySettings={intensitySettings}
+        readOnly={isViewer}
+        onClose={closeSalesGroups}
+        onOpenGroupDetail={openSalesGroupDetail}
+        onRequestBulkDelete={requestBulkDeleteGroups}
+        onCreateGroup={handleCreateGroupFromSalesGroups}
+        onEditGroup={handleEditGroupFromSalesGroups}
+        onDeleteGroup={requestDeleteGroup}
+      />
 
-            {!entryPickerVisible ? (
-              <div className="mt-5 flex flex-col gap-3">
-                <button
-                  type="button"
-                  onClick={handleOpenEntryPicker}
-                  className="rounded-lg border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-primary"
-                >
-                  Editar grupo existente
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleWaypointCreateGroup(pendingUpdateWaypoint)}
-                  className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  Crear otro grupo
-                </button>
-              </div>
-            ) : (
-              <div className="mt-5 space-y-3">
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Elegir grupo
+      <SalesGroupDetailModal
+        waypoint={salesGroupsWaypoint}
+        entryId={salesGroupDetailEntryId}
+        groupNumber={
+          salesGroupDetailEntryId
+            ? (salesGroupIndex.numberByEntryId.get(salesGroupDetailEntryId) ?? null)
+            : null
+        }
+        isOpen={salesGroupDetailOpen}
+        intensitySettings={intensitySettings}
+        readOnly={isViewer}
+        onBack={returnToSalesGroups}
+        onEditGroup={handleEditGroupFromDetail}
+        onDeleteGroup={requestDeleteGroup}
+      />
+
+      {pendingDelete && typeof window !== 'undefined'
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 px-4 pointer-events-auto"
+              onClick={handleCancelDelete}
+            >
+              <div
+                className="w-full max-w-md rounded-2xl bg-card/95 p-6 shadow-2xl backdrop-blur-lg pointer-events-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Confirmación</p>
+                <h2 className="mt-2 text-lg font-semibold text-foreground">
+                  {pendingDelete.type === 'bulk-groups'
+                    ? 'Eliminar grupos seleccionados'
+                    : pendingDelete.type === 'group' && pendingDelete.fallbackToWaypoint
+                      ? 'Eliminar punto de venta'
+                      : pendingDelete.type === 'group'
+                        ? 'Eliminar grupo de ventas'
+                        : 'Eliminar punto de venta'}
+                </h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {pendingDelete.type === 'bulk-groups'
+                    ? (() => {
+                        const ids = pendingDelete.entryIds ?? [];
+                        const allGroupsSelected = ids.length >= pendingDelete.waypoint.salesHistory.length;
+                        return allGroupsSelected
+                          ? `¿Eliminar ${ids.length} grupos seleccionados? Como son todos los grupos, se eliminará también el punto de venta y su historial.`
+                          : `¿Eliminar ${ids.length} grupos seleccionados sin afectar el resto del punto?`;
+                      })()
+                    : pendingDelete.type === 'group'
+                      ? pendingDelete.fallbackToWaypoint
+                        ? '¿Eliminar este grupo de ventas sin afectar el resto del punto? Como este es el único grupo, se eliminará también el punto de venta y su historial.'
+                        : '¿Eliminar este grupo de ventas sin afectar el resto del punto?'
+                      : 'Se eliminará todo el punto de venta, sus productos y su historial.'}
                 </p>
-                <div className="max-h-64 space-y-2 overflow-auto rounded-xl border border-border bg-background/40 p-3">
-                  {pendingUpdateWaypoint.salesHistory.map((entry) => (
-                    <button
-                      key={entry.id}
-                      type="button"
-                      onClick={() => handleSelectEntry(entry)}
-                      className="w-full rounded-lg border border-border/60 bg-white/5 px-3 py-2 text-left text-sm text-foreground transition-colors hover:border-primary"
-                    >
-                      <div className="flex items-center justify-between text-[12px] text-muted-foreground">
-                        <span>{formatEntryDate(entry.date)}</span>
-                        <span className="font-semibold text-foreground">
-                          ${entry.totalSales.toLocaleString()}
-                        </span>
-                                            </div>
-                      <p className="text-[11px] text-muted-foreground">
-                        {entry.products.length} productos
-                      </p>
-                    </button>
-                  ))}
+                <div className="mt-6 flex justify-end gap-3">
+                  <button
+                    type="button"
+                    onClick={handleCancelDelete}
+                    disabled={deleteSubmitting}
+                    className="rounded-full border border-border px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:border-foreground hover:text-foreground disabled:opacity-50"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleConfirmDelete}
+                    disabled={deleteSubmitting}
+                    className="rounded-full bg-destructive px-4 py-2 text-sm font-semibold text-destructive-foreground transition-colors hover:bg-destructive/80 disabled:opacity-70"
+                  >
+                    {deleteSubmitting ? (
+                      <span className="inline-flex items-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Eliminando...
+                      </span>
+                    ) : pendingDelete.type === 'bulk-groups' ? (
+                      'Eliminar seleccionados'
+                    ) : pendingDelete.type === 'group' && pendingDelete.fallbackToWaypoint ? (
+                      'Eliminar punto'
+                    ) : (
+                      'Eliminar'
+                    )}
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setEntryPickerVisible(false)}
-                  className="text-[11px] font-semibold text-primary transition-colors hover:text-primary/70"
-                >
-                  Volver
-                </button>
               </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {pendingDelete && (
-        <div
-          className="fixed inset-0 z-60 flex items-center justify-center bg-black/70 px-4"
-          onClick={handleCancelDelete}
-        >
-          <div
-            className="w-full max-w-md rounded-2xl bg-card/95 p-6 shadow-2xl backdrop-blur-lg"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Confirmación</p>
-            <h2 className="mt-2 text-lg font-semibold text-foreground">
-              {pendingDelete.type === 'group' && pendingDelete.fallbackToWaypoint
-                ? 'Eliminar punto de venta'
-                : pendingDelete.type === 'group'
-                ? 'Eliminar grupo de ventas'
-                : 'Eliminar punto de venta'}
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {pendingDelete.type === 'group'
-                ? pendingDelete.fallbackToWaypoint
-                  ? '¿Eliminar este grupo de ventas sin afectar el resto del punto? Como este es el único grupo, se eliminará también el punto de venta y su historial.'
-                  : '¿Eliminar este grupo de ventas sin afectar el resto del punto?'
-                : 'Se eliminará todo el punto de venta, sus productos y su historial.'}
-            </p>
-            <div className="mt-6 flex justify-end gap-3">
-              <button
-                type="button"
-                onClick={handleCancelDelete}
-                className="rounded-full border border-border px-4 py-2 text-sm font-semibold text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                onClick={handleConfirmDelete}
-                className="rounded-full bg-destructive px-4 py-2 text-sm font-semibold text-destructive-foreground transition-colors hover:bg-destructive/80"
-              >
-                {pendingDelete.type === 'group' && pendingDelete.fallbackToWaypoint
-                  ? 'Eliminar punto'
-                  : 'Eliminar'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+            </div>,
+            document.body
+          )
+        : null}
 
       {intensityEditorOpen && (
         <div
@@ -1164,9 +1391,13 @@ export default function SalesMapApp() {
             onClick={(e) => e.stopPropagation()}
           >
             <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Editar rango</p>
-            <h2 className="mt-2 text-lg font-semibold text-foreground">Intensidad de ventas</h2>
+            <h2 className="mt-2 text-lg font-semibold text-foreground">Ganancias en venta</h2>
             <p className="mt-1 text-xs text-muted-foreground">
               Ajusta los límites máximos para cada nivel. Los valores deben estar en orden ascendente.
+            </p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              Esta configuración colorea las ventas (grupos) dentro de los puntos del mapa. Editarla no cambia el
+              color de los puntos; ese se asigna automáticamente.
             </p>
             <div className="mt-4 space-y-3">
               <div className="space-y-1">
@@ -1428,7 +1659,7 @@ export default function SalesMapApp() {
               Eliminar producto
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              ¿Estás seguro de eliminar “{pendingCatalogDelete.name}”? Esta acción borrará su precio base.
+              ¿Estás seguro de eliminar "{pendingCatalogDelete.name}"? Esta acción borrará su precio base.
             </p>
             <div className="mt-6 flex justify-end gap-3">
               <button
@@ -1453,5 +1684,6 @@ export default function SalesMapApp() {
     </AuthGuard>
   );
 }
+
 
 

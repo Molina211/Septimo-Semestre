@@ -19,6 +19,13 @@ const bogotaFormatter = new Intl.DateTimeFormat('en', {
 });
 
 function extractBogotaParts(value?: string): DateParts | null {
+  if (value) {
+    const dateOnlyMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+    if (dateOnlyMatch) {
+      const [, year, month, day] = dateOnlyMatch;
+      return { year, month, day, hour: '00', minute: '00' };
+    }
+  }
   const date = value ? new Date(value) : new Date();
   if (Number.isNaN(date.getTime())) return null;
   const parts = bogotaFormatter.formatToParts(date);
@@ -36,6 +43,12 @@ export function toBogotaLocalInputValue(value?: string): string {
   const parts = extractBogotaParts(value);
   if (!parts) return '';
   return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
+}
+
+export function toBogotaDateOnly(value?: string): string {
+  const parts = extractBogotaParts(value);
+  if (!parts) return '';
+  return `${parts.year}-${parts.month}-${parts.day}`;
 }
 
 const BOGOTA_OFFSET = '-05:00';

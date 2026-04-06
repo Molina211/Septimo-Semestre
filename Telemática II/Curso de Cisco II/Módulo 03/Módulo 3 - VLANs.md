@@ -135,7 +135,7 @@ En general, al implementar VLAN, el tráfico de unidifusión, multidifusión y d
 
 ---
 
-### Identificación de VLAN con etiqueta
+### Identificación de VLAN con etiqueta (Tag)
 
 Las tramas Ethernet normales no incluyen información de VLAN, por lo que al viajar por un enlace troncal es necesario agregarla mediante un proceso llamado etiquetado. Esto se logra usando el estándar IEEE 802.1Q, que inserta una etiqueta de 4 bytes en el encabezado de la trama para indicar a qué VLAN pertenece.
 
@@ -628,12 +628,12 @@ En pocas palabras:
 
 La tabla ilustra los resultados de las opciones de configuración DTP en extremos opuestos de un enlace troncal conectado a los puertos del switch Catalyst 2960. Una buena practica es configurar los enlaces troncales estáticamente siempre que sea posible.
 
-|                         | Dinámico automático | Dinámico deseado | Troncal               | Acceso                |
-| ----------------------- | ------------------- | ---------------- | --------------------- | --------------------- |
-| **Dinámico automático** | Acceso              | Troncal          | Troncal               | Acceso                |
-| **Dinámico deseado**    | Troncal             | Troncal          | Troncal               | Acceso                |
-| **Troncal**             | Troncal             | Troncal          | Troncal               | Conectividad limitada |
-| **Acceso**              | Acceso              | Acceso           | Conectividad limitada | Acceso                |
+|                         | Dinámico automático | Dinámico deseado |        Troncal        |        Acceso         |
+| ----------------------- | :-----------------: | :--------------: | :-------------------: | :-------------------: |
+| **Dinámico automático** |       Acceso        |     Troncal      |        Troncal        |        Acceso         |
+| **Dinámico deseado**    |       Troncal       |     Troncal      |        Troncal        |        Acceso         |
+| **Troncal**             |       Troncal       |     Troncal      |        Troncal        | Conectividad limitada |
+| **Acceso**              |       Acceso        |      Acceso      | Conectividad limitada |        Acceso         |
 
 ---
 

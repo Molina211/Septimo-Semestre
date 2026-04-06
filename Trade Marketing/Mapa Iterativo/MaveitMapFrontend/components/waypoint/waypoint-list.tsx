@@ -2,7 +2,7 @@
 
 import type { SalesEntry, Waypoint } from '@/lib/models/waypoint.model';
 import { getIntensityLabel } from '@/lib/models/waypoint.model';
-import { MapPin, Trash2, ChevronDown, ChevronUp, Package, RefreshCw, Edit3, SlidersHorizontal } from 'lucide-react';
+import { MapPin, Trash2, ChevronDown, ChevronUp, Package, SlidersHorizontal } from 'lucide-react';
 import { useState } from 'react';
 import { formatBogotaDateTime } from '@/lib/utils/time-utils';
 
@@ -11,10 +11,9 @@ interface WaypointListProps {
   selectedWaypointId: number | null;
   onSelect: (id: number) => void;
   onDelete: (waypoint: Waypoint) => void;
-  onUpdateRequest: (waypoint: Waypoint) => void;
-  onEditEntry: (waypoint: Waypoint, entry: SalesEntry) => void;
   onEditPoint: (waypoint: Waypoint) => void;
-  onDeleteGroup: (waypoint: Waypoint, entry: SalesEntry) => void;
+  onOpenGroups: (waypoint: Waypoint) => void;
+  onOpenGroup: (waypoint: Waypoint, entry: SalesEntry) => void;
   readOnly?: boolean;
 }
 
@@ -25,10 +24,9 @@ export default function WaypointList({
   selectedWaypointId,
   onSelect,
   onDelete,
-  onUpdateRequest,
-  onEditEntry,
   onEditPoint,
-  onDeleteGroup,
+  onOpenGroups,
+  onOpenGroup,
   readOnly = false,
 }: WaypointListProps) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -56,15 +54,27 @@ export default function WaypointList({
         return (
           <div
             key={wp.id}
-            className={`rounded-lg border transition-all ${
+            onClick={() => {
+              onSelect(wp.id);
+              onOpenGroups(wp);
+            }}
+            className={`rounded-lg border transition-all cursor-pointer hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/10 ${
               isSelected
                 ? 'border-primary/50 bg-primary/5'
-                : 'border-border bg-secondary/20 hover:border-border/80'
+                : 'border-border bg-secondary/20 hover:border-primary/30'
             }`}
           >
             {/* Main row */}
-            <button
-              onClick={() => onSelect(wp.id)}
+            <div
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelect(wp.id);
+                  onOpenGroups(wp);
+                }
+              }}
               className="flex w-full items-center gap-3 px-3 py-3 text-left"
             >
               <span
@@ -93,15 +103,18 @@ export default function WaypointList({
                     ${wp.totalSales.toLocaleString()}
                   </span>
                   <span>{getIntensityLabel(wp.intensity)}</span>
-                  <span>{formatEntryDate(wp.visitDateTime)}</span>
+                  <span>{formatEntryDate(wp.date ?? wp.visitDateTime)}</span>
                 </div>
               </div>
-            </button>
+            </div>
 
             {/* Expand/collapse actions */}
             <div className="flex items-center border-t border-border/50 px-3 py-1.5">
                 <button
-                  onClick={() => setExpandedId(isExpanded ? null : wp.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setExpandedId(isExpanded ? null : wp.id);
+                  }}
                   className="flex items-center gap-1 rounded px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 >
                   <Package className="h-3 w-3" />
@@ -113,7 +126,7 @@ export default function WaypointList({
                 )}
               </button>
               {!readOnly && (
-                <div className="ml-auto flex items-center gap-1">
+                <div className="ml-auto flex items-center gap-2">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -123,16 +136,6 @@ export default function WaypointList({
                     aria-label={`Editar ${wp.name}`}
                   >
                     <SlidersHorizontal className="h-3.5 w-3.5" />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onUpdateRequest(wp);
-                    }}
-                    className="flex items-center gap-1 rounded px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                  >
-                    <RefreshCw className="h-3 w-3" />
-                    Actualizar venta
                   </button>
                   <button
                     onClick={(e) => {
@@ -151,42 +154,43 @@ export default function WaypointList({
             {/* Expanded product details */}
             {isExpanded && (
               <div className="border-t border-border/50 px-3 py-2 space-y-3">
-                {wp.salesHistory.map((entry) => (
-                  <div key={entry.id} className="space-y-2 rounded-lg border border-border p-2">
-                  <div className="flex items-center justify-between text-[10px] uppercase tracking-wide text-muted-foreground">
-                    <span>{formatEntryDate(entry.date)}</span>
-                    <div className="flex items-center gap-2">
-                        <span className="font-semibold text-foreground">
-                          ${entry.totalSales.toLocaleString()}
-                        </span>
-                        {!readOnly && (
-                          <>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                onEditEntry(wp, entry);
-                              }}
-                              className="rounded-full p-1.5 text-primary transition-colors hover:bg-secondary"
-                              aria-label="Editar grupo"
-                            >
-                              <Edit3 className="h-3 w-3" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                onDeleteGroup(wp, entry);
-                              }}
-                              className="rounded-full p-1.5 text-destructive transition-colors hover:bg-destructive/10"
-                              aria-label="Eliminar grupo"
-                            >
-                              <Trash2 className="h-3 w-3" />
-                            </button>
-                          </>
-                        )}
-                      </div>
-                    </div>
+                {(() => {
+                  const groups = [...(wp.salesHistory ?? [])].sort((a, b) => (b.totalSales ?? 0) - (a.totalSales ?? 0));
+                  const visible = groups.slice(0, 2);
+                  const remaining = Math.max(0, groups.length - visible.length);
+                  return (
+                    <>
+                      {visible.map((entry) => (
+                        <div
+                          key={entry.id}
+                          role="button"
+                          tabIndex={0}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onOpenGroup(wp, entry);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              onOpenGroup(wp, entry);
+                            }
+                          }}
+                          className="space-y-2 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-secondary/30 hover:shadow-md hover:shadow-primary/10 cursor-pointer"
+                        >
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onOpenGroup(wp, entry);
+                            }}
+                            className="flex w-full items-center justify-between text-left text-[10px] uppercase tracking-wide text-muted-foreground"
+                          >
+                            <span>{formatEntryDate(entry.date)}</span>
+                            <span className="font-semibold text-foreground">
+                              Total Neto: COP {Math.round(entry.totalSales ?? 0).toLocaleString('es-CO')}
+                            </span>
+                          </button>
                     {entry.products.length === 0 ? (
                       <p className="text-[11px] text-muted-foreground">Sin productos registrados</p>
                     ) : (
@@ -214,7 +218,23 @@ export default function WaypointList({
                       </table>
                     )}
                   </div>
-                ))}
+                      ))}
+
+                      {remaining > 0 && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onOpenGroups(wp);
+                          }}
+                          className="w-full rounded-lg border border-dashed border-border/50 py-2 text-center text-xs font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                        >
+                          Ver {remaining} grupos más
+                        </button>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
             )}
           </div>

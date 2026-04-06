@@ -13,7 +13,7 @@ export class ApiError extends Error {
   }
 }
 
-type ApiOptions = RequestInit & { requireAuth?: boolean }
+type ApiOptions = Omit<RequestInit, 'body'> & { requireAuth?: boolean; body?: unknown }
 
 let refreshInFlight: Promise<string | null> | null = null
 
@@ -111,8 +111,16 @@ export async function apiFetch<T = unknown>(path: string, options: ApiOptions = 
     throw new ApiError('Token requerido', 401)
   }
 
-  let body: BodyInit | null = providedBody ?? null
-  if (body && !(body instanceof FormData) && typeof body !== 'string') {
+  let body: BodyInit | null = (providedBody ?? null) as BodyInit | null
+  if (
+    body &&
+    !(body instanceof FormData) &&
+    !(body instanceof URLSearchParams) &&
+    !(body instanceof Blob) &&
+    !(body instanceof ArrayBuffer) &&
+    !ArrayBuffer.isView(body) &&
+    typeof body !== 'string'
+  ) {
     body = JSON.stringify(body)
   }
 

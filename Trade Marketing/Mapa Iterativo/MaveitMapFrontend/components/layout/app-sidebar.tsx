@@ -18,10 +18,9 @@ interface AppSidebarProps {
   onFilterChange: (filter: SalesFilter) => void;
   onWaypointSelect: (id: number) => void;
   onWaypointDelete: (waypoint: Waypoint) => void;
-  onWaypointUpdateRequest: (waypoint: Waypoint) => void;
-  onWaypointEditEntry: (waypoint: Waypoint, entry: SalesEntry) => void;
   onWaypointEditPoint: (waypoint: Waypoint) => void;
-  onWaypointDeleteGroup: (waypoint: Waypoint, entry: SalesEntry) => void;
+  onWaypointOpenGroups: (waypoint: Waypoint) => void;
+  onWaypointOpenGroup: (waypoint: Waypoint, entry: SalesEntry) => void;
   onCatalogOpen: () => void;
   readOnly?: boolean;
 }
@@ -40,10 +39,9 @@ export default function AppSidebar({
   onFilterChange,
   onWaypointSelect,
   onWaypointDelete,
-  onWaypointUpdateRequest,
-  onWaypointEditEntry,
   onWaypointEditPoint,
-  onWaypointDeleteGroup,
+  onWaypointOpenGroups,
+  onWaypointOpenGroup,
   onCatalogOpen,
   readOnly = false,
 }: AppSidebarProps) {
@@ -67,7 +65,6 @@ export default function AppSidebar({
         isCollapsed ? 'w-14' : 'w-96'
       }`}
     >
-      {/* Collapse toggle */}
       <button
         onClick={toggleCollapse}
         className="absolute -right-3 top-4 z-10 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-card text-muted-foreground shadow-md transition-colors hover:text-foreground"
@@ -76,7 +73,6 @@ export default function AppSidebar({
         {isCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
       </button>
 
-      {/* Header */}
       <div className="shrink-0 border-b border-border px-4 py-3">
         {!isCollapsed && (
           <div className="flex items-center gap-2.5">
@@ -107,7 +103,6 @@ export default function AppSidebar({
         )}
       </div>
 
-      {/* Tab bar */}
       <div className="shrink-0 border-b border-border">
         <div className={`flex ${isCollapsed ? 'flex-col' : ''}`}>
           {TABS.map((tab) => {
@@ -142,7 +137,6 @@ export default function AppSidebar({
         </div>
       </div>
 
-      {/* Content */}
       {!isCollapsed && (
         <div className="flex-1 overflow-y-auto p-4">
           {activeTab === 'waypoints' && (
@@ -157,10 +151,9 @@ export default function AppSidebar({
                 selectedWaypointId={selectedWaypointId}
                 onSelect={onWaypointSelect}
                 onDelete={onWaypointDelete}
-                onUpdateRequest={onWaypointUpdateRequest}
-                onEditEntry={onWaypointEditEntry}
                 onEditPoint={onWaypointEditPoint}
-                onDeleteGroup={onWaypointDeleteGroup}
+                onOpenGroups={onWaypointOpenGroups}
+                onOpenGroup={onWaypointOpenGroup}
                 readOnly={readOnly}
               />
             </>
@@ -178,3 +171,4 @@ export default function AppSidebar({
     </div>
   );
 }
+

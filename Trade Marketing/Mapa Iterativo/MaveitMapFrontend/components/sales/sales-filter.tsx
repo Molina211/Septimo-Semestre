@@ -1,10 +1,6 @@
 'use client';
 
-import type {
-  SalesFilter,
-  IntensityLevel,
-  IntensitySortDirection,
-} from '@/lib/models/waypoint.model';
+import type { SalesFilter, IntensityLevel, IntensitySortDirection } from '@/lib/models/waypoint.model';
 import { getIntensityColor, getIntensityLabel } from '@/lib/models/waypoint.model';
 import { Search, RotateCcw } from 'lucide-react';
 
@@ -12,14 +8,6 @@ interface SalesFilterProps {
   filter: SalesFilter;
   onFilterChange: (filter: SalesFilter) => void;
 }
-
-const INTENSITIES: IntensityLevel[] = [
-  'very-low',
-  'low',
-  'medium',
-  'high',
-  'very-high',
-];
 
 const TIME_PRESETS = [
   { label: '1D', days: 1 },
@@ -31,7 +19,20 @@ const TIME_PRESETS = [
   { label: 'Máx.', max: true },
 ];
 
-const toInputDate = (date: Date) => date.toISOString().split('T')[0];
+const INTENSITIES: IntensityLevel[] = [
+  'very-low',
+  'low',
+  'medium',
+  'high',
+  'very-high',
+];
+
+const toInputDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 const buildRange = (preset: typeof TIME_PRESETS[number]) => {
   if (preset.max) {
@@ -78,7 +79,6 @@ export default function SalesFilterPanel({ filter, onFilterChange }: SalesFilter
       : [...current, intensity];
     onFilterChange({ ...filter, intensities: updated });
   };
-
   const applyPreset = (preset: typeof TIME_PRESETS[number]) => {
     const range = buildRange(preset);
     onFilterChange({ ...filter, dateFrom: range.dateFrom, dateTo: range.dateTo });
@@ -95,8 +95,7 @@ export default function SalesFilterPanel({ filter, onFilterChange }: SalesFilter
   const resetFilters = () => onFilterChange(DEFAULT_FILTER);
 
   return (
-      <div className="flex flex-col gap-6 px-1 pb-2">
-      {/* Search */}
+    <div className="flex flex-col gap-6 px-1 pb-2">
       <div className="relative">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <input
@@ -108,7 +107,6 @@ export default function SalesFilterPanel({ filter, onFilterChange }: SalesFilter
         />
       </div>
 
-      {/* Date range */}
       <div>
         <label className="mb-1.5 block text-xs font-medium text-muted-foreground uppercase tracking-wider">
           Rango de fechas
@@ -147,7 +145,6 @@ export default function SalesFilterPanel({ filter, onFilterChange }: SalesFilter
         </div>
       </div>
 
-      {/* Sales range */}
       <div>
         <label className="mb-1.5 block text-xs font-medium text-muted-foreground uppercase tracking-wider">
           Rango de ventas ($)
@@ -176,7 +173,6 @@ export default function SalesFilterPanel({ filter, onFilterChange }: SalesFilter
         </div>
       </div>
 
-      {/* Intensity filter */}
       <div>
         <label className="mb-1.5 block text-xs font-medium text-muted-foreground uppercase tracking-wider">
           Intensidad de ventas
@@ -200,10 +196,7 @@ export default function SalesFilterPanel({ filter, onFilterChange }: SalesFilter
                     : undefined
                 }
               >
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ background: color }}
-                />
+                <span className="h-2 w-2 rounded-full" style={{ background: color }} />
                 {getIntensityLabel(intensity)}
               </button>
             );
@@ -211,7 +204,6 @@ export default function SalesFilterPanel({ filter, onFilterChange }: SalesFilter
         </div>
       </div>
 
-      {/* Intensity sort */}
       <div>
         <label className="mb-1.5 block text-xs font-medium text-muted-foreground uppercase tracking-wider">
           Ordenar intensidad
@@ -242,7 +234,6 @@ export default function SalesFilterPanel({ filter, onFilterChange }: SalesFilter
         </div>
       </div>
 
-      {/* Reset */}
       <button
         onClick={resetFilters}
         className="flex w-full items-center justify-center gap-2 rounded-lg border border-border py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"

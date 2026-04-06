@@ -44,7 +44,7 @@ const defaultProducts = (): ProductSale[] => [
     productName: '',
     quantity: 0,
     unitPrice: 0,
-    priceSource: 'custom',
+    priceSource: 'base',
   },
 ];
 
@@ -91,7 +91,7 @@ export default function WaypointForm({
   );
   const toProductState = useCallback(
     (product: ProductSale): ProductSale => {
-      const priceSource = product.priceSource ?? 'custom';
+      const priceSource = product.priceSource ?? 'base';
       const basePrice = resolveBasePrice(product);
       if (priceSource === 'base') {
         return { ...product, priceSource, unitPrice: basePrice };
@@ -121,7 +121,7 @@ export default function WaypointForm({
         productName: '',
         quantity: 0,
         unitPrice: 0,
-        priceSource: 'custom',
+        priceSource: 'base',
       },
     ]);
   }, []);
@@ -181,6 +181,24 @@ export default function WaypointForm({
   );
 
   const shouldShowProducts = !isPointMode;
+  const resetFormState = useCallback(() => {
+    setName(initialData?.name ?? '');
+    setLabel(initialData?.label ?? '');
+    setDateTime(() => toBogotaLocalInputValue(initialData?.dateTime));
+    if (shouldShowProducts) {
+      setProducts(
+        initialData?.products && initialData.products.length > 0
+          ? initialData.products.map((product) => toProductState(product))
+          : defaultProducts()
+      );
+    }
+    setRemovedProductIds([]);
+  }, [initialData, shouldShowProducts, toProductState]);
+
+  const handleCancel = useCallback(() => {
+    resetFormState();
+    onCancel();
+  }, [onCancel, resetFormState]);
   const initialProductsSignature = initialData?.products
     ? initialData.products
         .map((product) => `${product.productName}-${product.quantity}-${product.unitPrice}`)
@@ -199,12 +217,11 @@ export default function WaypointForm({
   }, [initialProductsSignature, shouldShowProducts, isGroupMode, isNewPointMode, toProductState]);
 
   useEffect(() => {
-    if (initialData?.dateTime) {
-    setDateTime(toBogotaLocalInputValue(initialData.dateTime));
-      return;
-    }
-    setDateTime(toBogotaLocalInputValue());
-  }, [contextSignature, initialData?.dateTime]);
+    setName(initialData?.name ?? '');
+    setLabel(initialData?.label ?? '');
+    setRemovedProductIds([]);
+    setDateTime(toBogotaLocalInputValue(initialData?.dateTime));
+  }, [contextSignature, initialData?.name, initialData?.label, initialData?.dateTime]);
   const filteredProducts = shouldShowProducts
     ? products.filter((p) => p.productName && p.quantity > 0)
     : [];
@@ -220,6 +237,7 @@ export default function WaypointForm({
       : (label.trim() || resolvedName);
 
     const removedPayloads = removedProductIds.map((productId) => ({
+      id: crypto.randomUUID(),
       productId,
       product: catalogProductMap.get(String(productId)) ?? null,
       productName: catalogProductMap.get(String(productId))?.name ?? '',
@@ -231,13 +249,13 @@ export default function WaypointForm({
     onSave({
       name: resolvedName,
       label: resolvedLabel,
-      id: waypointId,
+      id: waypointId !== undefined ? String(waypointId) : undefined,
       lng,
       lat,
       totalSales,
       dateTime,
       products: [...filteredProducts, ...removedPayloads],
-      entryId,
+      entryId: entryId !== undefined ? String(entryId) : undefined,
     });
   };
 
@@ -258,7 +276,7 @@ export default function WaypointForm({
             </div>
           </div>
           <button
-            onClick={onCancel}
+            onClick={handleCancel}
             className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
             aria-label="Cerrar formulario"
           >
@@ -325,14 +343,6 @@ export default function WaypointForm({
                   <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                     Productos vendidos
                   </label>
-                  <button
-                    type="button"
-                    onClick={addProduct}
-                    className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/10"
-                  >
-                    <Plus className="h-3 w-3" />
-                    Agregar
-                  </button>
                 </div>
 
                 <div className="space-y-3">
@@ -454,6 +464,15 @@ export default function WaypointForm({
                       </div>
                     );
                   })}
+
+                  <button
+                    type="button"
+                    onClick={addProduct}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-border/70 bg-secondary/10 px-4 py-3 text-sm font-semibold text-primary transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:bg-primary/10"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Agregar producto
+                  </button>
                 </div>
               </div>
             )}
@@ -472,7 +491,7 @@ export default function WaypointForm({
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={onCancel}
+                onClick={handleCancel}
                 className="flex-1 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
                 Cancelar

@@ -214,6 +214,11 @@ export default function InteractiveMap({
         el.addEventListener('mouseleave', () => {
           setHoveredWaypoint((prev) => (prev?.waypoint.id === wp.id ? null : prev));
         });
+        el.addEventListener('dblclick', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          onWaypointSelect(wp.id);
+        });
 
         if (isSelected) {
           popupRef.current = popup;
@@ -277,7 +282,7 @@ export default function InteractiveMap({
         <div className="rounded-lg border border-border bg-card/90 p-3 shadow-lg backdrop-blur-sm">
           <div className="mb-2 flex items-center justify-between gap-2">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              Intensidad de Ventas
+              Ganancias en venta
             </p>
             {showEditIntensity && onEditIntensity && (
               <button

@@ -10,7 +10,7 @@ import { logout } from "@/lib/services/auth.service"
 import { getUserProfile } from "@/lib/services/user.service"
 import { useAuthToken } from "@/lib/hooks/use-auth-token"
 import { parseAuthToken } from "@/lib/utils/jwt.utils"
-import type { UserAccountResponse } from "@/lib/models/user.model"
+import type { UserAccountResponse } from "@/lib/models/user-account.model"
 
 const sidebarLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -48,7 +48,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       .split(" ")
       .filter(Boolean)
       .slice(0, 2)
-      .map((s) => s[0]?.toUpperCase())
+      .map((s: string) => s[0]?.toUpperCase())
       .join("") || "SA"
 
   const handleLogout = async () => {

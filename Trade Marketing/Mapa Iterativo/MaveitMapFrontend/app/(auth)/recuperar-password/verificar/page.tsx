@@ -245,7 +245,7 @@ export default function RecoverVerifyPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground mb-2">Â¿No recibiste el código?</p>
+            <p className="text-sm text-muted-foreground mb-2">¿No recibiste el código?</p>
             <button
               type="button"
               onClick={handleResend}
