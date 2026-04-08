@@ -570,10 +570,10 @@ El proceso es así, en orden:
 1. **Menor Bridge ID (BID) del switch que envía la BPDU**  
     Se elige la ruta que viene del switch con menor identificador.
 
-2. **Menor prioridad de puerto del remitente**  
+2. **Menor prioridad de puerto del remitente**
     Si el BID es igual, se compara la prioridad del puerto del switch vecino.
 
-3. **Menor ID de puerto del remitente**  
+3. **Menor ID de puerto del remitente**
     Si aún hay empate, se elige el puerto con el número más bajo.
 
 
@@ -710,13 +710,13 @@ Explicación de cada uno de los estados
 
 - **Estados de puertos en STP (detalle operativo)**
 
-| Estado del puerto | BPDU               | Tabla de direcciones MAC  | Reenvío de datos |     |
-| ----------------- | ------------------ | ------------------------- | ---------------- | --- |
-| Bloqueo           | Recibir solo       | No hay actualización      | No               |     |
-| Escucha           | Recibir y enviar   | No hay actualización      | No               |     |
-| Aprendizaje       | Recibir y enviar   | Actualización de la tabla | No               |     |
-| Reenvío           | Recibir y enviar   | Actualización de la tabla | Sí               |     |
-| Deshabilitado     | No envía ni recibe | No hay actualización      | No               |     |
+| Estado del puerto | BPDU               | Tabla de direcciones MAC  | Reenvío de datos |
+| ----------------- | ------------------ | ------------------------- | ---------------- |
+| Bloqueo           | Recibir solo       | No hay actualización      | No               |
+| Escucha           | Recibir y enviar   | No hay actualización      | No               |
+| Aprendizaje       | Recibir y enviar   | Actualización de la tabla | No               |
+| Reenvío           | Recibir y enviar   | Actualización de la tabla | Sí               |
+| Deshabilitado     | No envía ni recibe | No hay actualización      | No               |
 
 ---
 

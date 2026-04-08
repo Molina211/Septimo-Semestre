@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "6e758ecb226d36eb",
+        "id": "1b465d029ff178ab",
         "type": "tabs",
         "children": [
           {
-            "id": "594184e5d7b50058",
+            "id": "162d5115cece11a5",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Telemática II/Curso de Cisco II/Módulo 06/Módulo 6 - EtherChannel.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "Módulo 6 - EtherChannel"
             }
           }
         ]
@@ -49,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "CFI",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -191,32 +195,37 @@
       "bases:Crear nueva base": true
     }
   },
-  "active": "594184e5d7b50058",
+  "active": "ea9cf50950bb1bae",
   "lastOpenFiles": [
-    "Investigación de Operaciones I/Semana 09/Semana Santa.md",
+    "Investigación de Operaciones I/Semana 10/WhatsApp Image 2026-04-08 at 1.32.41 AM (1).jpeg",
+    "Investigación de Operaciones I/Semana 10/WhatsApp Image 2026-04-08 at 1.32.41 AM.jpeg",
+    "Telemática II/Curso de Cisco II/Módulo 06/6.4.2-lab---implement-etherchannel_es-XL.pdf",
+    "Telemática II/Curso de Cisco II/Módulo 06/6.4.1-packet-tracer---implement-etherchannel_es-XL.pka",
+    "Telemática II/Curso de Cisco II/Módulo 06/6.3.4-packet-tracer---troubleshoot-etherchannel_es-XL.pka",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408012127.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011954.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011836.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011646.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011539.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011219.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011018.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408010844.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408010641.png",
+    "Telemática II/Curso de Cisco II/Módulo 06/6.2.4-packet-tracer---configure-etherchannel_es-XL.pka",
+    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS",
+    "Telemática II/Curso de Cisco II/Módulo 05/Módulo 5 - STP Conceptos.md",
+    "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
+    "Telemática II/Curso de Cisco II/Módulo 06/Módulo 6 - EtherChannel.md",
     "Minería de datos/Semana 09/Semana Santa.md",
+    "Telemática II/Semana 09/Semana Santa.md",
+    "Telemática II/Semana 10",
+    "Telemática II/Semana 09",
+    "Investigación de Operaciones I/Semana 09/Semana Santa.md",
     "Minería de datos/Semana 08/data-dogs/requirements-lock.txt",
     "Minería de datos/Semana 08/data-dogs",
     "Minería de datos/Semana 09",
-    "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Ocean's Deep-Diving Animals/ANEXOS/Pasted image 20260331230624.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402141216.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402141037.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402141013.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402140949.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402140917.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402140832.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS/Pasted image 20260402140744.png",
-    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/ANEXOS/Pasted image 20260330140414.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Internet and Dating/ANEXOS/Pasted image 20260401143041.png",
-    "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/Flight Delays/flight-delays-project.zip",
     "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/The Cicadas are Coming.md",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/cicadas-are-coming-project.zip",
     "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/Our World Connected.md",
-    "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/ANEXOS",
-    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/world-connected-project.zip",
-    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/ANEXOS",
-    "Minería de datos 1/Semana 04/Portafolio/Portafolio/script-portafolio.js",
-    "Minería de datos 1/Semana 04/Portafolio/Portafolio/styles-portafolio.css",
     "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Internet and Dating/The Internet and Dating.md",
     "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Ocean's Deep-Diving Animals/The Ocean's Deep-Diving Animals.md",
     "Minería de datos 1/Curso de Minería de Datos/Data Visualization/Open-Ended Projects 3/Open-Ended Projects 3.md",
@@ -234,11 +243,6 @@
     "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/Flight Delays/Flight Delays.md",
     "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/A Plant-Based Coffee Shop/A Plant-Based Coffee Shop.md",
     "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/A Century of Top Songs/A Century of Top Songs.md",
-    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Art as Data/Art as Data.md",
-    "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Skeletal Variation/Skeletal Variation.md",
-    "Minería de datos 1/Curso de Minería de Datos/Game-Based Intro/Zero to Python in 60 Seconds.md",
-    "Minería de datos 1/Curso de Minería de Datos/Game-Based Intro/Matplotlib's Pyplot.md",
-    "Minería de datos 1/Curso de Minería de Datos/Game-Based Intro/Meet the DataFrame.md",
     "Sin título.canvas",
     "Sin título 1.canvas"
   ]
