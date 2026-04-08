@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Telemática II/Curso de Cisco II/Módulo 06/Módulo 6 - EtherChannel.md",
+                "file": "Telemática II/Curso de Cisco II/Módulo 07/Módulo 7 - DHCPv4.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Módulo 6 - EtherChannel"
+              "title": "Módulo 7 - DHCPv4"
             }
           }
         ]
@@ -195,35 +195,36 @@
       "bases:Crear nueva base": true
     }
   },
-  "active": "ea9cf50950bb1bae",
+  "active": "162d5115cece11a5",
   "lastOpenFiles": [
-    "Investigación de Operaciones I/Semana 10/WhatsApp Image 2026-04-08 at 1.32.41 AM (1).jpeg",
-    "Investigación de Operaciones I/Semana 10/WhatsApp Image 2026-04-08 at 1.32.41 AM.jpeg",
+    "Telemática II/Curso de Cisco II/Módulo 07/7.4.2-lab---implement-dhcpv4_es-XL.pdf",
+    "Telemática II/Curso de Cisco II/Módulo 07/7.4.1-packet-tracer---implement-dhcpv4_es-XL.pka",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408023721.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408023626.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408023551.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408023502.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/7.2.10-packet-tracer---configure-dhcpv4_es-XL.pka",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408023203.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408023123.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408023029.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408022855.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408022804.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS/Pasted image 20260408022653.png",
+    "Telemática II/Curso de Cisco II/Módulo 07/ANEXOS",
+    "Telemática II/Curso de Cisco II/Módulo 06/Módulo 6 - EtherChannel.md",
+    "Telemática II/Curso de Cisco II/Módulo 07/Módulo 7 - DHCPv4.md",
+    "Telemática II/Curso de Cisco II/Módulo 07",
     "Telemática II/Curso de Cisco II/Módulo 06/6.4.2-lab---implement-etherchannel_es-XL.pdf",
     "Telemática II/Curso de Cisco II/Módulo 06/6.4.1-packet-tracer---implement-etherchannel_es-XL.pka",
     "Telemática II/Curso de Cisco II/Módulo 06/6.3.4-packet-tracer---troubleshoot-etherchannel_es-XL.pka",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408012127.png",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011954.png",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011836.png",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011646.png",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011539.png",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011219.png",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408011018.png",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408010844.png",
-    "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS/Pasted image 20260408010641.png",
     "Telemática II/Curso de Cisco II/Módulo 06/6.2.4-packet-tracer---configure-etherchannel_es-XL.pka",
     "Telemática II/Curso de Cisco II/Módulo 06/ANEXOS",
     "Telemática II/Curso de Cisco II/Módulo 05/Módulo 5 - STP Conceptos.md",
     "Telemática II/Curso de Cisco II/Módulo 03/Módulo 3 - VLANs.md",
-    "Telemática II/Curso de Cisco II/Módulo 06/Módulo 6 - EtherChannel.md",
     "Minería de datos/Semana 09/Semana Santa.md",
     "Telemática II/Semana 09/Semana Santa.md",
     "Telemática II/Semana 10",
-    "Telemática II/Semana 09",
     "Investigación de Operaciones I/Semana 09/Semana Santa.md",
-    "Minería de datos/Semana 08/data-dogs/requirements-lock.txt",
-    "Minería de datos/Semana 08/data-dogs",
-    "Minería de datos/Semana 09",
     "Minería de datos 1/Curso de Minería de Datos/Data Storytelling/The Cicadas are Coming/The Cicadas are Coming.md",
     "Minería de datos 1/Curso de Minería de Datos/Coding for Answers/Our World Connected/Our World Connected.md",
     "Minería de datos 1/Curso de Minería de Datos/Data Visualization/The Internet and Dating/The Internet and Dating.md",
@@ -242,7 +243,6 @@
     "Minería de datos 1/Curso de Minería de Datos/Data Modeling/E-Bike Stopping Distances/E-Bike Stopping Distances.md",
     "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/Flight Delays/Flight Delays.md",
     "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/A Plant-Based Coffee Shop/A Plant-Based Coffee Shop.md",
-    "Minería de datos 1/Curso de Minería de Datos/Data Cleaning/A Century of Top Songs/A Century of Top Songs.md",
     "Sin título.canvas",
     "Sin título 1.canvas"
   ]
