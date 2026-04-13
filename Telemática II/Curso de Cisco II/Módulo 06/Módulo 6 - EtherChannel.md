@@ -202,14 +202,14 @@ La tabla muestra las diversas combinaciones de modos PAgP en S1 y S2 y el result
 
 - **PAgP Modes**
 
-| S1         | S2                      | Establecimiento del canal |
-|------------|-------------------------|----------------------------|
-| Activo     | Activo                  | Sí                         |
-| Activado   | Deseable/Automático     | No                         |
-| Deseado    | Deseado                 | Sí                         |
-| Deseado    | Automático              | Sí                         |
-| Automático | Deseado                 | Sí                         |
-| Automático | Automático              | No                         |
+| S1         | S2                  | Establecimiento del canal |
+| ---------- | ------------------- | ------------------------- |
+| On         | On                  | Sí                        |
+| On         | Deseable/Automático | No                        |
+| Deseado    | Deseado             | Sí                        |
+| Deseado    | Automático          | Sí                        |
+| Automático | Deseado             | Sí                        |
+| Automático | Automático          | No                        |
 
 ---
 
@@ -286,14 +286,14 @@ Considere los dos switches en la figura. Si S1 y S2 establecen un EtherChannel u
 
 La tabla muestra las diversas combinaciones de modos LACP en S1 y S2 y el resultado resultante del establecimiento de canales.
 
-| S1       | S2            | Establecimiento del canal |
-| -------- | ------------- | ------------------------- |
-| Activo   | Activo        | Sí                        |
-| Activado | Activo/Pasivo | No                        |
-| Activo   | Activo        | Sí                        |
-| Activo   | Pasivo        | Sí                        |
-| Pasivo   | Activo        | Sí                        |
-| Pasivo   | Pasivo        | No                        |
+| S1     | S2            | Establecimiento del canal |
+| ------ | ------------- | ------------------------- |
+| On     | On            | Sí                        |
+| On     | Activo/Pasivo | No                        |
+| Activo | Activo        | Sí                        |
+| Activo | Pasivo        | Sí                        |
+| Pasivo | Activo        | Sí                        |
+| Pasivo | Pasivo        | No                        |
 
 ---
 

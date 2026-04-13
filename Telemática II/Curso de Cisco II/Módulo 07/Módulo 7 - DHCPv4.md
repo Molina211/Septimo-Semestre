@@ -133,7 +133,7 @@ Puede excluirse una sola IP o un rango, y el comando se puede repetir varias vec
 
 Se crea el conjunto de direcciones que el router va a administrar:
 
-`ip dhcp pool {nombre}`
+`ip dhcp pool {nombre} | {vlan_id}`
 
 Esto inicia el modo de configuración DHCP (`Router(dhcp-config)#`).
 
@@ -147,7 +147,9 @@ Se definen los parámetros principales:
 `network {direccion} {mascara}`
 
 - **Gateway predeterminado:**
+
 Desactive el servidor DHCPv4 del IOS de Cisco
+
 `default-router {direccion}`
 
 Opcionales:

@@ -271,7 +271,7 @@ El switch con el BID más bajo se convierte en el puente raíz.
 - Rango: 0 a 61440 (en saltos de 4096).
 
 - Regla importante:  
-    Entre más baja la prioridad, mejor.  
+    Entre más baja la prioridad, mejor.
     El switch con menor prioridad tiene más posibilidad de ser el Root Bridge.
 
 
