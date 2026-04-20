@@ -746,7 +746,7 @@ Además, cuando un router actúa como servidor DHCPv6 stateful, mantiene una bas
 El comando **`show ipv6 dhcp binding`** muestra:
 
 - La dirección link-local (LLA) del cliente.
-- La *dirección global (GUA) asignada por el servidor.
+- La dirección global (GUA) asignada por el servidor.
 
 En el ejemplo, aparecen dos clientes:
 
