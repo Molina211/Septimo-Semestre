@@ -20,7 +20,7 @@ interface AppSidebarProps {
   onWaypointDelete: (waypoint: Waypoint) => void;
   onWaypointEditPoint: (waypoint: Waypoint) => void;
   onWaypointOpenGroups: (waypoint: Waypoint) => void;
-  onWaypointOpenGroup: (waypoint: Waypoint, entry: SalesEntry) => void;
+  onWaypointOpenGroup: (waypoint: Waypoint, entry: SalesEntry, source?: 'quick' | 'groups-list') => void;
   onCatalogOpen: () => void;
   readOnly?: boolean;
 }
@@ -171,4 +171,3 @@ export default function AppSidebar({
     </div>
   );
 }
-

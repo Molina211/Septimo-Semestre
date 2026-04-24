@@ -13,7 +13,7 @@ interface WaypointListProps {
   onDelete: (waypoint: Waypoint) => void;
   onEditPoint: (waypoint: Waypoint) => void;
   onOpenGroups: (waypoint: Waypoint) => void;
-  onOpenGroup: (waypoint: Waypoint, entry: SalesEntry) => void;
+  onOpenGroup: (waypoint: Waypoint, entry: SalesEntry, source?: 'quick' | 'groups-list') => void;
   readOnly?: boolean;
 }
 
@@ -167,13 +167,13 @@ export default function WaypointList({
                           tabIndex={0}
                           onClick={(e) => {
                             e.stopPropagation();
-                            onOpenGroup(wp, entry);
+                            onOpenGroup(wp, entry, 'quick');
                           }}
                           onKeyDown={(e) => {
                             if (e.key === 'Enter' || e.key === ' ') {
                               e.preventDefault();
                               e.stopPropagation();
-                              onOpenGroup(wp, entry);
+                              onOpenGroup(wp, entry, 'quick');
                             }
                           }}
                           className="space-y-2 rounded-lg border border-border p-2 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-secondary/30 hover:shadow-md hover:shadow-primary/10 cursor-pointer"
@@ -182,7 +182,7 @@ export default function WaypointList({
                             type="button"
                             onClick={(e) => {
                               e.stopPropagation();
-                              onOpenGroup(wp, entry);
+                              onOpenGroup(wp, entry, 'quick');
                             }}
                             className="flex w-full items-center justify-between text-left text-[10px] uppercase tracking-wide text-muted-foreground"
                           >

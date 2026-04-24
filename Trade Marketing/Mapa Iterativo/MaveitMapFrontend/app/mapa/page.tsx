@@ -189,6 +189,7 @@ export default function SalesMapApp() {
   const [salesGroupsOpenMode, setSalesGroupsOpenMode] = useState<'fresh' | 'resume'>('fresh');
   const [salesGroupDetailOpen, setSalesGroupDetailOpen] = useState(false);
   const [salesGroupDetailEntryId, setSalesGroupDetailEntryId] = useState<string | null>(null);
+  const [salesGroupDetailSource, setSalesGroupDetailSource] = useState<'quick' | 'groups-list'>('groups-list');
   const [resumeSalesGroups, setResumeSalesGroups] = useState(false);
   const [resumeGroupDetailEntryId, setResumeGroupDetailEntryId] = useState<string | null>(null);
   const [formContextKey, setFormContextKey] = useState(0);
@@ -670,14 +671,18 @@ export default function SalesMapApp() {
     setSalesGroupDetailEntryId(null);
   }, []);
 
-  const openSalesGroupDetail = useCallback((waypoint: Waypoint, entry: SalesEntry) => {
+  const openSalesGroupDetail = useCallback(
+    (waypoint: Waypoint, entry: SalesEntry, source: 'quick' | 'groups-list' = 'quick') => {
     setSelectedWaypointId(waypoint.id);
     setSalesGroupsWaypointId(waypoint.id);
     setSalesGroupsOpen(false);
     setSalesGroupsOpenMode('resume');
     setSalesGroupDetailEntryId(entry.id);
+    setSalesGroupDetailSource(source);
     setSalesGroupDetailOpen(true);
-  }, []);
+    },
+    []
+  );
 
   const closeSalesGroups = useCallback(() => {
     setSalesGroupsOpen(false);
@@ -687,11 +692,11 @@ export default function SalesMapApp() {
   const returnToSalesGroups = useCallback(() => {
     setSalesGroupDetailOpen(false);
     setSalesGroupDetailEntryId(null);
-    if (salesGroupsWaypointId != null) {
+    if (salesGroupDetailSource === 'groups-list' && salesGroupsWaypointId != null) {
       setSalesGroupsOpenMode('resume');
       setSalesGroupsOpen(true);
     }
-  }, [salesGroupsWaypointId]);
+  }, [salesGroupDetailSource, salesGroupsWaypointId]);
 
   const handleMapClick = useCallback(
     (lng: number, lat: number) => {

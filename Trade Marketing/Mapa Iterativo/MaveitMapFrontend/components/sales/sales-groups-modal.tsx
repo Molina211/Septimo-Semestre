@@ -44,7 +44,7 @@ export interface SalesGroupsModalProps {
   readOnly?: boolean;
   intensitySettings: SalesIntensitySettings;
   onClose: () => void;
-  onOpenGroupDetail: (waypoint: Waypoint, entry: SalesEntry) => void;
+  onOpenGroupDetail: (waypoint: Waypoint, entry: SalesEntry, source?: 'quick' | 'groups-list') => void;
   onRequestBulkDelete: (waypoint: Waypoint, entryIds: string[]) => void;
   onCreateGroup: (waypoint: Waypoint) => void;
   onEditGroup: (waypoint: Waypoint, entry: SalesEntry) => void;
@@ -145,7 +145,7 @@ export default function SalesGroupsModal({
   const handleOpenGroupDetail = useCallback(
     (entry: SalesEntry) => {
       if (!waypoint) return;
-      onOpenGroupDetail(waypoint, entry);
+      onOpenGroupDetail(waypoint, entry, 'groups-list');
       onClose();
     },
     [onClose, onOpenGroupDetail, waypoint]
