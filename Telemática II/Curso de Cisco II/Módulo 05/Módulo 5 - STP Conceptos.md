@@ -435,8 +435,8 @@ Por ejemplo:
 | Velocidad de enlace | STP Cost: IEEE 802.1D-1998 | Costo de RSTP: IEEE 802.1w-2004 |
 | ------------------- | -------------------------- | ------------------------------- |
 | 10 Gbps             | 2                          | 2000                            |
-| 1 Gbps              | 4                          | 20000                           |
-| 100 Mbps            | 19                         | 200000                          |
+| **1 Gbps**          | **4**                      | **20000**                       |
+| **100 Mbps**        | **19**                     | **200000**                      |
 | 10 Mbps             | 100                        | 2000000                         |
 
 Existen dos formas de medir estos costos:

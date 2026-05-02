@@ -353,7 +353,7 @@ Así se garantiza que el puerto quede permanentemente asociado a una única VLAN
 | Establezca el puerto en modo de acceso.       | `Switch(config-if)# switchport mode access`         |
 | Asigne el puerto a una VLAN.                  | `Switch(config-if)# switchport access vlan vlan-id` |
 | Vuelva al modo EXEC privilegiado.             | `Switch(config-if)# end`                            |
-|                                               |                                                     |
+
 *Nota:* Use el `interface range` comando para configurar simultáneamente varias interfaces.
 
 ---
