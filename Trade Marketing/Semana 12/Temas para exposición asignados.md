@@ -34,7 +34,7 @@
 
 ## 💚 Santi
  
-- ⁠*7* Estrategia de mezcla de productos 
+- ⁠*7* Estrategia de mezcla de productos
 
 - ⁠*8* Posicionamiento actual
 
