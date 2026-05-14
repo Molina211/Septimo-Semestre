@@ -156,11 +156,11 @@ Para poner el modo de violación de seguridad de puerto, use el siguiente comand
 
 **Descripciones de los modos de violación de seguridad**
 
-| Modo de violación | Descripción simplificada                                                                                     |
-|-------------------|--------------------------------------------------------------------------------------------------------------|
+| Modo de violación         | Descripción simplificada                                                                                                                                  |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | shutdown (predeterminado) | El puerto se bloquea (error-disabled) de inmediato. Se necesita que un administrador lo reactive manualmente con los comandos "shutdown" y "no shutdown". |
-| restrict          | Los paquetes con MAC desconocida se descartan. Se registra la violación con un mensaje syslog y aumenta el contador. |
-| protect           | Es el modo menos seguro. Los paquetes con MAC desconocida se descartan en silencio, sin enviar ningún mensaje de registro (syslog). |
+| restrict                  | Los paquetes con MAC desconocida se descartan. Se registra la violación con un mensaje syslog y aumenta el contador.                                      |
+| protect                   | Es el modo menos seguro. Los paquetes con MAC desconocida se descartan en silencio, sin enviar ningún mensaje de registro (syslog).                       |
 
 **Comparación de modos de violación de seguridad**
 

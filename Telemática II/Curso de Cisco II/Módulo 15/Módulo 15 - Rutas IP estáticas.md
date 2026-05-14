@@ -77,14 +77,14 @@ La mayoría de los parámetros son idénticos a la versión IPv4 del comando.
 
 La tabla muestra los distintos parámetros de *ipv6 route* comando y sus descripciones.
 
-| Parámetro              | Descripción simplificada                                                                 |
-|------------------------|------------------------------------------------------------------------------------------|
-| ipv6-prefix            | La dirección de red IPv6 de destino a la que quieres llegar.                             |
-| /prefix-length         | La longitud del prefijo (como /64) que indica qué parte de la dirección es la red.       |
+| Parámetro              | Descripción simplificada                                                                                                                                        |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ipv6-prefix            | La dirección de red IPv6 de destino a la que quieres llegar.                                                                                                    |
+| /prefix-length         | La longitud del prefijo (como /64) que indica qué parte de la dirección es la red.                                                                              |
 | ipv6-address           | La dirección IPv6 del siguiente router (salto siguiente). Se usa en redes Ethernet. Puede requerir una búsqueda adicional para encontrar la interfaz de salida. |
-| exit-intf              | La interfaz física del router por donde debe salir el paquete. Se usa en conexiones punto a punto. |
-| exit-intf ipv6-address | Define tanto la interfaz de salida como la dirección del siguiente salto. Es una ruta completamente especificada. |
-| distance               | Valor opcional (1 a 255) que asigna prioridad a la ruta. Se usa para rutas estáticas flotantes (de respaldo) con menor prioridad que una ruta dinámica. |
+| exit-intf              | La interfaz física del router por donde debe salir el paquete. Se usa en conexiones punto a punto.                                                              |
+| exit-intf ipv6-address | Define tanto la interfaz de salida como la dirección del siguiente salto. Es una ruta completamente especificada.                                               |
+| distance               | Valor opcional (1 a 255) que asigna prioridad a la ruta. Se usa para rutas estáticas flotantes (de respaldo) con menor prioridad que una ruta dinámica.         |
 
 *Nota: El ipv6 unicast-routing comando de configuracion global debe configurarse para que habilite al router para que reenvié paquetes IPv6.*
 

@@ -44,15 +44,15 @@ Aunque varias rutas pueden coincidir, como 172.16.0.0/12, 172.16.0.0/18 y 172.16
 
 En este caso, la ruta 172.16.0.0/26 es la mejor opción porque representa la coincidencia más larga.
 
-| Dirección IPv4 de destino | Dirección de host en formato binario                          |
-|---------------------------|---------------------------------------------------------------|
-| 172.16.0.10               | 10101100.00010000.00000000.00001010                           |
+| Dirección IPv4 de destino | Dirección de host en formato binario |
+| ------------------------- | ------------------------------------ |
+| 172.16.0.10               | 10101100.00010000.00000000.00001010  |
 
 | Entradas de ruta | Longitud del prefijo/prefijo | Dirección de host en formato binario  |
 | ---------------- | ---------------------------- | ------------------------------------- |
-| 1                | 172.16.0.0/12                | 10101100.00010000.00000000.001010     |
-| 2                | 172.16.0.0/18                | 10101100.00010000.00000000.00001010   |
-| *3*              | *172.16.0.0/26*              | *10101100.00010000.00000000.00001010* |
+| 1                | 172.16.0.0/12                | *10101100.0001*0000.00000000.001010   |
+| 2                | 172.16.0.0/18                | *10101100.00010000.00*000000.00001010 |
+| *3*              | *172.16.0.0/26*              | *10101100.00010000.00000000.00*001010 |
 
 ---
 
@@ -563,18 +563,18 @@ Por ejemplo:
 
 Si varias rutas llevan al mismo destino, el router instalará en su tabla la que tenga la distancia administrativa más baja. Esto permite seleccionar automáticamente la fuente considerada más confiable.
 
-| Origen de la ruta               | Distancia administrativa |
-|---------------------------------|--------------------------|
-| Conectado directamente          | 0                        |
-| Ruta estática                   | 1                        |
-| Ruta resumida del protocolo EIGRP | 5                      |
-| BGP externo                     | 20                       |
-| EIGRP interno                   | 90                       |
-| OSPF                            | 110                      |
-| IS-IS                           | 115                      |
-| RIP                             | 120                      |
-| EIGRP externo                   | 170                      |
-| BGP interno                     | 200                      |
+| Origen de la ruta                 | Distancia administrativa |
+| --------------------------------- | ------------------------ |
+| Conectado directamente            | 0                        |
+| Ruta estática                     | 1                        |
+| Ruta resumida del protocolo EIGRP | 5                        |
+| BGP externo                       | 20                       |
+| EIGRP interno                     | 90                       |
+| OSPF                              | 110                      |
+| IS-IS                             | 115                      |
+| RIP                               | 120                      |
+| EIGRP externo                     | 170                      |
+| BGP interno                       | 200                      |
 
 ---
 
